@@ -17,6 +17,9 @@ class envertech_pv extends utils.Adapter {
         this.on('unload', this.onUnload.bind(this));
     }
 
+
+
+
     async onReady() {
         const self = this;
         this.log.info('start ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ start');
@@ -26,9 +29,34 @@ class envertech_pv extends utils.Adapter {
 
 
 
-        setTimeout(this.stop.bind(this), 20000);
-    }
+            request(
+                    {   method: 'POST',
+                        url: 'https://www.envertecportal.com/ApiInverters/QueryTerminalReal?page=1&perPage=20&orderBy=GATEWAYSN&whereCondition=%7B%22STATIONID%22%3A%22' +this.config.station_id+ '%22%7D',
+                        json: true,
+                        time: true,
+                        timeout: 4500
+                    },
+                    (error, response, content) => {
+                        self.log.info('local request done');
 
+                        if (response) {
+                            self.log.info('received data (' + response.statusCode + '): ' + JSON.stringify(content));
+
+
+                            if (!error && response.statusCode == 200) {
+                                self.log.info('alles ok');
+                           
+                            }
+                        } else if (error) {
+                            self.log.info(error);
+                        }
+                    }
+                );
+
+
+
+        
+        };
     onUnload(callback) {
         try {
             this.log.debug('cleaned everything up...');
@@ -36,9 +64,9 @@ class envertech_pv extends utils.Adapter {
         } catch (e) {
             callback();
         }
-    }
+      
 }
-
+}
 // @ts-ignore parent is a valid property on module
 if (module.parent) {
     // Export the constructor in compact mode
