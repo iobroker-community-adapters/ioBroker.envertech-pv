@@ -1,4 +1,4 @@
-![Logo](admin/envertech-pv.png)
+![Logo](admin/envertech.png)
 # ioBroker.envertech-pv
 
 [![NPM version](http://img.shields.io/npm/v/iobroker.template.svg)](https://www.npmjs.com/package/iobroker.template)
@@ -14,7 +14,7 @@
 
 ## ioBroker.envertech-pv
 
-Template for adapter development
+This is a test 
 
 ## Developer manual
 Only test
