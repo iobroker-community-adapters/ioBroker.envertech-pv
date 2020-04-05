@@ -18,16 +18,10 @@ class envertech_pv extends utils.Adapter {
     }
 
 
-
-
     async onReady() {
         const self = this;
-        this.log.info('start ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ start');
-        this.log.info('config station_id: ' + this.config.station_id);
-        const url = 'https://www.envertecportal.com/ApiInverters/QueryTerminalReal?page=1&perPage=20&orderBy=GATEWAYSN&whereCondition=%7B%22STATIONID%22%3A%22' +this.config.station_id+ '%22%7D';
-        this.log.info('end ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ end');
-
-
+        this.log.info('Loading envertech-pv');
+        //this.log.info('config station_id: ' + this.config.station_id);
 
             request(
                     {   method: 'POST',
@@ -37,21 +31,53 @@ class envertech_pv extends utils.Adapter {
                         timeout: 4500
                     },
                     (error, response, content) => {
-                        self.log.info('local request done');
+                        self.log.info('request done');
 
                         if (response) {
-                            self.log.info('received data (' + response.statusCode + '): ' + JSON.stringify(content));
-
-
+                            //self.log.info('received data (' + response.statusCode + '): ' + JSON.stringify(content));
                             if (!error && response.statusCode == 200) {
                                 self.log.info('alles ok');
+
+                            for (var key in content.Data.QueryResults){
+                                const obj = content.Data.QueryResults[key];
+                                const ordner = obj["SNALIAS"].replace(/\ /g, '-');
+
+                                self.setObjectNotExists(ordner, {
+                                        type: 'state',
+                                            common: {
+                                                name: ordner,
+                                                type: 'string',
+                                                role: 'value',
+                                                read: true,
+                                                write: false
+                                            },
+                                        native: {}
+                                    });
+                                self.setState(ordner, {val: null, ack: true});
+
+                                    for (var [key, value] of Object.entries(obj)) {
+
+                                        self.setObjectNotExists(ordner+"."+key, {
+                                        type: 'state',
+                                            common: {
+                                                name: ordner+"."+key,
+                                                type: 'string',
+                                                role: 'value',
+                                                read: true,
+                                                write: false
+                                            },
+                                        native: {}
+                                        });
+                                    self.setState(ordner+"."+key, {val: value, ack: true});
+                                    };
+                            };
                            
-                            }
+                            };
                         } else if (error) {
                             self.log.info(error);
                         }
                     }
-                    
+
                 );
 
 
