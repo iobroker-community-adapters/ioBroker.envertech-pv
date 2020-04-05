@@ -20,7 +20,8 @@
     "url": "https://github.com/adcrafter27/ioBroker.envertech-pv"
   },
   "dependencies": {
-    "@iobroker/adapter-core": "^2.2.1"
+    "@iobroker/adapter-core": "^2.2.1",
+    "request": "^2.72.0"
   },
   "devDependencies": {
     "@iobroker/testing": "^2.1.0",
