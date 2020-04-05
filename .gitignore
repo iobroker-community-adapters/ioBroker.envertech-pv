@@ -5,6 +5,8 @@ node_modules
 nbproject
 test
 lib
+.gitignore
+test1.json
 
 # npm package files
 iobroker.*.tgz

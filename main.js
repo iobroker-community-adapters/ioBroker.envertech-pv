@@ -54,9 +54,12 @@ class envertech_pv extends utils.Adapter {
                 );
 
 
-
+        setTimeout(this.stop.bind(this), 10000);
         
-        };
+    };
+
+
+
     onUnload(callback) {
         try {
             this.log.debug('cleaned everything up...');
