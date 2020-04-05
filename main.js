@@ -51,6 +51,7 @@ class envertech_pv extends utils.Adapter {
                             self.log.info(error);
                         }
                     }
+                    
                 );
 
 

@@ -9,7 +9,7 @@ lib
 test1.json
 .travis.yml
 .vscode
-package-lock.jso
+package-lock.json
 gulpfile.js
 .eslintrc.json
 custom_m.html
