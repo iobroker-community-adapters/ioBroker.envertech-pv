@@ -10,14 +10,21 @@
 
 [![NPM](https://nodei.co/npm/iobroker.template.png?downloads=true)](https://nodei.co/npm/iobroker.template/)
 
-**Tests:**: [![Travis-CI](http://img.shields.io/travis/Author/ioBroker.template/master.svg)](https://travis-ci.org/Author/ioBroker.template)
+
 
 ## ioBroker.envertech-pv
 
-This is a test 
+It works put it is experimental and I will change many and add more.
 
-## Developer manual
-Only test
+## Manual find Station ID
+
+Die Station ID erhält ihr folgendermaßen:
+Meldet euch mit euren Zugangsdaten unter www.envertecportal.com an.
+Nach dem Login einen Rechtsklick auf die Seite und "Seitenquelltext anzeigen" klicken.
+Danach sucht ihr nach "var stationId =".
+Sollte ca. so aussehen: var stationId = '3EH583732993048DDX706VT57F8708452';
+Ihr benötigt nur die zahlen und Buchstaben Kombination (3EH58373299348DDX706VT57F8708452)
+Diese zahlen und Buchstaben Kombination müsst ihr unter den Einstellungen im Adapter eintragen.
 
 
 ## Changelog
