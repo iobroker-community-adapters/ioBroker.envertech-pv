@@ -15,8 +15,8 @@ systemDictionary = {
         'zh-cn': 'template的适配器设置'
     },
     'option1': {
-        'en': 'option1',
-        'de': 'Option 1',
+        'en': 'option1_w',
+        'de': 'Option 1_w',
         'ru': 'Опция 1',
         'pt': 'Opção 1',
         'nl': 'Optie 1',
