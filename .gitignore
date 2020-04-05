@@ -7,6 +7,13 @@ test
 lib
 .gitignore
 test1.json
+.travis.yml
+.vscode
+package-lock.jso
+gulpfile.js
+.eslintrc.json
+custom_m.html
+tab_m.html
 
 # npm package files
 iobroker.*.tgz
