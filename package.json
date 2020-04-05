@@ -1,6 +1,6 @@
 {
   "_from": "https://github.com/adcrafter27/ioBroker.envertech-pv/tarball/9d7aaba7cf545dc2b5f9f4815d6a808c88530a95",
-  "_id": "iobroker.envertech-pv@0.0.1",
+  "_id": "iobroker.envertech-pv@0.0.2",
   "_inBundle": false,
   "_integrity": "sha512-HUe+UuR5o198mMbesJG3aCySgXrwOQvaYm2TV0ax5HOo4CSPGncaaceUi/J+XM0YQ34PmsOSan3PJh++tviXEg==",
   "_location": "/iobroker.envertech-pv",
@@ -79,5 +79,5 @@
     "test:package": "mocha test/package --exit",
     "test:unit": "mocha test/unit --exit"
   },
-  "version": "0.0.1"
+  "version": "0.0.2"
 }

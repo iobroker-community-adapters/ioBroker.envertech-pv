@@ -29,6 +29,9 @@ Diese zahlen und Buchstaben Kombination müsst ihr unter den Einstellungen im Ad
 
 ## Changelog
 
+### 0.0.2
+* (adcrafter27) First test release
+
 ### 0.0.1
 * (adcrafter27) initial release
 

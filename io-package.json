@@ -1,11 +1,11 @@
 {
   "common": {
     "name": "envertech-pv",
-    "version": "0.0.1",
+    "version": "0.0.2",
     "news": {
-      "0.0.1": {
-        "en": "initial release",
-        "de": "Erstveröffentlichung"
+      "0.0.2": {
+        "en": "First test release",
+        "de": "Erster Test"
       }
     },
     "title": "envertech-pv",
