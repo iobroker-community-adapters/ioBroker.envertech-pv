@@ -1,11 +1,11 @@
 {
   "common": {
     "name": "envertech-pv",
-    "version": "0.0.3",
+    "version": "0.0.4",
     "news": {
-      "0.0.3": {
-        "en": "Update new functions",
-        "de": "Neue Funktionen"
+      "0.0.4": {
+        "en": "First test release",
+        "de": "Erster Test"
       }
     },
     "title": "envertech-pv",
@@ -25,10 +25,10 @@
       "Envertech",
       "Envertech.com",
       "Smart Home",
-      "home automation"
-      "EVB202"
-      "EVB201"
-      "evt560"
+      "home automation",
+      "EVB202",
+      "EVB201",
+      "evt560",
       "evt300"
     ],
     "license": "MIT",
