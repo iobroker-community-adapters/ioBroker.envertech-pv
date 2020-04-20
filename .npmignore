@@ -1,0 +1,27 @@
+.git
+.idea
+*.code-workspace
+node_modules
+nbproject
+test
+lib
+.gitignore
+test1.json
+.travis.yml
+.vscode
+package-lock.json
+gulpfile.js
+.eslintrc.json
+.github
+custom_m.html
+tab_m.html
+
+# npm package files
+iobroker.*.tgz
+.npmignore
+
+Thumbs.db
+
+# i18n intermediate files
+admin/i18n/flat.txt
+admin/i18n/*/flat.txt

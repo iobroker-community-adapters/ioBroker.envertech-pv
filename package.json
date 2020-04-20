@@ -1,0 +1,83 @@
+{
+  "_from": "https://github.com/adcrafter27/ioBroker.envertech-pv/tarball/9d7aaba7cf545dc2b5f9f4815d6a808c88530a95",
+  "_id": "iobroker.envertech-pv@0.0.2",
+  "_inBundle": false,
+  "_integrity": "sha512-HUe+UuR5o198mMbesJG3aCySgXrwOQvaYm2TV0ax5HOo4CSPGncaaceUi/J+XM0YQ34PmsOSan3PJh++tviXEg==",
+  "_location": "/iobroker.envertech-pv",
+  "_phantomChildren": {
+    "@types/node": "13.9.2"
+  },
+  "_requested": {
+    "type": "remote",
+    "raw": "https://github.com/adcrafter27/ioBroker.envertech-pv/tarball/9d7aaba7cf545dc2b5f9f4815d6a808c88530a95",
+    "rawSpec": "https://github.com/adcrafter27/ioBroker.envertech-pv/tarball/9d7aaba7cf545dc2b5f9f4815d6a808c88530a95",
+    "saveSpec": "https://github.com/adcrafter27/ioBroker.envertech-pv/tarball/9d7aaba7cf545dc2b5f9f4815d6a808c88530a95",
+    "fetchSpec": "https://github.com/adcrafter27/ioBroker.envertech-pv/tarball/9d7aaba7cf545dc2b5f9f4815d6a808c88530a95"
+  },
+  "_requiredBy": [
+    "#USER",
+    "/"
+  ],
+  "_resolved": "https://github.com/adcrafter27/ioBroker.envertech-pv/tarball/9d7aaba7cf545dc2b5f9f4815d6a808c88530a95",
+  "_shasum": "dc83de74ead5b833976e99ecfbcf16775c3c0993",
+  "_spec": "https://github.com/adcrafter27/ioBroker.envertech-pv/tarball/9d7aaba7cf545dc2b5f9f4815d6a808c88530a95",
+  "_where": "/",
+  "author": {
+    "name": "adcrafter27",
+    "email": "adcrafter27@gmail.com"
+  },
+  "bugs": {
+    "url": "https://github.com/adcrafter27/ioBroker.envertech-pv/issues"
+  },
+  "bundleDependencies": false,
+  "dependencies": {
+    "@iobroker/adapter-core": "^2.2.1",
+    "request": "^2.88.2"
+  },
+  "deprecated": false,
+  "description": "Read Envertech.com Web data",
+  "devDependencies": {
+    "@iobroker/testing": "^2.1.0",
+    "@types/chai": "^4.2.11",
+    "@types/chai-as-promised": "^7.1.2",
+    "@types/gulp": "^4.0.6",
+    "@types/mocha": "^7.0.2",
+    "@types/node": "^12.12.30",
+    "@types/proxyquire": "^1.3.28",
+    "@types/sinon": "^7.5.2",
+    "@types/sinon-chai": "^3.2.3",
+    "axios": "^0.19.2",
+    "chai": "^4.2.0",
+    "chai-as-promised": "^7.1.1",
+    "eslint": "^6.8.0",
+    "gulp": "^4.0.2",
+    "mocha": "^7.1.0",
+    "proxyquire": "^2.1.3",
+    "sinon": "^8.1.1",
+    "sinon-chai": "^3.5.0"
+  },
+  "homepage": "https://github.com/adcrafter27/ioBroker.envertech-pv",
+  "keywords": [
+    "ioBroker",
+    "Envertech",
+    "Envertech.com",
+    "Smart Home",
+    "home automation"
+  ],
+  "license": "MIT",
+  "main": "main.js",
+  "name": "iobroker.envertech-pv",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/adcrafter27/ioBroker.envertech-pv.git"
+  },
+  "scripts": {
+    "lint": "eslint",
+    "test": "npm run test:js && npm run test:package",
+    "test:integration": "mocha test/integration --exit",
+    "test:js": "mocha --opts test/mocha.custom.opts",
+    "test:package": "mocha test/package --exit",
+    "test:unit": "mocha test/unit --exit"
+  },
+  "version": "0.0.2"
+}
