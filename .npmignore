@@ -16,9 +16,12 @@ gulpfile.js
 custom_m.html
 tab_m.html
 
+
 # npm package files
 iobroker.*.tgz
 .npmignore
+iob_npm.done
+tsconfig.json
 
 Thumbs.db
 

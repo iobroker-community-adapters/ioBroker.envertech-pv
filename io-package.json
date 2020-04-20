@@ -4,8 +4,8 @@
     "version": "0.0.4",
     "news": {
       "0.0.4": {
-        "en": "First test release",
-        "de": "Erster Test"
+        "en": "fix",
+        "de": "fix"
       }
     },
     "title": "envertech-pv",
