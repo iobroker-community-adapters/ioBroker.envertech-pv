@@ -1,20 +1,20 @@
 ![Logo](admin/envertech.png)
 # ioBroker.envertech-pv
+[![NPM version](http://img.shields.io/npm/v/iobroker.envertech-pv.svg)](https://www.npmjs.com/package/iobroker.envertech-pv)
+[![Downloads](https://img.shields.io/npm/dm/iobroker.envertech-pv.svg)](https://www.npmjs.com/package/iobroker.envertech-pv)
+[![Stable](http://iobroker.live/badges/envertech-pv-stable.svg)](http://iobroker.live/badges/envertech-pv-stable.svg)
+[![installed](http://iobroker.live/badges/envertech-pv-installed.svg)](http://iobroker.live/badges/envertech-pv-installed.svg)
+[![Dependency Status](https://img.shields.io/david/adcrafter27/iobroker.envertech-pv.svg)](https://david-dm.org/adcrafter27/iobroker.envertech-pv)
+[![Known Vulnerabilities](https://snyk.io/test/github/adcrafter27/ioBroker.envertech-pv/badge.svg)](https://snyk.io/test/github/adcrafter27/ioBroker.envertech-pv)
+[![Build Status](http://img.shields.io/travis/adcrafter27/ioBroker.envertech-pv.svg)](https://travis-ci.org/adcrafter27/ioBroker.envertech-pv)
 
-[![NPM version](http://img.shields.io/npm/v/iobroker.template.svg)](https://www.npmjs.com/package/iobroker.template)
-[![Downloads](https://img.shields.io/npm/dm/iobroker.template.svg)](https://www.npmjs.com/package/iobroker.template)
-![Number of Installations (latest)](http://iobroker.live/badges/template-installed.svg)
-![Number of Installations (stable)](http://iobroker.live/badges/template-stable.svg)
-[![Dependency Status](https://img.shields.io/david/Author/iobroker.template.svg)](https://david-dm.org/Author/iobroker.template)
-[![Known Vulnerabilities](https://snyk.io/test/github/Author/ioBroker.template/badge.svg)](https://snyk.io/test/github/Author/ioBroker.template)
-
-[![NPM](https://nodei.co/npm/iobroker.template.png?downloads=true)](https://nodei.co/npm/iobroker.template/)
+[![NPM](https://nodei.co/npm/iobroker.envertech-pv.png?downloads=true)](https://nodei.co/npm/iobroker.envertech-pv/)
 
 
 
 ## ioBroker.envertech-pv
 
-It works put it is experimental and I will change many and add more.
+You can read Data from Envertech.com Web
 
 ## Manual find Station ID
 
@@ -28,6 +28,9 @@ Diese zahlen und Buchstaben Kombination müsst ihr unter den Einstellungen im Ad
 
 
 ## Changelog
+
+### 0.0.3
+* (adcrafter27) Update new functions
 
 ### 0.0.2
 * (adcrafter27) First test release

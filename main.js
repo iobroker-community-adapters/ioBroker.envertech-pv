@@ -86,15 +86,15 @@ class envertech_pv extends utils.Adapter {
                 },
 
                 (error, response, content) => {
-                    self.log.info('request done');
+                    self.log.info('request station done');
 
                     if (response) {
                     	if (!error && response.statusCode == 200) {
-                                self.log.info('alles ok bei data');
+                                self.log.info('station data ok');
 						    for (var key in content.Data){
 		                        const obj = content.Data[key];
-		                        self.log.info(key);
-		                        self.log.info(obj);
+		                        //self.log.info(key);
+		                        //self.log.info(obj);
 		                         let unit = null;
 
 
@@ -110,8 +110,8 @@ class envertech_pv extends utils.Adapter {
 			                        native: {}
 			                        });
 			                    	self.setState("overview.station."+key, {val: obj, ack: true});
-							}	
-			            self.log.info('received data (' + response.statusCode + '): ' + JSON.stringify(content));
+						}	
+			            //self.log.info('received data (' + response.statusCode + '): ' + JSON.stringify(content));
                         var datum_string = new Date().toLocaleString();
 	                    self.setState("overview.info.last-data-received", {val: datum_string, ack: true});
 		            	}
@@ -127,34 +127,6 @@ class envertech_pv extends utils.Adapter {
 			);
 
 
-
-
-
-
-
-
-
-
-
-
-
-        	request(
-                {   method: 'POST',
-                    url: 'https://www.envertecportal.com/ApiStations/getStationInfo?stationId=' +this.config.station_id,
-                    json: true,
-                    time: true,
-                    timeout: 4500
-                },
-
-                (error, response, content) => {
-                    self.log.info('request done');
-
-                    if (response) {
-                        //self.log.info('received data (' + response.statusCode + '): ' + JSON.stringify(content));
-                    }
-                }
-					);
-
             request(
                     {   method: 'POST',
                         url: 'https://www.envertecportal.com/ApiInverters/QueryTerminalReal?page=1&perPage=20&orderBy=GATEWAYSN&whereCondition=%7B%22STATIONID%22%3A%22' +this.config.station_id+ '%22%7D',
@@ -163,12 +135,12 @@ class envertech_pv extends utils.Adapter {
                         timeout: 4500
                     },
                     (error, response, content) => {
-                        self.log.info('request done');
+                        self.log.info('request data done');
 
                         if (response) {
                             //self.log.info('received data (' + response.statusCode + '): ' + JSON.stringify(content));
                             if (!error && response.statusCode == 200) {
-                                self.log.info('alles ok');
+                                self.log.info('data ok');
                                 const unitList = {
 					                DCVOLTAGE: 'V',
 					                ACVOLTAGE: 'V',
