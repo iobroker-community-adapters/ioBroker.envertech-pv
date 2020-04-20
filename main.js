@@ -17,7 +17,6 @@ class envertech_pv extends utils.Adapter {
         this.on('unload', this.onUnload.bind(this));
     }
 
-
     async onReady() {
         const self = this;
         var pow1 = 0;
@@ -291,3 +290,4 @@ if (module.parent) {
     // otherwise start the instance directly
     new envertech_pv();
 }
+
