@@ -29,13 +29,16 @@ Diese zahlen und Buchstaben Kombination müsst ihr unter den Einstellungen im Ad
 
 ## Changelog
 
-### 0.0.3
+## 0.0.5
+* (adcrafter27) release
+
+## 0.0.3
 * (adcrafter27) Update new functions
 
-### 0.0.2
+## 0.0.2
 * (adcrafter27) First test release
 
-### 0.0.1
+## 0.0.1
 * (adcrafter27) initial release
 
 ## License
