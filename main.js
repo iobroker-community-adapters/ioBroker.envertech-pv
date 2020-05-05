@@ -182,7 +182,7 @@ class envertech_pv extends utils.Adapter {
 			                                            },
 			                                        native: {}
 		                                        });
-		                                    	self.setState("data.gateway_"+gat+".info.gateway_day_energy", {val: pow1, ack: true});
+		                                    	self.setState("data.gateway_"+gat+".info.gateway_day_energy", {val: pow1.toFixed(3), ack: true});
 	                                   
 
 
@@ -240,7 +240,7 @@ class envertech_pv extends utils.Adapter {
                                         },
                                     native: {}
                                 });
-                            	self.setState("data.gateway_"+gat+".info.gateway_day_energy", {val: pow1, ack: true});
+                            	self.setState("data.gateway_"+gat+".info.gateway_day_energy", {val: pow1.toFixed(3), ack: true});
 
 
 	                            
@@ -251,7 +251,7 @@ class envertech_pv extends utils.Adapter {
                         } else if (error) {
                         	var datum_string = new Date().toLocaleString();
                         	self.setState("data.info.last-data-error", {val: datum_string, ack: true});
-                        	self.setState("data.info.last-error-code", {val: error[key], ack: true});
+                        	self.setState("data.info.last-error-code", {val: error.toString(), ack: true});
                             self.log.error(error);
                         }
                     }

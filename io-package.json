@@ -1,9 +1,9 @@
 {
   "common": {
     "name": "envertech-pv",
-    "version": "0.0.5",
+    "version": "0.0.6",
     "news": {
-      "0.0.5": {
+      "0.0.6": {
         "en": "release",
         "de": "release"
       }
@@ -45,22 +45,14 @@
     "compact": true,
     "materialize": true,
     "materializeTab": true,
-    "adminTab": {
-      "singleton": true,
-      "name": {
-        "en": "envertech-pv",
-        "de": "envertech-pv"
-      },
-      "link": "",
-      "fa-icon": "info"
-    },
+
     "supportCustoms": true,
     "dependencies": [
       {
         "js-controller": ">=1.4.2"
       }
     ],
-    "installedFrom": "https://github.com/adcrafter27/ioBroker.envertech-pv/tarball/9d7aaba7cf545dc2b5f9f4815d6a808c88530a95"
+    
   },
   "native": {
     "option1": true,
