@@ -22,7 +22,6 @@ class envertech_pv extends utils.Adapter {
         var pow1 = 0;
 		var gat = 0;
         this.log.info('Loading envertech-pv');
-        //this.log.info('config station_id: ' + this.config.station_id);
         if (this.config.station_id){
 
         	self.setObjectNotExists("data.info.last-data-received", {
@@ -116,9 +115,6 @@ class envertech_pv extends utils.Adapter {
 		            	}
 
                     } 	else if (error) {
-	                    	//var datum_string = new Date().toLocaleString();
-	                    	//self.setState("overview.info.last-data-error", {val: datum_string, ack: true});
-	                    	//self.setState("overview.info.last-error-code", {val: error[key], ack: true});
 	                    	self.log.error(error);
                       	}
 
@@ -266,7 +262,6 @@ class envertech_pv extends utils.Adapter {
         setTimeout(this.stop.bind(this), 10000);
         
     };
-
 
 
     onUnload(callback) {
