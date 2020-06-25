@@ -22,12 +22,14 @@ Die Station ID erhält ihr folgendermaßen:
 Meldet euch mit euren Zugangsdaten unter www.envertecportal.com an.
 Nach dem Login einen Rechtsklick auf die Seite und "Seitenquelltext anzeigen" klicken.
 Danach sucht ihr nach "var stationId =".
-Sollte ca. so aussehen: var stationId = '3EH583732993048DDX706VT57F8708452';
-Ihr benötigt nur die zahlen und Buchstaben Kombination (3EH58373299348DDX706VT57F8708452)
+Sollte ca. so aussehen: var stationId = '3EH583732993048DDX706VT57F8708452'; oder 4 stellen.
+Ihr benötigt nur die zahlen und Buchstaben Kombination (3EH58373299348DDX706VT57F8708452).
 Diese zahlen und Buchstaben Kombination müsst ihr unter den Einstellungen im Adapter eintragen.
 
 
 ## Changelog
+## 0.0.7
+* (adcrafter27) add more functions
 
 ## 0.0.6
 * (adcrafter27) code fix

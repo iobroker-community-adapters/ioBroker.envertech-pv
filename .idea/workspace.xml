@@ -26,8 +26,11 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="node.js.detected.package.eslint" value="true" />
+    <property name="node.js.detected.package.standard" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
+    <property name="node.js.path.for.package.standard" value="project" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
+    <property name="node.js.selected.package.standard" value="" />
   </component>
   <component name="SvnConfiguration">
     <configuration />
@@ -40,6 +43,7 @@
       <option name="presentableId" value="Default" />
       <updated>1586081165401</updated>
       <workItem from="1586081170356" duration="300000" />
+      <workItem from="1592505744369" duration="845000" />
     </task>
     <servers />
   </component>
@@ -47,10 +51,15 @@
     <option name="version" value="1" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="976" y="524" key="com.intellij.ide.util.TipDialog" timestamp="1586081170374">
+    <state x="872" y="358" key="#ESLint" timestamp="1592505755799">
+      <screen x="0" y="0" width="2560" height="1400" />
+    </state>
+    <state x="872" y="358" key="#ESLint/0.0.2560.1400/333.-1080.1920.1040/2560.0.2560.1400/-2560.0.2560.1400@0.0.2560.1400" timestamp="1592505755799" />
+    <state x="976" y="524" key="com.intellij.ide.util.TipDialog" timestamp="1592505744928">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
     <state x="976" y="524" key="com.intellij.ide.util.TipDialog/0.0.2560.1400/2560.0.2560.1400/271.-1080.1920.1040/-2560.0.2560.1400@0.0.2560.1400" timestamp="1586081170374" />
+    <state x="976" y="524" key="com.intellij.ide.util.TipDialog/0.0.2560.1400/333.-1080.1920.1040/2560.0.2560.1400/-2560.0.2560.1400@0.0.2560.1400" timestamp="1592505744928" />
     <state x="976" y="298" width="1270" height="804" key="find.popup" timestamp="1586081464732">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>

@@ -13,6 +13,8 @@ class envertech_pv extends utils.Adapter {
             ...options,
             name: 'envertech-pv',
         });
+        this.killTimeout = null;
+        
         this.on('ready', this.onReady.bind(this));
         this.on('unload', this.onUnload.bind(this));
     }
@@ -20,7 +22,11 @@ class envertech_pv extends utils.Adapter {
     async onReady() {
         const self = this;
         var pow1 = 0;
+        var powergateway = 0;
 		var gat = 0;
+		var mppt_online = 0;
+		var mppt_offline = 0;
+
         this.log.info('Loading envertech-pv');
         if (this.config.station_id){
 
@@ -69,6 +75,32 @@ class envertech_pv extends utils.Adapter {
                                                 type: 'string',
                                                 role: 'value',
                                                 def:  'no data received',
+                                                read: true,
+                                                write: false
+                                            },
+                                        native: {}
+                                    });
+
+        	self.setObjectNotExists("data.info.mppt_online", {
+                                        type: 'state',
+                                            common: {
+                                                name: "mppt_online",
+                                                type: 'string',
+                                                role: 'value',
+                                                def:  '0',
+                                                read: true,
+                                                write: false
+                                            },
+                                        native: {}
+                                    });
+
+        	self.setObjectNotExists("data.info.mppt_offline", {
+                                        type: 'state',
+                                            common: {
+                                                name: "mppt_offline",
+                                                type: 'string',
+                                                role: 'value',
+                                                def:  '0',
                                                 read: true,
                                                 write: false
                                             },
@@ -162,7 +194,38 @@ class envertech_pv extends utils.Adapter {
 			                                    		pow1 += x;
 			                                    		//self.log.info(pow1);
 			                                    	};
+			                                    if (key == "POWER"){
+			                                    		var y = parseFloat(value);
+			                                    		//self.log.info(x);
+			                                    		powergateway += y;
+			                                    		//self.log.info(pow1);
+			                                    	};
+			                                    if (key == "STATUS"){
+			                                    		if (parseFloat(value) == "0"){
+			                                    			mppt_online += 1;
+			                                    		};
+			                                    		if (parseFloat(value) == "1"){
+			                                    			mppt_offline += 1;
+			                                    		};
+			                                    	};
+
+			                                    self.setObjectNotExists("data.gateway_"+gat+".info.gateway_power_now", {
+			                                        type: 'state',
+			                                            common: {
+			                                                name: "gateway_power_now",
+			                                                type: 'string',
+			                                                role: 'value',
+			                                                unit: 'watt',
+			                                                read: true,
+			                                                write: false
+			                                            },
+			                                        native: {}
+		                                        });
+
+			                                    self.setState("data.gateway_"+gat+".info.gateway_power_now", {val: powergateway.toFixed(0), ack: true});
+	                                    		//powergateway = 0;
 			                                }else {
+			                                	powergateway = 0;
 			                                	//self.log.info(pow1);
 			                                	//self.log.info(gateway);
 
@@ -178,6 +241,7 @@ class envertech_pv extends utils.Adapter {
 			                                            },
 			                                        native: {}
 		                                        });
+		                                        
 		                                    	self.setState("data.gateway_"+gat+".info.gateway_day_energy", {val: pow1.toFixed(3), ack: true});
 	                                   
 
@@ -191,6 +255,13 @@ class envertech_pv extends utils.Adapter {
 			                                    		pow1 += x;
 			                                    		//self.log.info(pow1);
 			                                    	};
+			                                    if (key == "POWER"){
+			                                    		var y = parseFloat(value);
+			                                    		//self.log.info(x);
+			                                    		powergateway += y;
+			                                    		//self.log.info(pow1);
+			                                    	};
+
 			                                    gat = gateway;
 
 			                                };
@@ -201,6 +272,8 @@ class envertech_pv extends utils.Adapter {
                                             if (Object.prototype.hasOwnProperty.call(unitList, key)) {
                                                 unit = unitList[key];
                                             }
+
+                                            
 
 		                                    	
 	                                    	
@@ -236,7 +309,23 @@ class envertech_pv extends utils.Adapter {
                                         },
                                     native: {}
                                 });
+                                self.setObjectNotExists("data.gateway_"+gat+".info.gateway_power_now", {
+			                                        type: 'state',
+			                                            common: {
+			                                                name: "gateway_power_now",
+			                                                type: 'string',
+			                                                role: 'value',
+			                                                unit: 'watt',
+			                                                read: true,
+			                                                write: false
+			                                            },
+			                                        native: {}
+		                                        });
                             	self.setState("data.gateway_"+gat+".info.gateway_day_energy", {val: pow1.toFixed(3), ack: true});
+                            	self.setState("data.gateway_"+gat+".info.gateway_power_now", {val: powergateway.toFixed(0), ack: true});
+                            	self.setState("data.info.mppt_online", {val: mppt_online.toFixed(0), ack: true});
+                            	self.setState("data.info.mppt_offline", {val: mppt_offline.toFixed(0), ack: true});
+                            	mppt_online = 0;
 
 
 	                            
@@ -259,13 +348,18 @@ class envertech_pv extends utils.Adapter {
 
         
 
-        setTimeout(this.stop.bind(this), 10000);
+        //setTimeout(this.stop.bind(this), 10000);
+        this.killthetimeout = setTimeout(this.stop.bind(this), 10000);
         
     };
 
 
     onUnload(callback) {
         try {
+        	if (this.killthetimeout) {
+                this.log.debug('clearing and kill timeout');
+                clearTimeout(this.killthetimeout);
+            }
             this.log.debug('cleaned everything up...');
             callback();
         } catch (e) {
