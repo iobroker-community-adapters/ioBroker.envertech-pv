@@ -49,7 +49,7 @@ Diese zahlen und Buchstaben Kombination müsst ihr unter den Einstellungen im Ad
 ## License
 MIT License
 
-Copyright (c) 2020 adcrafter27 <adcrafter27@gmail.com>
+Copyright (c) 2021 adcrafter27 <adcrafter27@gmail.com>
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
