@@ -127,12 +127,18 @@ class envertech_pv extends utils.Adapter {
 		                        //self.log.info(obj);
 		                         let unit = null;
 
+								if(typeof obj == 'number'){
+								    var newtype1 = 'number'
+								 }else{
+								    var newtype1 = 'string'
+								 }
+
 
 			                        self.setObjectNotExists("overview.station."+key, {
 			                        type: 'state',
 			                            common: {
 			                                name: key,
-			                                type: 'string',
+			                                type: newtype1,
 			                                role: 'value',
 			                                read: true,
 			                                write: false
