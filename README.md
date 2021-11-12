@@ -14,7 +14,7 @@
 
 ## ioBroker.envertech-pv
 
-You can read Data from Envertech.com Web
+You can read PV Data from www.envertecportal.com Web
 
 ## Manual find Station ID
 
@@ -28,6 +28,9 @@ Diese zahlen und Buchstaben Kombination müsst ihr unter den Einstellungen im Ad
 
 
 ## Changelog
+## 0.0.8
+* (adcrafter27) add setting for more log output
+
 ## 0.0.7
 * (adcrafter27) add more functions
 

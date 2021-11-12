@@ -27,7 +27,9 @@ class envertech_pv extends utils.Adapter {
 		var mppt_online = 0;
 		var mppt_offline = 0;
 
-        this.log.info('Loading envertech-pv');
+        if (this.config.morelogoutput) {
+			this.log.info('Loading envertech-pv');
+		}
         if (this.config.station_id){
 
         	self.setObjectNotExists("data.info.last-data-received", {
@@ -116,11 +118,15 @@ class envertech_pv extends utils.Adapter {
                 },
 
                 (error, response, content) => {
-                    self.log.info('request station done');
+                    if (this.config.morelogoutput) {
+                		self.log.info('request station done');
+					}
 
                     if (response) {
                     	if (!error && response.statusCode == 200) {
-                                self.log.info('station data ok');
+                                if (this.config.morelogoutput) {
+                    				self.log.info('station data ok');
+								}
 						    for (var key in content.Data){
 		                        const obj = content.Data[key];
 		                        //self.log.info(key);
@@ -168,12 +174,16 @@ class envertech_pv extends utils.Adapter {
                         timeout: 4500
                     },
                     (error, response, content) => {
-                        self.log.info('request data done');
+                        if (this.config.morelogoutput) {
+							self.log.info('request data done');
+						}
 
                         if (response) {
                             //self.log.info('received data (' + response.statusCode + '): ' + JSON.stringify(content));
                             if (!error && response.statusCode == 200) {
-                                self.log.info('data ok');
+                                if (this.config.morelogoutput) {
+                    				self.log.info('data ok');
+								}
                                 const unitList = {
 					                DCVOLTAGE: 'V',
 					                ACVOLTAGE: 'V',

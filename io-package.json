@@ -1,12 +1,12 @@
 {
   "common": {
     "name": "envertech-pv",
-    "connectionType" : "cloud", 
-    "version": "0.0.7",
+    "connectionType": "cloud",
+    "version": "0.0.8",
     "news": {
-      "0.0.7": {
-        "en": "add more functions",
-        "de": "Weitere Funktionen hinzufügen"
+      "0.0.8": {
+        "en": "add setting for more log output",
+        "de": "einstellung für erweiterte log ausgaben hinzugefügt"
       }
     },
     "title": "envertech-pv",
@@ -15,8 +15,8 @@
       "de": "envertech-pv"
     },
     "desc": {
-      "en": "adapter to read Data from Envertech.com",
-      "de": "Adapter um Werte von Envertech.com zu laden"
+      "en": "adapter to read Data from www.envertecportal.com",
+      "de": "Adapter um Werte von www.envertecportal.com zu laden"
     },
     "authors": [
       "adcrafter27 <adcrafter27@gmail.com>"
@@ -24,13 +24,20 @@
     "keywords": [
       "ioBroker",
       "Envertech",
-      "Envertech.com",
+      "Envertec",
+      "envertecportal.com",
+      "envertecportal",
+      "Envertec.com",
       "Smart Home",
-      "home automation",
+      "mikroinverter",
+      "evt360",
       "EVB202",
       "EVB201",
       "evt560",
-      "evt300"
+      "evt300",
+      "evt720",
+      "evt300",
+      "evt360"
     ],
     "license": "MIT",
     "platform": "Javascript/Node.js",
@@ -47,15 +54,13 @@
     "dataSource": "poll",
     "compact": true,
     "materialize": true,
-
     "dependencies": [
       {
         "js-controller": ">=1.4.2"
       }
     ],
-    "installedFrom": "https://github.com/adcrafter27/ioBroker.envertech-pv/tarball/9d7aaba7cf545dc2b5f9f4815d6a808c88530a95"
+    "installedFrom": "adcrafter27/ioBroker.envertech-pv#17e658f9aed59c663da796229b2783f1aaf93c7a"
   },
-  "native": {
-  },
+  "native": {},
   "objects": []
 }
