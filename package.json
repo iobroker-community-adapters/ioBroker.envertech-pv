@@ -1,6 +1,6 @@
 {
   "name": "iobroker.envertech-pv-new",
-  "version": "0.0.8"
+  "version": "0.0.8",
   "description": "Adapter to read data from www.envertecportal.com",
   "author": {
     "name": "mcm1957",
