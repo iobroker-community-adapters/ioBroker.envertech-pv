@@ -10,17 +10,17 @@
     },
     "title": "envertech-pv",
     "titleLang": {
-        "en": "envertech-pv",
-        "de": "envertech-pv",
-        "ru": "Энвертех-ПВ",
-        "pt": "envertech-pv",
-        "nl": "envertech-pv",
-        "fr": "envertech-pv",
-        "it": "envertech-pv",
-        "es": "envertech-pv",
-        "pl": "envertech-pv",
-        "uk": "envertech-pv",
-        "zh-cn": "恩沃光伏"
+      "en": "Envertech-PV",
+      "de": "Envertech-PV",
+      "ru": "Envertech-PV",
+      "pt": "Envertech-PV",
+      "nl": "Envertech-PV",
+      "fr": "Envertech-PV",
+      "it": "Envertech-PV",
+      "es": "Envertech-PV",
+      "pl": "Envertech-PV",
+      "uk": "Енвертех-ПВ",
+      "zh-cn": "D. 全 技术"
     },
     "desc": {
       "en": "Adapter to read data from www.envertecportal.com",
