@@ -134,12 +134,13 @@ class envertech_pv extends utils.Adapter {
                                 const obj = content.Data[key];
                                 //self.log.info(key);
                                 //self.log.info(obj);
-                                const unit = null;
+                                //const unit = null;
 
+                                let newtype1;
                                 if (typeof obj == 'number') {
-                                    var newtype1 = 'number';
+                                    newtype1 = 'number';
                                 } else {
-                                    var newtype1 = 'string';
+                                    newtype1 = 'string';
                                 }
 
                                 self.setObjectNotExists('overview.station.' + key, {
@@ -197,24 +198,25 @@ class envertech_pv extends utils.Adapter {
                                 TEMPERATURE: '°C',
                             };
 
-                            for (var key in content.Data.QueryResults) {
+                            for (const key in content.Data.QueryResults) {
                                 const obj = content.Data.QueryResults[key];
-                                const gateway = obj['GATEWAYSN'].replace(/\ /g, '-');
-                                const alias = obj['SNALIAS'].replace(/\ /g, '-');
+                                const gateway = obj['GATEWAYSN'].replace(/ /g, '-');
+                                const alias = obj['SNALIAS'].replace(/ /g, '-');
 
-                                for (var [key, value] of Object.entries(obj)) {
+                                // eslint-disable-next-line prefer-const
+                                for (let [key, value] of Object.entries(obj)) {
                                     //self.log.info(gateway);
                                     //self.log.info(gat);
                                     if (gat == 0 || gat == gateway) {
                                         gat = gateway;
                                         if (key == 'DAYENERGY') {
-                                            var x = parseFloat(value);
+                                            const x = parseFloat(value);
                                             //self.log.info(x);
                                             pow1 += x;
                                             //self.log.info(pow1);
                                         }
                                         if (key == 'POWER') {
-                                            var y = parseFloat(value);
+                                            const y = parseFloat(value);
                                             //self.log.info(x);
                                             powergateway += y;
                                             //self.log.info(pow1);
@@ -273,13 +275,13 @@ class envertech_pv extends utils.Adapter {
                                         pow1 = 0;
                                         //self.log.info(pow1);
                                         if (key == 'DAYENERGY') {
-                                            var x = parseFloat(value);
+                                            const x = parseFloat(value);
                                             //self.log.info(x);
                                             pow1 += x;
                                             //self.log.info(pow1);
                                         }
                                         if (key == 'POWER') {
-                                            var y = parseFloat(value);
+                                            const y = parseFloat(value);
                                             //self.log.info(x);
                                             powergateway += y;
                                             //self.log.info(pow1);
@@ -350,11 +352,11 @@ class envertech_pv extends utils.Adapter {
                             self.setState('data.info.mppt_offline', { val: mppt_offline.toFixed(0), ack: true });
                             mppt_online = 0;
 
-                            var datum_string = new Date().toLocaleString();
+                            const datum_string = new Date().toLocaleString();
                             self.setState('data.info.last-data-received', { val: datum_string, ack: true });
                         }
                     } else if (error) {
-                        var datum_string = new Date().toLocaleString();
+                        const datum_string = new Date().toLocaleString();
                         self.setState('data.info.last-data-error', { val: datum_string, ack: true });
                         self.setState('data.info.last-error-code', { val: error.toString(), ack: true });
                         self.log.error(error);
