@@ -1,60 +1,18 @@
 {
-  "_from": "https://github.com/adcrafter27/ioBroker.envertech-pv/tarball/9d7aaba7cf545dc2b5f9f4815d6a808c88530a95",
-  "_id": "iobroker.envertech-pv@0.0.8",
-  "_inBundle": false,
-  "_integrity": "sha512-HUe+UuR5o198mMbesJG3aCySgXrwOQvaYm2TV0ax5HOo4CSPGncaaceUi/J+XM0YQ34PmsOSan3PJh++tviXEg==",
-  "_location": "/iobroker.envertech-pv",
-  "_phantomChildren": {
-    "@types/node": "13.9.2"
-  },
-  "_requested": {
-    "type": "remote",
-    "raw": "https://github.com/adcrafter27/ioBroker.envertech-pv/tarball/9d7aaba7cf545dc2b5f9f4815d6a808c88530a95",
-    "rawSpec": "https://github.com/adcrafter27/ioBroker.envertech-pv/tarball/9d7aaba7cf545dc2b5f9f4815d6a808c88530a95",
-    "saveSpec": "https://github.com/adcrafter27/ioBroker.envertech-pv/tarball/9d7aaba7cf545dc2b5f9f4815d6a808c88530a95",
-    "fetchSpec": "https://github.com/adcrafter27/ioBroker.envertech-pv/tarball/9d7aaba7cf545dc2b5f9f4815d6a808c88530a95"
-  },
-  "_requiredBy": [
-    "#USER",
-    "/"
-  ],
-  "_resolved": "https://github.com/adcrafter27/ioBroker.envertech-pv/tarball/9d7aaba7cf545dc2b5f9f4815d6a808c88530a95",
-  "_shasum": "dc83de74ead5b833976e99ecfbcf16775c3c0993",
-  "_spec": "https://github.com/adcrafter27/ioBroker.envertech-pv/tarball/9d7aaba7cf545dc2b5f9f4815d6a808c88530a95",
-  "_where": "/",
+  "name": "iobroker.envertech-pv",
+  "version": "0.0.8",
+  "description": "Adapter to read data from www.envertecportal.com",
   "author": {
-    "name": "adcrafter27",
-    "email": "adcrafter27@gmail.com"
+    "name": "mcm1957",
+    "email": "mcm57@gmx.at"
   },
-  "bugs": {
-    "url": "https://github.com/adcrafter27/ioBroker.envertech-pv/issues"
-  },
-  "dependencies": {
-    "@iobroker/adapter-core": "^2.3.1",
-    "request": "^2.88.2"
-  },
-  "description": "Read www.envertecportal.com Web data",
-  "devDependencies": {
-    "@iobroker/testing": "^2.2.0",
-    "@types/chai": "^4.2.11",
-    "@types/chai-as-promised": "^7.1.2",
-    "@types/gulp": "^4.0.6",
-    "@types/mocha": "^7.0.2",
-    "@types/node": "^12.12.37",
-    "@types/proxyquire": "^1.3.28",
-    "@types/sinon": "^9.0.0",
-    "@types/sinon-chai": "^3.2.4",
-    "axios": ">=0.21.1",
-    "chai": "^4.2.0",
-    "chai-as-promised": "^7.1.1",
-    "eslint": "^6.8.0",
-    "gulp": "^4.0.2",
-    "mocha": "^7.1.2",
-    "proxyquire": "^2.1.3",
-    "sinon-chai": "^3.5.0",
-    "sinon": "^8.1.1"
-  },
-  "homepage": "https://github.com/adcrafter27/ioBroker.envertech-pv",
+  "contributors": [
+    {
+      "name": "adcrafter27"
+    }
+  ],
+  "homepage": "https://github.com/iobroker-community-adapters/ioBroker.envertech-pv",
+  "license": "MIT",
   "keywords": [
     "ioBroker",
     "Envertech",
@@ -63,31 +21,75 @@
     "envertecportal",
     "Envertec.com",
     "Smart Home",
-    "mikroinverter",
-    "evt360",
+    "microinverter",
+    "EVB300",
     "EVB202",
     "EVB201",
-    "evt560",
-    "evt300",
     "evt720",
-    "evt300",
-    "evt360"
+    "evt560",
+    "evt360",
+    "evt300"
   ],
-  "license": "MIT",
-  "main": "main.js",
-  "name": "iobroker.envertech-pv",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/adcrafter27/ioBroker.envertech-pv.git"
+    "url": "https://github.com/iobroker-community-adapters/ioBroker.envertech-pv.git"
   },
+  "engines": {
+    "node": ">= 14"
+  },
+  "dependencies": {
+    "@iobroker/adapter-core": "^2.6.7",
+    "request": "^2.88.2"
+  },
+  "devDependencies": {
+    "@alcalzone/release-script": "^3.5.9",
+    "@alcalzone/release-script-plugin-iobroker": "^3.5.9",
+    "@alcalzone/release-script-plugin-license": "^3.5.9",
+    "@alcalzone/release-script-plugin-manual-review": "^3.5.9",
+    "@iobroker/adapter-dev": "^1.2.0",
+    "@iobroker/testing": "^4.1.0",
+    "@tsconfig/node14": "^1.0.3",
+    "@types/chai": "^4.3.4",
+    "@types/chai-as-promised": "^7.1.5",
+    "@types/mocha": "^10.0.1",
+    "@types/node": "^14.18.36",
+    "@types/proxyquire": "^1.3.28",
+    "@types/sinon": "^10.0.13",
+    "@types/sinon-chai": "^3.2.9",
+    "chai": "^4.3.7",
+    "chai-as-promised": "^7.1.1",
+    "eslint": "^8.32.0",
+    "eslint-config-prettier": "^8.6.0",
+    "eslint-plugin-prettier": "^4.2.1",
+    "mocha": "^9.2.2",
+    "prettier": "^2.8.3",
+    "proxyquire": "^2.1.3",
+    "sinon-chai": "^3.7.0",
+    "sinon": "^13.0.2",
+    "typescript": "~4.6.4"
+  },
+  "main": "main.js",
+  "files": [
+    "admin{,/!(src)/**}/!(tsconfig|tsconfig.*|.eslintrc).json",
+    "admin{,/!(src)/**}/*.{html,css,png,svg,jpg,js}",
+    "lib/",
+    "www/",
+    "io-package.json",
+    "LICENSE",
+    "main.js"
+  ],
   "scripts": {
-    "lint": "eslint",
-    "test": "npm run test:js && npm run test:package",
-    "test:integration": "mocha test/integration --exit",
-    "test:js": "mocha --opts test/mocha.custom.opts",
+    "test:js": "mocha --config test/mocharc.custom.json \"{!(node_modules|test)/**/*.test.js,*.test.js,test/**/test!(PackageFiles|Startup).js}\"",
     "test:package": "mocha test/package --exit",
-    "test:unit": "mocha test/unit --exit",
-    "test": "node node_modules/mocha/bin/mocha --exit"
+    "test:integration": "mocha test/integration --exit",
+    "test": "npm run test:js && npm run test:package",
+    "check": "tsc --noEmit -p tsconfig.check.json",
+    "lint": "eslint .",
+    "translate": "translate-adapter",
+    "release": "release-script"
   },
-  "version": "0.0.8"
+  "bugs": {
+    "url": "https://github.com/iobroker-community-adapters/ioBroker.envertech-pv/issues"
+  },
+  "readmeFilename": "README.md"
 }
