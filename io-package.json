@@ -19,6 +19,7 @@
         "it": "envertech-pv",
         "es": "envertech-pv",
         "pl": "envertech-pv",
+        "uk": "envertech-pv",
         "zh-cn": "恩沃光伏"
     },
     "desc": {
@@ -31,6 +32,7 @@
       "it": "Adattatore per leggere i dati da www.envertecportal.com",
       "es": "Adaptador para leer datos de www.envertecportal.com",
       "pl": "Adapter do odczytu danych z www.envertecportal.com",
+      "uk": "Адаптер для читання даних з www.envertecportal.com",
       "zh-cn": "从 www.envertecportal.com 读取数据的适配器"
     },
     "authors": [
@@ -38,14 +40,12 @@
       "mcm1957 <mcm57@gmx.at>"
     ],
     "keywords": [
-      "ioBroker",
       "Envertech",
       "Envertec",
       "envertecportal.com",
       "envertecportal",
       "Envertec.com",
-      "Smart Home",
-      "miroinverter",
+      "microinverter",
       "EVB300",
       "EVB202",
       "EVB201",
