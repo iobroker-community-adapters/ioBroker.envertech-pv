@@ -4,8 +4,17 @@
     "version": "0.0.8",
     "news": {
       "0.0.8": {
-        "en": "add setting for more log output",
-        "de": "einstellung für erweiterte log ausgaben hinzugefügt"
+        "en": "added settings for more log output",
+        "de": "zusätzliche Einstellungen für mehr log ausgabe",
+        "ru": "добавлены настройки для большего вывода лога",
+        "pt": "configurações adicionadas para mais saída de log",
+        "nl": "voegde instellingen toe voor meer logboeken",
+        "fr": "paramètres ajoutés pour plus de sortie de journal",
+        "it": "impostazioni aggiuntive per più uscita log",
+        "es": "ajustes añadidos para más salida de registro",
+        "pl": "dodać ustawienia dla więcej wyjściowych logów",
+        "uk": "додано параметри для отримання більш виходу журналу",
+        "zh-cn": "增加产出环境"
       }
     },
     "title": "envertech-pv",
