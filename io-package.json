@@ -1,7 +1,6 @@
 {
   "common": {
     "name": "envertech-pv",
-    "connectionType": "cloud",
     "version": "0.0.8",
     "news": {
       "0.0.8": {
