@@ -11,15 +11,32 @@
     },
     "title": "envertech-pv",
     "titleLang": {
-      "en": "envertech-pv",
-      "de": "envertech-pv"
+        "en": "envertech-pv",
+        "de": "envertech-pv",
+        "ru": "Энвертех-ПВ",
+        "pt": "envertech-pv",
+        "nl": "envertech-pv",
+        "fr": "envertech-pv",
+        "it": "envertech-pv",
+        "es": "envertech-pv",
+        "pl": "envertech-pv",
+        "zh-cn": "恩沃光伏"
     },
     "desc": {
-      "en": "adapter to read Data from www.envertecportal.com",
-      "de": "Adapter um Werte von www.envertecportal.com zu laden"
+      "en": "Adapter to read data from www.envertecportal.com",
+      "de": "Adapter zum Auslesen von Daten von www.envertecportal.com",
+      "ru": "Адаптер для чтения данных с www.envertecportal.com",
+      "pt": "Adaptador para ler dados de www.envertecportal.com",
+      "nl": "Adapter om gegevens uit te lezen van www.envertecportal.com",
+      "fr": "Adaptateur pour lire les données de www.envertecportal.com",
+      "it": "Adattatore per leggere i dati da www.envertecportal.com",
+      "es": "Adaptador para leer datos de www.envertecportal.com",
+      "pl": "Adapter do odczytu danych z www.envertecportal.com",
+      "zh-cn": "从 www.envertecportal.com 读取数据的适配器"
     },
     "authors": [
-      "adcrafter27 <adcrafter27@gmail.com>"
+      "adcrafter27 <adcrafter27@gmail.com>",
+      "mcm1957 <mcm57@gmx.at>"
     ],
     "keywords": [
       "ioBroker",
@@ -29,37 +46,41 @@
       "envertecportal",
       "Envertec.com",
       "Smart Home",
-      "mikroinverter",
-      "evt360",
+      "miroinverter",
+      "EVB300",
       "EVB202",
       "EVB201",
-      "evt560",
-      "evt300",
       "evt720",
-      "evt300",
-      "evt360"
+      "evt560",
+      "evt360",
+      "evt300"
     ],
     "license": "MIT",
     "platform": "Javascript/Node.js",
     "main": "main.js",
-    "icon": "envertech.png",
+    "icon": "envertech-pv.png",
     "enabled": true,
-    "extIcon": "https://raw.githubusercontent.com/adcrafter27/ioBroker.envertech-pv/master/admin/envertech.png",
-    "readme": "https://github.com/adcrafter27/ioBroker.envertech-pv/blob/master/README.md",
+    "extIcon": "https://raw.githubusercontent.com/iobroker-ommunity-adapters/ioBroker.envertech-pv/master/admin/envertech-pv.png",
+    "readme": "https://github.com/iobroker-ommunity-adapters/ioBroker.envertech-pv/blob/master/README.md",
     "loglevel": "info",
     "mode": "schedule",
     "allowInit": true,
     "schedule": "*/5 * * * *",
-    "type": "general",
+    "type": "energy",
+    "connectionType": "cloud",
     "dataSource": "poll",
     "compact": true,
     "materialize": true,
     "dependencies": [
       {
-        "js-controller": ">=1.4.2"
+          "js-controller": ">=3.3.22"
       }
     ],
-    "installedFrom": "adcrafter27/ioBroker.envertech-pv#17e658f9aed59c663da796229b2783f1aaf93c7a"
+    "globalDependencies": [
+      {
+          "admin": ">=5.1.13"
+      }
+    ]
   },
   "native": {},
   "objects": []
