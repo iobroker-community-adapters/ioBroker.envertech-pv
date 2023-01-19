@@ -51,6 +51,7 @@ Best is to set the adapter to Debug log mode (Instances -> Expert mode -> Column
 -->
 ### **WORK IN PROGRESS**
 * (mcm1957) moved adapter to iobroker-community-adapters organisation
+* (mcm1957) Note: This is an intermediate release.
 
 ### 0.0.8
 * (adcrafter27) add setting for more log output
