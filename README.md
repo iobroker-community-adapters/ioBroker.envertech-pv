@@ -49,7 +49,7 @@ Best is to set the adapter to Debug log mode (Instances -> Expert mode -> Column
     Placeholder for the next version (at the beginning of the line):
     ### **WORK IN PROGRESS**
 -->
-### **WORK IN PROGRESS**
+### 0.1.0-alpha.0 (2023-01-19)
 * (mcm1957) moved adapter to iobroker-community-adapters organisation
 * (mcm1957) Note: This is an intermediate release.
 

@@ -1,8 +1,21 @@
 {
   "common": {
     "name": "envertech-pv",
-    "version": "0.0.8",
+    "version": "0.1.0-alpha.0",
     "news": {
+      "0.1.0-alpha.0": {
+        "en": "moved adapter to iobroker-community-adapters organisation\nNote: This is an intermediate release.",
+        "de": "Adapter zur Iobroker-community-adapter-organisation verschoben\nHinweis: Dies ist eine Zwischenversion.",
+        "ru": "переехал адаптер в организацию iobroker-community-adapters\nПримечание: Это промежуточный релиз.",
+        "pt": "adaptador movido para iobroker-community-adapters organização\nNota: Esta é uma versão intermediária.",
+        "nl": "verhuisde adapter naar iobroker-community-adapters organisatie\nDit is een tussentijdse vrijlating.",
+        "fr": "adaptateur déplacé à l'organisation iobroker-community-adapters\nRemarque : C'est une version intermédiaire.",
+        "it": "ha spostato l'adattatore all'organizzazione di iobroker-community-adapters\nNota: Questa è una versione intermedia.",
+        "es": "adaptador movido a la organización de ibroker-community-adapters\nNota: Esta es una versión intermedia.",
+        "pl": "przeprowadził adapter do organizacji iobroker-kommunity-profit\nUwaga: Jest to pośrednie wydanie.",
+        "uk": "перехідний адаптер для організації iobroker-community-adapters\nПримітка: Це проміжний реліз.",
+        "zh-cn": "变通器\n注:这是中间释放。."
+      },
       "0.0.8": {
         "en": "added settings for more log output",
         "de": "zusätzliche Einstellungen für mehr log ausgabe",
@@ -81,12 +94,12 @@
     "materialize": true,
     "dependencies": [
       {
-          "js-controller": ">=3.3.22"
+        "js-controller": ">=3.3.22"
       }
     ],
     "globalDependencies": [
       {
-          "admin": ">=5.1.13"
+        "admin": ">=5.1.13"
       }
     ]
   },
