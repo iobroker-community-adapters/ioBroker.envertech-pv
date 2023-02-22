@@ -35,7 +35,7 @@ Diese zahlen und Buchstaben Kombination müsst ihr unter den Einstellungen im Ad
 
 
 ## Credits
-The work of the adapter would not had been possible without the great work of @adcrafter27 (https://github.com/adcrafter27).
+Providing this adapter would not have been possible without the great work of @adcrafter27 (https://github.com/adcrafter27).
 
 ## How to report issues and feature requests
 
