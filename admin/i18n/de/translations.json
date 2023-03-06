@@ -1,0 +1,8 @@
+{
+    "hlpCloudStationId": "Geben Sie die Stations-ID Ihres Kontos ein",
+    "lblCloudPanel": "Cloud-Konfiguration",
+    "lblCloudStationId": "Stations-ID",
+    "lblOptPanel": "Allgemeine Optionen",
+    "ttCloudStationId": "Stations-ID des Kontos",
+    "txtCloudPanel": "Konfigurieren Sie Parameter für den Zugriff auf Envertec Cloud-Dienste"
+}

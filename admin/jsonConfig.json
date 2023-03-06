@@ -1,0 +1,62 @@
+{
+    "i18n": true,
+    "type": "tabs",
+    "items": {
+        "_cloudPanel": {
+            "type": "panel",
+            "label": "lblCloudPanel",
+            "items": {
+                "_cloudInfo_1": {
+                    "type": "staticText",
+                    "text": "txtCloudPanel",
+                    "style": {
+                        "fontSize": 16
+                    }
+                },
+                "_divider1": {
+                    "type": "divider"
+                },
+                "cloudUsername": {
+                    "type": "text",
+                    "label": "lblCloudUsername",
+                    "default": "",
+                    "tooltip": "ttCloudUsername",
+                    "help": "hlpCloudUsername"
+                },
+                "cloudPassword": {
+                    "type": "password",
+                    "label": "lblCloudPassword",
+                    "default": "",
+                    "tooltip": "ttCloudPassword",
+                    "help": "hlpCloudPassword"
+                },
+                "_divider2": {
+                    "type": "divider"
+                },
+                "cloudStationId": {
+                    "type": "text",
+                    "label": "lblCloudStationId",
+                    "default": "",
+                    "tooltip": "ttCloudStationId",
+                    "help": "hlpCloudStationId"
+                },
+                "_divider3": {
+                    "type": "divider"
+                },
+                "cloudPollIntvl": {
+                    "type": "number",
+                    "label": "lblCloudPollIntvl",
+                    "default": "60",
+                    "tooltip": "ttCloudPollIntvl",
+                    "help": "hlpCloudPollIntvl"
+                }
+            }
+        },
+
+        "_optPanel": {
+            "type": "panel",
+            "label": "lblOptPanel",
+            "items": {}
+        }
+    }
+}

@@ -1,0 +1,8 @@
+{
+    "hlpCloudStationId": "Введіть ідентифікатор станції свого облікового запису",
+    "lblCloudPanel": "Конфігурація хмари",
+    "lblCloudStationId": "Ідентифікатор станції",
+    "lblOptPanel": "Загальні параметри",
+    "ttCloudStationId": "Station-Id облікового запису",
+    "txtCloudPanel": "Налаштуйте параметри доступу до хмарних служб Envertec"
+}

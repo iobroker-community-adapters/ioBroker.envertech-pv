@@ -1,0 +1,8 @@
+{
+    "hlpCloudStationId": "输入您帐户的站号",
+    "lblCloudPanel": "云配置",
+    "lblCloudStationId": "站号",
+    "lblOptPanel": "常规选项",
+    "ttCloudStationId": "账号站号",
+    "txtCloudPanel": "配置参数以访问 Envertec 云服务"
+}
