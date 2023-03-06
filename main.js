@@ -1,4 +1,11 @@
-// REMOVE NEXT LINE WHEN CLEANING UP CODE
+/**
+ *
+ * envertech_pv adapter,
+ *		copyright CTJaeger 2020 - 2022, MIT
+ *		copyright McM1957 2023, MIT
+ *
+ */
+
 // @ts-nocheck
 
 /* jshint -W097 */
@@ -7,371 +14,134 @@
 'use strict';
 
 const utils = require('@iobroker/adapter-core');
-const request = require('request');
+const jsl = require('./lib/jslib.js');
+//const translate = require('./lib/transLib.js');
 
+const adapterName = require('./package.json').name.split('.').pop();
+const EnvCloud = require('./lib/envertechCloud.js');
+
+const STATEs = {};
+
+/* prettier-ignore */
+const STATES_CFG = {
+    '_Error_':      {'type': 'boolean', 'name': 'error flag',       'desc': 'descError',        'role': 'indicator.maintenance',  'unit': '',    'cvt': null },
+    '_ErrorText_':  {'type': 'string',  'name': 'error text',       'desc': 'descErrorText',    'role': 'text',                   'unit': '',    'cvt': null },
+    '_LastData_':   {'type': 'string',  'name': 'last data',        'desc': 'descLastData',     'role': 'text',                   'unit': '',    'cvt': null },
+    '_LastUpdate_': {'type': 'string',  'name': 'last update',      'desc': 'descLastUpdate',   'role': 'date',                   'unit': '',    'cvt': null },
+    '_Online_':     {'type': 'boolean', 'name': 'online flag',      'desc': 'descOnline',       'role': 'indicator.reachable',    'unit': '',    'cvt': null },
+
+    '_MpptOnline_': {'type': 'number', 'name': 'mppt online',       'desc': 'descMpptOnline',   'role': 'value',                  'unit': '',    'cvt': /(?<val>\d+(\.\d+)?)\s+\w+/ },     // '0,9 kWp'
+    '_MpptOffline_':{'type': 'number', 'name': 'mppt offline',      'desc': 'descMpptOffline',  'role': 'value',                  'unit': '',    'cvt': /(?<val>\d+(\.\d+)?)\s+\w+/ },     // '0,9 kWp'
+    '_StationId_':  {'type': 'string', 'name': 'station id',        'desc': 'descStationId',    'role': 'info.serial',            'unit': '',    'cvt': null },                            // ''
+
+    'UnitCapacity': {'type': 'number', 'name': 'unit capacity',     'desc': 'descUnitCapacity', 'role': 'value.power',            'unit': 'kWp', 'cvt': /(?<val>\d+(\.\d+)?)\s+\w+/ },     // '0,9 kWp'
+    'UnitEToday':   {'type': 'number', 'name': 'unit earned today', 'desc': 'descUnitEToday',   'role': 'value.power.production', 'unit': 'kWh', 'cvt': /(?<val>\d+(\.\d+)?)\s+\w+/ },     // '2.12 kWh'
+    'UnitEMonth':   {'type': 'number', 'name': 'unit earned month', 'desc': 'descUnitEMonth',   'role': 'value.power.production', 'unit': 'kWh', 'cvt': /(?<val>\d+(\.\d+)?)\s+\w+/ },     // '6.99 kWh',
+    'UnitEYear':    {'type': 'number', 'name': 'unit earned year',  'desc': 'descUnitEYear',    'role': 'value.power.production', 'unit': 'kWh', 'cvt': /(?<val>\d+(\.\d+)?)\s+\w+/ },     //'40.9 kWh',
+    'UnitETotal':   {'type': 'number', 'name': 'unit earned total', 'desc': 'descUnitETotal',   'role': 'value.power.production', 'unit': 'kWh', 'cvt': /(?<val>\d+(\.\d+)?)\s+\w+/ },     //'353.49 kWh',
+    'Power':        {'type': 'number', 'name': 'power',             'desc': 'descPower',        'role': 'value.power',            'unit': 'kW',  'cvt': null },     // 0,
+    'PowerStr':     {'type': null,     'name': '',                  'desc': '',                 'role': '',                       'unit': '',    'cvt': /(?<val>\d+(\.\d+)?)\s+\w+/ },     // '0 W',        *ignore*
+    'Capacity':     {'type': null,     'name': '',                  'desc': '',                 'role': '',                       'unit': '',    'cvt': null },     // 0.9,          *ignore*
+    'StrCO2':       {'type': 'number', 'name': 'co2 saved',         'desc': 'descStrCO2',       'role': 'value',                  'unit': 't',   'cvt': /(?<val>\d+(\.\d+)?)\s+\w+/ },     //'0.352 ton',
+    'StrTrees':     {'type': 'number', 'name': 'trees',             'desc': 'descStrTrees',     'role': 'value',                  'unit': '',    'cvt': null },     // '1',
+    'StrIncome':    {'type': 'number', 'name': 'income',            'desc': 'descStrIncome',    'role': 'value',                  'unit': '',    'cvt': /\w+\s+(?<val>\d+(\.\d+)?)/ },     //:'€ 0.00',
+    'PwImg':        {'type': null,     'name': '',                  'desc': '',                 'role': '',                       'unit': '',    'cvt': null },     //'Default.jpg', *ignore*
+    'StationName':  {'type': 'string', 'name': 'station name',      'desc': 'descStationName',  'role': 'info.name',              'unit': '',    'cvt': null },     //'KTG6',
+    'InvModel1':    {'type': 'string', 'name': 'inverter #1 model', 'desc': 'descInvModel1',    'role': 'info.name',              'unit': '',    'cvt': null },     //null,
+    'InvModel2':    {'type': 'string', 'name': 'inverter #2 model', 'desc': 'descInvModel2',    'role': 'info.name',              'unit': '',    'cvt': null },     //null,
+    'Lat':          {'type': 'number', 'name': 'latitude',          'desc': 'descLat',          'role': 'value.gps.latitude',     'unit': '',    'cvt': null },     //48.208201762059105,
+    'Lng':          {'type': 'number', 'name': 'longitude',         'desc': 'descLng',          'role': 'value.gps.longitude',    'unit': '',    'cvt': null },     //16.371216773986816,
+    'TimeZone':     {'type': 'number', 'name': 'timezone',          'desc': 'descTimeZone',     'role': 'value',                  'unit': '',    'cvt': null },     //1,
+    'StrPeakPower': {'type': 'number', 'name': 'peak power',        'desc': 'descStrPeakPower', 'role': 'value.power',            'unit': 'W',   'cvt': /(?<val>\d+(\.\d+)?)\s+\w+/ },     //'616.42 W',
+    'Installer':    {'type': 'string', 'name': 'installer',         'desc': 'descInstaller',    'role': 'info.name',              'unit': '',    'cvt': null },     //null,
+    'CreateTime':   {'type': 'string', 'name': 'create time',       'desc': 'descCreateTime',   'role': 'value',                  'unit': '',    'cvt': null },     //'21/12/2022 GMT +1',
+    'CreateYear':   {'type': 'number', 'name': 'create year',       'desc': 'descCreateYear',   'role': 'value',                  'unit': '',    'cvt': null },     //2022,
+    'CreateMonth':  {'type': 'number', 'name': 'create month',      'desc': 'descCreateMonth',  'role': 'value',                  'unit': '',    'cvt': null },     //12,
+    'Etoday':       {'type': 'number', 'name': 'earning today',     'desc': 'descEtoday',       'role': 'value.power.production', 'unit': 'Wh',  'cvt': null },     //2.12,
+    'InvTotal':     {'type': 'number', 'name': 'total inverts',     'desc': 'descInvTotal',     'role': 'value',                  'unit': '',    'cvt': null },     //2
+
+    'GATEWAYALIAS': {'type': 'string', 'name': 'gateway alias',     'desc': 'descGatewayAlias',  'role': 'info.name',             'unit': '',    'cvt': null },     //'EVB300_94001732',
+    'GATEWAYSN':    {'type': 'string', 'name': 'gateway sn',        'desc': 'descGatewaySn',     'role': 'info.serial',           'unit': '',    'cvt': null },     //'94001732',
+    'SNALIAS':      {'type': 'string', 'name': 'converter alias',   'desc': 'descConverterAlias','role': 'info.name',             'unit': '',    'cvt': null },     //'EVT west',
+    'SN':           {'type': 'string', 'name': 'convertser sn',     'desc': 'descConverterSn',   'role': 'info.serial',           'unit': '',    'cvt': null },     //'12866103',
+    'DCVOLTAGE':    {'type': 'number', 'name': 'dc voltage',        'desc': 'descDcVoltage',     'role': 'value.voltage',         'unit': 'V',   'cvt': null },     //'32.54',
+    'ACVOLTAGE':    {'type': 'number', 'name': 'ac voltage',        'desc': 'descAcVoltage',     'role': 'value.voltage',         'unit': 'V',   'cvt': null },     //'242.25',
+    'ACCURRENCY':   {'type': null,     'name': '',                  'desc': 'descAccurency',     'role': '',                      'unit': '',   'cvt': null },     //'0',
+    'POWER':        {'type': 'number', 'name': 'power',             'desc': 'descPower',         'role': 'value.power',           'unit': 'W',   'cvt': null },     //'14.19',
+    'FREQUENCY':    {'type': 'number', 'name': 'frequency',         'desc': 'descFrequency',     'role': 'value.frequency',       'unit': 'Hz',  'cvt': null },     //'50.02',
+    'DAYENERGY':    {'type': 'number', 'name': 'day energy',        'desc': 'descDayEnergy',     'role': 'value.power.production','unit': 'kWh', 'cvt': null },     //'0.24',
+    'ENERGY':       {'type': 'number', 'name': 'energy',            'desc': 'descEnergy',        'role': 'value.power.production','unit': 'kWh', 'cvt': null },     //'202.52',
+    'TEMPERATURE':  {'type': 'number', 'name': 'temperature',       'desc': 'descTemperature',   'role': 'value.temperature',     'unit': '°C',   'cvt': null },     //'15.4',
+    'SITETIME':     {'type': 'string', 'name': 'site datetime',     'desc': 'descSiteDateTime',  'role': 'value',                 'unit': '',    'cvt': null },     //'3/5/2023 1:34:58 PM',
+    'STATIONID':    {'type': 'string', 'name': 'station id',        'desc': 'descStationId',     'role': 'value',                 'unit': '',    'cvt': null },     //null,
+    'STATUS':       {'type': 'number', 'name': 'status',            'desc': 'descStatus',        'role': 'value',                 'unit': '',    'cvt': null },     //'0',
+    'SNID':         {'type': 'string', 'name': 'sn id',             'desc': 'descSnId',          'role': 'value',                 'unit': '',    'cvt': null },     //'9489A29C25BD4A468594E976AD2411E4'0
+};
+
+/**
+ * main adapter class
+ */
 class envertech_pv extends utils.Adapter {
     constructor(options) {
         super({
             ...options,
             name: 'envertech-pv',
         });
-        this.killTimeout = null;
 
         this.on('ready', this.onReady.bind(this));
         this.on('unload', this.onUnload.bind(this));
+
+        translate.init(this);
+
+        this.stationInitialized = false;
+        this.envCloud = new EnvCloud(this);
+        this.pollIntv = 60 * 1000; //TODO
+
+        //this.killTimeout = null;
     }
 
+    /**
+     * onReady - will be called as soon as adapter is ready
+     *
+     * @param
+     * @return
+     *
+     */
     async onReady() {
-        const self = this;
-        let pow1 = 0;
-        let powergateway = 0;
-        let gat = 0;
-        let mppt_online = 0;
-        let mppt_offline = 0;
+        this.log.debug('onReady triggered');
 
-        if (this.config.morelogoutput) {
-            this.log.info('Loading envertech-pv');
-        }
-        if (this.config.station_id) {
-            self.setObjectNotExists('data.info.last-data-received', {
-                type: 'state',
-                common: {
-                    name: 'last-data-received',
-                    type: 'string',
-                    role: 'value',
-                    def: 'no data received',
-                    read: true,
-                    write: false,
-                },
-                native: {},
-            });
+        // reset
+        await this.resetStateObjects();
 
-            self.setObjectNotExists('data.info.last-data-error', {
-                type: 'state',
-                common: {
-                    name: 'last-data-error',
-                    type: 'string',
-                    role: 'value',
-                    def: 'no error',
-                    read: true,
-                    write: false,
-                },
-                native: {},
-            });
-            self.setObjectNotExists('data.info.last-error-code', {
-                type: 'state',
-                common: {
-                    name: 'last-error-code',
-                    type: 'string',
-                    role: 'value',
-                    def: 'no error',
-                    read: true,
-                    write: false,
-                },
-                native: {},
-            });
+        // login and retrieve station-id
+        let result = 0;
+        do {
+            result = await this.doLogin();
+            if (result === -1) {
+                this.log.error('[login] aborting - please correct config');
+                return;
+            }
+            await jsl.sleep(result);
+        } while (result);
 
-            self.setObjectNotExists('overview.info.last-data-received', {
-                type: 'state',
-                common: {
-                    name: 'last-data-received',
-                    type: 'string',
-                    role: 'value',
-                    def: 'no data received',
-                    read: true,
-                    write: false,
-                },
-                native: {},
-            });
+        this.log.info(`[login] successful login using station-id ${this.stationId}`);
 
-            self.setObjectNotExists('data.info.mppt_online', {
-                type: 'state',
-                common: {
-                    name: 'mppt_online',
-                    type: 'string',
-                    role: 'value',
-                    def: '0',
-                    read: true,
-                    write: false,
-                },
-                native: {},
-            });
+        // start scanning loop
+        //setImmediate(this.doScan.bind(this));
+        await this.doScan();
 
-            self.setObjectNotExists('data.info.mppt_offline', {
-                type: 'state',
-                common: {
-                    name: 'mppt_offline',
-                    type: 'string',
-                    role: 'value',
-                    def: '0',
-                    read: true,
-                    write: false,
-                },
-                native: {},
-            });
-
-            request(
-                {
-                    method: 'POST',
-                    url:
-                        'https://www.envertecportal.com/ApiStations/getStationInfo?stationId=' + this.config.station_id,
-                    json: true,
-                    time: true,
-                    timeout: 4500,
-                },
-
-                (error, response, content) => {
-                    if (this.config.morelogoutput) {
-                        self.log.info('request station done');
-                    }
-
-                    if (response) {
-                        if (!error && response.statusCode == 200) {
-                            if (this.config.morelogoutput) {
-                                self.log.info('station data ok');
-                            }
-                            for (const key in content.Data) {
-                                const obj = content.Data[key];
-                                //self.log.info(key);
-                                //self.log.info(obj);
-                                //const unit = null;
-
-                                let newtype1;
-                                if (typeof obj == 'number') {
-                                    newtype1 = 'number';
-                                } else {
-                                    newtype1 = 'string';
-                                }
-
-                                self.setObjectNotExists('overview.station.' + key, {
-                                    type: 'state',
-                                    common: {
-                                        name: key,
-                                        type: newtype1,
-                                        role: 'value',
-                                        read: true,
-                                        write: false,
-                                    },
-                                    native: {},
-                                });
-                                self.setState('overview.station.' + key, { val: obj, ack: true });
-                            }
-                            //self.log.info('received data (' + response.statusCode + '): ' + JSON.stringify(content));
-                            const datum_string = new Date().toLocaleString();
-                            self.setState('overview.info.last-data-received', { val: datum_string, ack: true });
-                        }
-                    } else if (error) {
-                        self.log.error(error);
-                    }
-                },
-            );
-
-            request(
-                {
-                    method: 'POST',
-                    url:
-                        'https://www.envertecportal.com/ApiInverters/QueryTerminalReal?page=1&perPage=20&orderBy=GATEWAYSN&whereCondition=%7B%22STATIONID%22%3A%22' +
-                        this.config.station_id +
-                        '%22%7D',
-                    json: true,
-                    time: true,
-                    timeout: 4500,
-                },
-                (error, response, content) => {
-                    if (this.config.morelogoutput) {
-                        self.log.info('request data done');
-                    }
-
-                    if (response) {
-                        //self.log.info('received data (' + response.statusCode + '): ' + JSON.stringify(content));
-                        if (!error && response.statusCode == 200) {
-                            if (this.config.morelogoutput) {
-                                self.log.info('data ok');
-                            }
-                            const unitList = {
-                                DCVOLTAGE: 'V',
-                                ACVOLTAGE: 'V',
-                                POWER: 'watt',
-                                FREQUENCY: 'Hz',
-                                DAYENERGY: 'kWh',
-                                ENERGY: 'kWh',
-                                TEMPERATURE: '°C',
-                            };
-
-                            for (const key in content.Data.QueryResults) {
-                                const obj = content.Data.QueryResults[key];
-                                const gateway = obj['GATEWAYSN'].replace(/ /g, '-');
-                                const alias = obj['SNALIAS'].replace(/ /g, '-');
-
-                                // eslint-disable-next-line prefer-const
-                                for (let [key, value] of Object.entries(obj)) {
-                                    //self.log.info(gateway);
-                                    //self.log.info(gat);
-                                    if (gat == 0 || gat == gateway) {
-                                        gat = gateway;
-                                        if (key == 'DAYENERGY') {
-                                            const x = parseFloat(value);
-                                            //self.log.info(x);
-                                            pow1 += x;
-                                            //self.log.info(pow1);
-                                        }
-                                        if (key == 'POWER') {
-                                            const y = parseFloat(value);
-                                            //self.log.info(x);
-                                            powergateway += y;
-                                            //self.log.info(pow1);
-                                        }
-                                        if (key == 'STATUS') {
-                                            if (parseFloat(value) == '0') {
-                                                mppt_online += 1;
-                                            }
-                                            if (parseFloat(value) == '1') {
-                                                mppt_offline += 1;
-                                            }
-                                        }
-
-                                        self.setObjectNotExists('data.gateway_' + gat + '.info.gateway_power_now', {
-                                            type: 'state',
-                                            common: {
-                                                name: 'gateway_power_now',
-                                                type: 'string',
-                                                role: 'value',
-                                                unit: 'watt',
-                                                read: true,
-                                                write: false,
-                                            },
-                                            native: {},
-                                        });
-
-                                        self.setState('data.gateway_' + gat + '.info.gateway_power_now', {
-                                            val: powergateway.toFixed(0),
-                                            ack: true,
-                                        });
-                                        //powergateway = 0;
-                                    } else {
-                                        powergateway = 0;
-                                        //self.log.info(pow1);
-                                        //self.log.info(gateway);
-
-                                        self.setObjectNotExists('data.gateway_' + gat + '.info.gateway_day_energy', {
-                                            type: 'state',
-                                            common: {
-                                                name: 'gateway_day_energy',
-                                                type: 'string',
-                                                role: 'value',
-                                                unit: 'kWh',
-                                                read: true,
-                                                write: false,
-                                            },
-                                            native: {},
-                                        });
-
-                                        self.setState('data.gateway_' + gat + '.info.gateway_day_energy', {
-                                            val: pow1.toFixed(3),
-                                            ack: true,
-                                        });
-
-                                        //self.log.info("else");
-                                        pow1 = 0;
-                                        //self.log.info(pow1);
-                                        if (key == 'DAYENERGY') {
-                                            const x = parseFloat(value);
-                                            //self.log.info(x);
-                                            pow1 += x;
-                                            //self.log.info(pow1);
-                                        }
-                                        if (key == 'POWER') {
-                                            const y = parseFloat(value);
-                                            //self.log.info(x);
-                                            powergateway += y;
-                                            //self.log.info(pow1);
-                                        }
-
-                                        gat = gateway;
-                                    }
-
-                                    let unit = null;
-
-                                    if (Object.prototype.hasOwnProperty.call(unitList, key)) {
-                                        unit = unitList[key];
-                                    }
-
-                                    self.setObjectNotExists('data.gateway_' + gateway + '.' + alias + '.' + key, {
-                                        type: 'state',
-                                        common: {
-                                            name: alias + '.' + key,
-                                            type: 'string',
-                                            role: 'value',
-                                            unit: unit,
-                                            read: true,
-                                            write: false,
-                                        },
-                                        native: {},
-                                    });
-                                    self.setState('data.gateway_' + gateway + '.' + alias + '.' + key, {
-                                        val: value,
-                                        ack: true,
-                                    });
-                                }
-                            }
-                            //self.log.info(pow1);
-                            //self.log.info(gat);
-                            self.setObjectNotExists('data.gateway_' + gat + '.info.gateway_day_energy', {
-                                type: 'state',
-                                common: {
-                                    name: 'gateway_day_energy',
-                                    type: 'string',
-                                    role: 'value',
-                                    unit: 'kWh',
-                                    read: true,
-                                    write: false,
-                                },
-                                native: {},
-                            });
-                            self.setObjectNotExists('data.gateway_' + gat + '.info.gateway_power_now', {
-                                type: 'state',
-                                common: {
-                                    name: 'gateway_power_now',
-                                    type: 'string',
-                                    role: 'value',
-                                    unit: 'watt',
-                                    read: true,
-                                    write: false,
-                                },
-                                native: {},
-                            });
-                            self.setState('data.gateway_' + gat + '.info.gateway_day_energy', {
-                                val: pow1.toFixed(3),
-                                ack: true,
-                            });
-                            self.setState('data.gateway_' + gat + '.info.gateway_power_now', {
-                                val: powergateway.toFixed(0),
-                                ack: true,
-                            });
-                            self.setState('data.info.mppt_online', { val: mppt_online.toFixed(0), ack: true });
-                            self.setState('data.info.mppt_offline', { val: mppt_offline.toFixed(0), ack: true });
-                            mppt_online = 0;
-
-                            const datum_string = new Date().toLocaleString();
-                            self.setState('data.info.last-data-received', { val: datum_string, ack: true });
-                        }
-                    } else if (error) {
-                        const datum_string = new Date().toLocaleString();
-                        self.setState('data.info.last-data-error', { val: datum_string, ack: true });
-                        self.setState('data.info.last-error-code', { val: error.toString(), ack: true });
-                        self.log.error(error);
-                    }
-                },
-            );
-        } else {
-            self.log.error('Station_id Error');
-        }
-
-        //setTimeout(this.stop.bind(this), 10000);
-        this.killthetimeout = setTimeout(this.stop.bind(this), 10000);
+        return;
     }
 
+    /**
+     * onUnload - called when adapter shuts down
+     *
+     * @param {callback} callback 	callback function
+     * @return
+     *
+     */
     onUnload(callback) {
+        this.log.debug('onUnload triggered');
         try {
             if (this.killthetimeout) {
                 this.log.debug('clearing and kill timeout');
@@ -383,7 +153,412 @@ class envertech_pv extends utils.Adapter {
             callback();
         }
     }
+
+    /**
+     * doLogin - handle login request and retrieve stationId
+     *
+     * @return  0       if login successful
+     *          -1      if abort is requested
+     *          delay   time in ms to retry
+     *
+     */
+    async doLogin() {
+        this.log.debug('doLogin triggered');
+
+        const result = await this.envCloud.login(this.config.cloudUsername, this.config.cloudPassword);
+        if (result.status !== 0) {
+            this.log.error(`[login] ${result.statustext}`);
+            if (result.status < 0) {
+                // error raised by axios
+            } else if (result.status == 1) {
+                if (result.statustext === 'User does not exist') return -1;
+            } else if (result.status >= 100) {
+                //
+            }
+            return 15000;
+        }
+
+        this.stationId = result.data.stationId;
+
+        return 0;
+    }
+
+    /**
+     * doScan - Scan station data
+     *
+     * @return  nothing
+     *
+     */
+    async doScan() {
+        this.log.debug('doScan triggered');
+
+        const start = Date.now();
+
+        // scan gateways
+        await this.doQueryStation(this.stationId);
+
+        // scan gateways and converters
+        await this.doQueryGateways(this.stationId);
+
+        // start next scan
+        let delay = this.pollIntv + start - Date.now();
+        if (delay < 0) delay = 0;
+        setTimeout(this.doScan.bind(this), delay);
+    }
+
+    /**
+     * doQueryGateways - Scan station data
+     *
+     * @return  nothing
+     *
+     */
+    async doQueryGateways(pStationId) {
+        this.log.debug(`doQueryGateways (${pStationId}`);
+
+        const result = await this.envCloud.getGatewayInfo(pStationId);
+        if (result.status < 0) {
+            // error raised by axios
+            let states;
+            states = await this.getStatesAsync(`ST-${pStationId}.GW-*.info.online`);
+            for (const key in states) await this.setState(key, { val: false, ack: true, q: 0x00 });
+            states = await this.getStatesAsync(`ST-${pStationId}.GW-*.info.error`);
+            for (const key in states) await this.setState(key, { val: false, ack: true, q: 0x00 });
+            states = await this.getStatesAsync(`ST-${pStationId}.GW-*.info.error_text`);
+            for (const key in states) await this.setState(key, { val: result.error_text, ack: true, q: 0x00 });
+            return; // abort
+        } else if (result.status == 1) {
+            //
+            let states;
+            states = await this.getStatesAsync(`ST-${pStationId}.GW-*.info.online`);
+            for (const key in states) await this.setState(key, { val: false, ack: true, q: 0x00 });
+            states = await this.getStatesAsync(`ST-${pStationId}.GW-*.info.error`);
+            for (const key in states) await this.setState(key, { val: false, ack: true, q: 0x00 });
+            states = await this.getStatesAsync(`ST-${pStationId}.GW-*.info.error_text`);
+            for (const key in states) await this.setState(key, { val: result.error_text, ack: true, q: 0x00 });
+            return; // abort
+        } else if (result.status >= 100) {
+            //
+            let states;
+            states = await this.getStatesAsync(`ST-${pStationId}.GW-*.info.online`);
+            for (const key in states) await this.setState(key, { val: false, ack: true, q: 0x00 });
+            states = await this.getStatesAsync(`ST-${pStationId}.GW-*.info.error`);
+            for (const key in states) await this.setState(key, { val: false, ack: true, q: 0x00 });
+            states = await this.getStatesAsync(`ST-${pStationId}.GW-*.info.error_text`);
+            for (const key in states) await this.setState(key, { val: result.error_text, ack: true, q: 0x00 });
+            return; // abort
+        }
+        if (!result.data.QueryResults) return;
+
+        for (const row of result.data.QueryResults) {
+            const gatewayAlias = row['GATEWAYALIAS'];
+            const gatewaySn = row['GATEWAYSN'];
+
+            const gatewayId = `ST-${pStationId}.GW-${gatewaySn}`;
+            await this.initObject({
+                _id: `${gatewayId}`,
+                type: 'device',
+                common: {
+                    name: `gateway ${gatewayAlias}`,
+                    statusStates: {
+                        onlineId: `${adapterName}.${this.instance}.${gatewayId}.info.online`,
+                        errorId: `${adapterName}.${this.instance}.${gatewayId}.info.error`,
+                    },
+                },
+                native: {},
+            });
+
+            await this.initObject({
+                _id: `${gatewayId}.info`,
+                type: 'channel',
+                common: {
+                    name: `gateway ${gatewayAlias} info`,
+                },
+                native: {},
+            });
+
+            await this.initStateObject(`${gatewayId}.info.error`, STATES_CFG['_Error_']);
+            await this.initStateObject(`${gatewayId}.info.error_text`, STATES_CFG['_ErrorText_']);
+            await this.initStateObject(`${gatewayId}.info.last_update`, STATES_CFG['_LastUpdate_']);
+            await this.initStateObject(`${gatewayId}.info.online`, STATES_CFG['_Online_']);
+
+            await this.initStateObject(`${gatewayId}.mppt_online`, STATES_CFG['_MpptOnline_']);
+            await this.initStateObject(`${gatewayId}.mppt_offline`, STATES_CFG['_MpptOffline_']);
+
+            /* prettier-ignore */
+            await this.setStateAsync(`${gatewayId}.info.last_update`, { val: new Date().toLocaleString(), ack: true, q: 0x00 });
+            await this.setStateAsync(`${gatewayId}.info.online`, { val: true, ack: true, q: 0x00 });
+            await this.setStateAsync(`${gatewayId}.info.error`, { val: false, ack: true, q: 0x00 });
+            await this.setStateAsync(`${gatewayId}.info.error_text`, { val: null, ack: true, q: 0x00 });
+
+            const snAlias = row['SNALIAS'];
+            const sn = row['SN'];
+
+            const rootId = `ST-${pStationId}.GW-${gatewaySn}.CVT-${sn}`;
+            await this.initObject({
+                _id: `${rootId}`,
+                type: 'channel',
+                common: {
+                    name: `converter ${snAlias}`,
+                    statusStates: {
+                        onlineId: `${adapterName}.${this.instance}.${rootId}.info.online`,
+                        errorId: `${adapterName}.${this.instance}.${rootId}.info.error`,
+                    },
+                },
+                native: {},
+            });
+
+            await this.initObject({
+                _id: `${rootId}.info`,
+                type: 'channel',
+                common: {
+                    name: `converter ${snAlias} info`,
+                },
+                native: {},
+            });
+
+            await this.initStateObject(`${rootId}.info.online`, STATES_CFG['_Online_']);
+            await this.setStateAsync(`${rootId}.info.online`, { val: true, ack: true, q: 0x00 });
+
+            for (const key in row) {
+                this.log.debug(`[gatewayinfo] processing ${key}`);
+                await this.initStateObject(`${rootId}.${key}`, STATES_CFG[key]);
+
+                let val = row[key];
+                if (STATES_CFG[key].cvt && typeof val === 'string') {
+                    const match = result.data[key].match(STATES_CFG[key].cvt);
+                    if (match) {
+                        val = match.groups.val;
+                    } else {
+                        this.log.debug(`[gateway] unexpected data format for ${key} - ${val}`);
+                    }
+                }
+                if (STATES_CFG[key].type === 'number') val = Number(val);
+                await this.setStateAsync(`${rootId}.${key}`, { val: val, ack: true, q: 0x00 });
+            }
+        }
+
+        // data total count - total converters
+        /*
+        for (const key in content.Data.QueryResults) {
+            const obj = content.Data.QueryResults[key];
+            const gateway = obj['GATEWAYSN'].replace(/ /g, '-');
+            const alias = obj['SNALIAS'].replace(/ /g, '-');
+*/
+    }
+
+    /**
+     * doQueryStation - Scan station data
+     *
+     * @return  nothing
+     *
+     */
+    async doQueryStation(pStationId) {
+        this.log.debug(`doQueryStation (${pStationId})`);
+
+        const rootId = `ST-${pStationId}`;
+
+        const result = await this.envCloud.getStationInfo(pStationId);
+        if (result.status < 0) {
+            // error raised by axios
+            if (this.stationInitialized) {
+                if (!result.statustext.match(/Error: connect ETIMEDOUT/))
+                    await this.setStateAsync(`${rootId}.info.error`, { val: true, ack: true, q: 0x00 });
+                await this.setStateAsync(`${rootId}.info.error_text`, { val: result.statustext, ack: true, q: 0x00 });
+                await this.setStateAsync(`${rootId}.info.online`, { val: false, ack: true, q: 0x00 });
+            }
+            return; // abort
+        } else if (result.status == 1) {
+            if (this.stationInitialized) {
+                await this.setStateAsync(`${rootId}.info.error_text`, { val: result.statustext, ack: true, q: 0x00 });
+                await this.setStateAsync(`${rootId}.info.online`, { val: false, ack: true, q: 0x00 });
+                await this.setStateAsync(`${rootId}.info.error`, { val: true, ack: true, q: 0x00 });
+            }
+            return; // abort
+        } else if (result.status >= 100) {
+            // http error
+            if (this.stationInitialized) {
+                if (!result.statustext.match(/Error: connect ETIMEDOUT/))
+                    await this.setStateAsync(`${rootId}.info.error`, { val: true, ack: true, q: 0x00 });
+                await this.setStateAsync(`${rootId}.info.error_text`, { val: result.statustext, ack: true, q: 0x00 });
+                await this.setStateAsync(`${rootId}.info.online`, { val: false, ack: true, q: 0x00 });
+            }
+            return; // abort
+        }
+
+        await this.initObject({
+            _id: `${rootId}`,
+            type: 'folder',
+            common: {
+                name: `station ${result.data.StationName}`,
+                statusStates: {
+                    onlineId: `${adapterName}.${this.instance}.${rootId}.info.online`,
+                    errorId: `${adapterName}.${this.instance}.${rootId}.info.error`,
+                },
+            },
+            native: {},
+        });
+
+        await this.initObject({
+            _id: `${rootId}.info`,
+            type: 'channel',
+            common: {
+                name: `station ${result.data.StationName} info`,
+            },
+            native: {},
+        });
+
+        await this.initStateObject(`${rootId}.info.error`, STATES_CFG['_Error_']);
+        await this.initStateObject(`${rootId}.info.error_text`, STATES_CFG['_ErrorText_']);
+        //await this.initStateObject(`${rootId}.info.last_data`, STATES_CFG['_LastData_']);
+        await this.initStateObject(`${rootId}.info.last_update`, STATES_CFG['_LastUpdate_']);
+        await this.initStateObject(`${rootId}.info.online`, STATES_CFG['_Online_']);
+
+        await this.initStateObject(`${rootId}.mppt_online`, STATES_CFG['_MpptOnline_']);
+        await this.initStateObject(`${rootId}.mppt_offline`, STATES_CFG['_MpptOffline_']);
+        await this.initStateObject(`${rootId}.station_id`, STATES_CFG['_StationId_']);
+
+        this.stationInitialized = true;
+
+        /* prettier-ignore */
+        await this.setStateAsync(`${rootId}.info.last_update`, { val: new Date().toLocaleString(), ack: true, q: 0x00 });
+        //await this.setStateAsync(`${rootId}.info.last_data`, { val: null, ack: true, q: 0x00 });
+        await this.setStateAsync(`${rootId}.info.online`, { val: true, ack: true, q: 0x00 });
+        await this.setStateAsync(`${rootId}.info.error`, { val: false, ack: true, q: 0x00 });
+        await this.setStateAsync(`${rootId}.info.error_text`, { val: null, ack: true, q: 0x00 });
+
+        await this.setStateAsync(`${rootId}.station_id`, { val: pStationId, ack: true, q: 0x00 });
+
+        for (const key in result.data) {
+            this.log.debug(`[stationdatainfo] processing station info ${key}`);
+            await this.initStateObject(`${rootId}.${key}`, STATES_CFG[key]);
+
+            let val = result.data[key];
+            if (STATES_CFG[key].cvt && typeof val === 'string') {
+                const match = result.data[key].match(STATES_CFG[key].cvt);
+                if (match) {
+                    val = match.groups.val;
+                } else {
+                    this.log.debug(`[station] unexpected data format for ${key} - ${val}`);
+                }
+            }
+            if (STATES_CFG[key].type === 'number') val = Number(val);
+            await this.setStateAsync(`${rootId}.${key}`, { val: val, ack: true, q: 0x00 });
+        }
+    }
+
+    /**
+     * initObject - create or reconfigure single object
+     *
+     *		creates object if it does not exist
+     *		overrides object data otherwise
+     *
+     * @param {obj}     pObj    objectstructure
+     * @return
+     *
+     */
+    async initObject(pObj) {
+        this.log.debug(`initobject [${pObj._id}]`);
+
+        const fullId = `${adapterName}.${this.instance}.${pObj._id}`;
+
+        if (typeof STATEs[fullId] === 'undefined') {
+            try {
+                this.log.debug('creating obj "' + pObj._id + '" with type ' + pObj.type);
+                await this.setObjectNotExistsAsync(pObj._id, pObj);
+                await this.extendObjectAsync(pObj._id, pObj);
+            } catch (e) {
+                this.log.error('error initializing obj "' + pObj._id + '" ' + e.message);
+            }
+        }
+    }
+
+    /**
+     * initStateObject - create or reconfigure single state object
+     *
+     *		creates object if it does not exist
+     *		overrides object data otherwise
+     *
+     * @param    {string}    pId    object id
+     * @param    {obj}       pObj   configuration object
+     * @return
+     *
+     */
+    async initStateObject(pId, pObj) {
+        this.log.debug(`initStateobject (${pId})`);
+
+        if (!pObj.type) return;
+        await this.initObject({
+            _id: pId,
+            type: 'state',
+            common: {
+                name: pObj.name,
+                desc: pObj.desc,
+                write: false,
+                read: true,
+                type: pObj.type,
+                role: pObj.role,
+                unit: pObj.unit,
+            },
+            native: {},
+        });
+    }
+
+    /**
+     * resetStateObjects - reset state existing objects
+     *
+     * @return
+     *
+     */
+    async resetStateObjects() {
+        this.log.debug(`resetStateobjects`);
+
+        let states;
+
+        states = await this.getStatesAsync('*');
+        for (const key in states) await this.setState(key, { ack: true, q: 0x02 });
+
+        states = await this.getStatesAsync('*.info.online');
+        for (const key in states) await this.setState(key, { val: false, ack: true, q: 0x00 });
+
+        states = await this.getStatesAsync('*.info.error');
+        for (const key in states) await this.setState(key, { val: false, ack: true, q: 0x00 });
+    }
+} /* end of adapter class */
+
+// ---------------------------------------------------------------------------------------------------------------------
+
+/**
+ * here we start    const objs = await adapter.getForeignObjectsAsync( `${adapterName}.${adapter.instance}.${pPattern}` );
+    if (objs){
+        if ( Object.values(objs).length ) {
+            adapter.log.info(`removing states ${pPattern}...`);
+        }
+        for (const obj of Object.values(objs)) {
+            adapter.log.debug(`removing object ${obj._id}...`);
+            await adapter.delForeignObjectAsync( obj._id, {recursive: true} );
+        }
+    }
+
+ * module export / startup
+ */
+
+console.log('DEBUG  : envertech_pv adapter initializing (' + process.argv + ') ...'); //logger not yet initialized
+
+/*
+if (process.argv) {
+    for (let a = 1; a < process.argv.length; a++) {
+        if (process.argv[a] === '--install') {
+            doInstall = true;
+            process.on('exit', function () {
+                if (!didInstall) {
+                    console.log('WARNING: migration of config skipped - ioBroker might be stopped');
+                }
+            });
+        }
+    }
 }
+*/
+
 // @ts-ignore parent is a valid property on module
 if (module.parent) {
     // Export the constructor in compact mode

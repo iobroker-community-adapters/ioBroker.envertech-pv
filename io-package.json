@@ -1,108 +1,132 @@
 {
-  "common": {
-    "name": "envertech-pv",
-    "version": "0.1.0-alpha.0",
-    "news": {
-      "0.1.0-alpha.0": {
-        "en": "moved adapter to iobroker-community-adapters organisation\nNote: This is an intermediate release.",
-        "de": "Adapter zur Iobroker-community-adapter-organisation verschoben\nHinweis: Dies ist eine Zwischenversion.",
-        "ru": "переехал адаптер в организацию iobroker-community-adapters\nПримечание: Это промежуточный релиз.",
-        "pt": "adaptador movido para iobroker-community-adapters organização\nNota: Esta é uma versão intermediária.",
-        "nl": "verhuisde adapter naar iobroker-community-adapters organisatie\nDit is een tussentijdse vrijlating.",
-        "fr": "adaptateur déplacé à l'organisation iobroker-community-adapters\nRemarque : C'est une version intermédiaire.",
-        "it": "ha spostato l'adattatore all'organizzazione di iobroker-community-adapters\nNota: Questa è una versione intermedia.",
-        "es": "adaptador movido a la organización de ibroker-community-adapters\nNota: Esta es una versión intermedia.",
-        "pl": "przeprowadził adapter do organizacji iobroker-kommunity-profit\nUwaga: Jest to pośrednie wydanie.",
-        "uk": "перехідний адаптер для організації iobroker-community-adapters\nПримітка: Це проміжний реліз.",
-        "zh-cn": "变通器\n注:这是中间释放。."
-      },
-      "0.0.8": {
-        "en": "added settings for more log output",
-        "de": "zusätzliche Einstellungen für mehr log ausgabe",
-        "ru": "добавлены настройки для большего вывода лога",
-        "pt": "configurações adicionadas para mais saída de log",
-        "nl": "voegde instellingen toe voor meer logboeken",
-        "fr": "paramètres ajoutés pour plus de sortie de journal",
-        "it": "impostazioni aggiuntive per più uscita log",
-        "es": "ajustes añadidos para más salida de registro",
-        "pl": "dodać ustawienia dla więcej wyjściowych logów",
-        "uk": "додано параметри для отримання більш виходу журналу",
-        "zh-cn": "增加产出环境"
-      }
+    "common": {
+        "name": "envertech-pv",
+        "version": "0.1.0-alpha.0",
+        "news": {
+            "0.1.0-alpha.0": {
+                "en": "moved adapter to iobroker-community-adapters organisation\nNote: This is an intermediate release.",
+                "de": "Adapter zur Iobroker-community-adapter-organisation verschoben\nHinweis: Dies ist eine Zwischenversion.",
+                "ru": "переехал адаптер в организацию iobroker-community-adapters\nПримечание: Это промежуточный релиз.",
+                "pt": "adaptador movido para iobroker-community-adapters organização\nNota: Esta é uma versão intermediária.",
+                "nl": "verhuisde adapter naar iobroker-community-adapters organisatie\nDit is een tussentijdse vrijlating.",
+                "fr": "adaptateur déplacé à l'organisation iobroker-community-adapters\nRemarque : C'est une version intermédiaire.",
+                "it": "ha spostato l'adattatore all'organizzazione di iobroker-community-adapters\nNota: Questa è una versione intermedia.",
+                "es": "adaptador movido a la organización de ibroker-community-adapters\nNota: Esta es una versión intermedia.",
+                "pl": "przeprowadził adapter do organizacji iobroker-kommunity-profit\nUwaga: Jest to pośrednie wydanie.",
+                "uk": "перехідний адаптер для організації iobroker-community-adapters\nПримітка: Це проміжний реліз.",
+                "zh-cn": "变通器\n注:这是中间释放。."
+            },
+            "0.0.8": {
+                "en": "added settings for more log output",
+                "de": "zusätzliche Einstellungen für mehr log ausgabe",
+                "ru": "добавлены настройки для большего вывода лога",
+                "pt": "configurações adicionadas para mais saída de log",
+                "nl": "voegde instellingen toe voor meer logboeken",
+                "fr": "paramètres ajoutés pour plus de sortie de journal",
+                "it": "impostazioni aggiuntive per più uscita log",
+                "es": "ajustes añadidos para más salida de registro",
+                "pl": "dodać ustawienia dla więcej wyjściowych logów",
+                "uk": "додано параметри для отримання більш виходу журналу",
+                "zh-cn": "增加产出环境"
+            }
+        },
+        "title": "envertech-pv",
+        "titleLang": {
+            "en": "Envertech-PV",
+            "de": "Envertech-PV",
+            "ru": "Envertech-PV",
+            "pt": "Envertech-PV",
+            "nl": "Envertech-PV",
+            "fr": "Envertech-PV",
+            "it": "Envertech-PV",
+            "es": "Envertech-PV",
+            "pl": "Envertech-PV",
+            "uk": "Енвертех-ПВ",
+            "zh-cn": "D. 全 技术"
+        },
+        "desc": {
+            "en": "Adapter to read data from www.envertecportal.com",
+            "de": "Adapter zum Auslesen von Daten von www.envertecportal.com",
+            "ru": "Адаптер для чтения данных с www.envertecportal.com",
+            "pt": "Adaptador para ler dados de www.envertecportal.com",
+            "nl": "Adapter om gegevens uit te lezen van www.envertecportal.com",
+            "fr": "Adaptateur pour lire les données de www.envertecportal.com",
+            "it": "Adattatore per leggere i dati da www.envertecportal.com",
+            "es": "Adaptador para leer datos de www.envertecportal.com",
+            "pl": "Adapter do odczytu danych z www.envertecportal.com",
+            "uk": "Адаптер для читання даних з www.envertecportal.com",
+            "zh-cn": "从 www.envertecportal.com 读取数据的适配器"
+        },
+        "authors": [
+            "adcrafter27 <adcrafter27@gmail.com>",
+            "mcm1957 <mcm57@gmx.at>"
+        ],
+        "keywords": [
+            "Envertech",
+            "Envertec",
+            "envertecportal.com",
+            "envertecportal",
+            "Envertec.com",
+            "microinverter",
+            "EVB300",
+            "EVB202",
+            "EVB201",
+            "evt720",
+            "evt560",
+            "evt360",
+            "evt300"
+        ],
+        "license": "MIT",
+        "platform": "Javascript/Node.js",
+        "main": "main.js",
+        "icon": "envertech-pv.png",
+        "enabled": true,
+        "extIcon": "https://raw.githubusercontent.com/iobroker-community-adapters/ioBroker.envertech-pv/master/admin/envertech-pv.png",
+        "readme": "https://github.com/iobroker-community-adapters/ioBroker.envertech-pv/blob/master/README.md",
+        "loglevel": "info",
+        "mode": "daemon",
+        "allowInit": true,
+        "type": "energy",
+        "connectionType": "cloud",
+        "dataSource": "poll",
+        "compact": true,
+        "adminUI": {
+            "config": "json"
+        },
+        "dependencies": [
+            {
+                "js-controller": ">=3.3.22"
+            }
+        ],
+        "globalDependencies": [
+            {
+                "admin": ">=5.1.13"
+            }
+        ]
     },
-    "title": "envertech-pv",
-    "titleLang": {
-      "en": "Envertech-PV",
-      "de": "Envertech-PV",
-      "ru": "Envertech-PV",
-      "pt": "Envertech-PV",
-      "nl": "Envertech-PV",
-      "fr": "Envertech-PV",
-      "it": "Envertech-PV",
-      "es": "Envertech-PV",
-      "pl": "Envertech-PV",
-      "uk": "Енвертех-ПВ",
-      "zh-cn": "D. 全 技术"
-    },
-    "desc": {
-      "en": "Adapter to read data from www.envertecportal.com",
-      "de": "Adapter zum Auslesen von Daten von www.envertecportal.com",
-      "ru": "Адаптер для чтения данных с www.envertecportal.com",
-      "pt": "Adaptador para ler dados de www.envertecportal.com",
-      "nl": "Adapter om gegevens uit te lezen van www.envertecportal.com",
-      "fr": "Adaptateur pour lire les données de www.envertecportal.com",
-      "it": "Adattatore per leggere i dati da www.envertecportal.com",
-      "es": "Adaptador para leer datos de www.envertecportal.com",
-      "pl": "Adapter do odczytu danych z www.envertecportal.com",
-      "uk": "Адаптер для читання даних з www.envertecportal.com",
-      "zh-cn": "从 www.envertecportal.com 读取数据的适配器"
-    },
-    "authors": [
-      "adcrafter27 <adcrafter27@gmail.com>",
-      "mcm1957 <mcm57@gmx.at>"
-    ],
-    "keywords": [
-      "Envertech",
-      "Envertec",
-      "envertecportal.com",
-      "envertecportal",
-      "Envertec.com",
-      "microinverter",
-      "EVB300",
-      "EVB202",
-      "EVB201",
-      "evt720",
-      "evt560",
-      "evt360",
-      "evt300"
-    ],
-    "license": "MIT",
-    "platform": "Javascript/Node.js",
-    "main": "main.js",
-    "icon": "envertech-pv.png",
-    "enabled": true,
-    "extIcon": "https://raw.githubusercontent.com/iobroker-community-adapters/ioBroker.envertech-pv/master/admin/envertech-pv.png",
-    "readme": "https://github.com/iobroker-community-adapters/ioBroker.envertech-pv/blob/master/README.md",
-    "loglevel": "info",
-    "mode": "schedule",
-    "allowInit": true,
-    "schedule": "*/5 * * * *",
-    "type": "energy",
-    "connectionType": "cloud",
-    "dataSource": "poll",
-    "compact": true,
-    "materialize": true,
-    "dependencies": [
-      {
-        "js-controller": ">=3.3.22"
-      }
-    ],
-    "globalDependencies": [
-      {
-        "admin": ">=5.1.13"
-      }
+    "native": {},
+    "objects": [],
+    "instanceObjects": [
+        {
+            "_id": "info",
+            "type": "channel",
+            "common": {
+                "name": "Information"
+            },
+            "native": {}
+        },
+        {
+            "_id": "info.connection",
+            "type": "state",
+            "common": {
+                "role": "indicator.connected",
+                "name": "Device or service connected",
+                "type": "boolean",
+                "read": true,
+                "write": false,
+                "def": false
+            },
+            "native": {}
+        }
     ]
-  },
-  "native": {},
-  "objects": []
 }
