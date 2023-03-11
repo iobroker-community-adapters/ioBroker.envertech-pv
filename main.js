@@ -131,7 +131,7 @@ class envertech_pv extends utils.Adapter {
                 this.log.info(`[start] scanning station with id ${station.stationId}`);
 
                 let pollIntv = station.pollIntv;
-                if pollIntv < 15 pollIngtv = 15; 
+                if (pollIntv < 15) pollIntv = 15;
                 this.stations[station.stationId] = {
                     envCloud: new EnvCloud(this),
                     pollIntv: pollIntv * 1000,
