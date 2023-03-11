@@ -14,10 +14,9 @@
 'use strict';
 
 const utils = require('@iobroker/adapter-core');
-const jsl = require('./lib/jslib.js');
-//const translate = require('./lib/transLib.js');
+//const jsl = require('./lib/jslib.js');
+const translib = require('./lib/translib.js');
 
-const adapterName = require('./package.json').name.split('.').pop();
 const EnvCloud = require('./lib/envertechCloud.js');
 
 const STATEs = {};
@@ -39,7 +38,7 @@ const STATES_CFG = {
     'UnitEMonth':   {'type': 'number', 'name': 'unit earned month', 'desc': 'descUnitEMonth',   'role': 'value.power.production', 'unit': 'kWh', 'cvt': /(?<val>\d+(\.\d+)?)\s+\w+/ },     // '6.99 kWh',
     'UnitEYear':    {'type': 'number', 'name': 'unit earned year',  'desc': 'descUnitEYear',    'role': 'value.power.production', 'unit': 'kWh', 'cvt': /(?<val>\d+(\.\d+)?)\s+\w+/ },     //'40.9 kWh',
     'UnitETotal':   {'type': 'number', 'name': 'unit earned total', 'desc': 'descUnitETotal',   'role': 'value.power.production', 'unit': 'kWh', 'cvt': /(?<val>\d+(\.\d+)?)\s+\w+/ },     //'353.49 kWh',
-    'Power':        {'type': 'number', 'name': 'power',             'desc': 'descPower',        'role': 'value.power',            'unit': 'kW',  'cvt': null },     // 0,
+    'Power':        {'type': 'number', 'name': 'power',             'desc': 'descUnitPower',    'role': 'value.power',            'unit': 'kW',  'cvt': null },     // 0,
     'PowerStr':     {'type': null,     'name': '',                  'desc': '',                 'role': '',                       'unit': '',    'cvt': /(?<val>\d+(\.\d+)?)\s+\w+/ },     // '0 W',        *ignore*
     'Capacity':     {'type': null,     'name': '',                  'desc': '',                 'role': '',                       'unit': '',    'cvt': null },     // 0.9,          *ignore*
     'StrCO2':       {'type': 'number', 'name': 'co2 saved',         'desc': 'descStrCO2',       'role': 'value',                  'unit': 't',   'cvt': /(?<val>\d+(\.\d+)?)\s+\w+/ },     //'0.352 ton',
@@ -88,16 +87,14 @@ class envertech_pv extends utils.Adapter {
             name: 'envertech-pv',
         });
 
+        this.on('message', this.onMessage.bind(this));
         this.on('ready', this.onReady.bind(this));
         this.on('unload', this.onUnload.bind(this));
 
-        translate.init(this);
+        translib.init(this);
+        //const test = translib.translate('lblCloudPanel', 'de', ' (test)');
 
-        this.stationInitialized = false;
-        this.envCloud = new EnvCloud(this);
-        this.pollIntv = 60 * 1000; //TODO
-
-        //this.killTimeout = null;
+        this.stations = {};
     }
 
     /**
@@ -113,6 +110,7 @@ class envertech_pv extends utils.Adapter {
         // reset
         await this.resetStateObjects();
 
+        /*
         // login and retrieve station-id
         let result = 0;
         do {
@@ -125,16 +123,31 @@ class envertech_pv extends utils.Adapter {
         } while (result);
 
         this.log.info(`[login] successful login using station-id ${this.stationId}`);
-
+*/
         // start scanning loop
-        //setImmediate(this.doScan.bind(this));
-        await this.doScan();
+        let stationCnt = 0;
+        if (this.config.stations) {
+            for (const station of this.config.stations) {
+                this.log.info(`[start] scanning station with id ${station.stationId}`);
 
+                this.stations[station.stationId] = {
+                    envCloud: new EnvCloud(this),
+                    pollIntv: station.pollIntv,
+                    timer: null,
+                };
+
+                setImmediate(this.doScan.bind(this), station.stationId);
+                stationCnt++;
+                this.delay(5000);
+            }
+        }
+        if (stationCnt) this.log.info(`scanning started for ${stationCnt} station(s)`);
+        else this.log.warn(`no active station(s) detected - check config`);
         return;
     }
 
     /**
-     * onUnload - called when adapter shuts down
+     * onUnload - called for adapter shuts down
      *
      * @param {callback} callback 	callback function
      * @return
@@ -155,6 +168,72 @@ class envertech_pv extends utils.Adapter {
     }
 
     /**
+     * onMessage - called if adapter receives a message
+     *
+     * @param {object} pObj 	message object
+     * @return
+     *
+     */
+    async onMessage(pObj) {
+        if (pObj) {
+            this.log.debug(`onMessage - ${JSON.stringify(pObj)}`);
+            switch (pObj.command) {
+                case 'getStationId': {
+                    if (pObj.message) {
+                        const username = pObj.message?.username;
+                        const password = pObj.message?.password;
+                        if (username.trim() === '' || password.trim() === '') {
+                            if (pObj.callback) {
+                                this.sendTo(
+                                    pObj.from,
+                                    pObj.command,
+                                    { error: 'Username and password must not be empty' },
+                                    pObj.callback,
+                                );
+                            }
+                            return;
+                        }
+
+                        const envCloud = new EnvCloud(this);
+                        const result = await envCloud.login(username, password);
+                        if (result.status !== 0) {
+                            this.log.error(`[login] ${result.statustext}`);
+                            if (result.status < 0) {
+                                // error raised by axios
+                            } else if (result.status == 1) {
+                                // envertech error
+                            } else if (result.status >= 100) {
+                                // http error
+                            }
+                            if (pObj.callback) {
+                                this.sendTo(
+                                    pObj.from,
+                                    pObj.command,
+                                    { error: `Error retrieving station-id: ${result.statustext}` },
+                                    pObj.callback,
+                                );
+                            }
+                            return;
+                        }
+
+                        this.stationId = result.data.stationId;
+                        if (pObj.callback) {
+                            this.sendTo(
+                                pObj.from,
+                                pObj.command,
+                                { native: { cloudStationId: `${result.data.stationId}` } },
+                                pObj.callback,
+                            );
+                        }
+                        return;
+                    }
+                    break;
+                }
+            }
+        }
+    }
+
+    /**
      * doLogin - handle login request and retrieve stationId
      *
      * @return  0       if login successful
@@ -162,7 +241,7 @@ class envertech_pv extends utils.Adapter {
      *          delay   time in ms to retry
      *
      */
-    async doLogin() {
+    /*    async doLogin() {
         this.log.debug('doLogin triggered');
 
         const result = await this.envCloud.login(this.config.cloudUsername, this.config.cloudPassword);
@@ -182,6 +261,7 @@ class envertech_pv extends utils.Adapter {
 
         return 0;
     }
+*/
 
     /**
      * doScan - Scan station data
@@ -189,21 +269,22 @@ class envertech_pv extends utils.Adapter {
      * @return  nothing
      *
      */
-    async doScan() {
-        this.log.debug('doScan triggered');
+    async doScan(pStationId) {
+        this.log.debug(`doScan triggered (${pStationId})`);
+        this.stations[pStationId].timeout = null;
 
         const start = Date.now();
 
         // scan gateways
-        await this.doQueryStation(this.stationId);
+        await this.doQueryStation(pStationId);
 
         // scan gateways and converters
-        await this.doQueryGateways(this.stationId);
+        await this.doQueryGateways(pStationId);
 
         // start next scan
-        let delay = this.pollIntv + start - Date.now();
+        let delay = this.stations[pStationId].pollIntv + start - Date.now();
         if (delay < 0) delay = 0;
-        setTimeout(this.doScan.bind(this), delay);
+        this.stations[pStationId].timeout = setTimeout(this.doScan.bind(this), delay, pStationId);
     }
 
     /**
@@ -215,7 +296,7 @@ class envertech_pv extends utils.Adapter {
     async doQueryGateways(pStationId) {
         this.log.debug(`doQueryGateways (${pStationId}`);
 
-        const result = await this.envCloud.getGatewayInfo(pStationId);
+        const result = await this.stations[pStationId].envCloud.getGatewayInfo(pStationId);
         if (result.status < 0) {
             // error raised by axios
             let states;
@@ -260,8 +341,8 @@ class envertech_pv extends utils.Adapter {
                 common: {
                     name: `gateway ${gatewayAlias}`,
                     statusStates: {
-                        onlineId: `${adapterName}.${this.instance}.${gatewayId}.info.online`,
-                        errorId: `${adapterName}.${this.instance}.${gatewayId}.info.error`,
+                        onlineId: `${this.name}.${this.instance}.${gatewayId}.info.online`,
+                        errorId: `${this.name}.${this.instance}.${gatewayId}.info.error`,
                     },
                 },
                 native: {},
@@ -300,8 +381,8 @@ class envertech_pv extends utils.Adapter {
                 common: {
                     name: `converter ${snAlias}`,
                     statusStates: {
-                        onlineId: `${adapterName}.${this.instance}.${rootId}.info.online`,
-                        errorId: `${adapterName}.${this.instance}.${rootId}.info.error`,
+                        onlineId: `${this.name}.${this.instance}.${rootId}.info.online`,
+                        errorId: `${this.name}.${this.instance}.${rootId}.info.error`,
                     },
                 },
                 native: {},
@@ -322,6 +403,8 @@ class envertech_pv extends utils.Adapter {
             for (const key in row) {
                 this.log.debug(`[gatewayinfo] processing ${key}`);
                 await this.initStateObject(`${rootId}.${key}`, STATES_CFG[key]);
+
+                if (typeof STATEs[`${this.name}.${this.instance}.${rootId}.${key}`] === 'undefined') continue; // undesired object
 
                 let val = row[key];
                 if (STATES_CFG[key].cvt && typeof val === 'string') {
@@ -357,7 +440,7 @@ class envertech_pv extends utils.Adapter {
 
         const rootId = `ST-${pStationId}`;
 
-        const result = await this.envCloud.getStationInfo(pStationId);
+        const result = await this.stations[pStationId].envCloud.getStationInfo(pStationId);
         if (result.status < 0) {
             // error raised by axios
             if (this.stationInitialized) {
@@ -391,8 +474,8 @@ class envertech_pv extends utils.Adapter {
             common: {
                 name: `station ${result.data.StationName}`,
                 statusStates: {
-                    onlineId: `${adapterName}.${this.instance}.${rootId}.info.online`,
-                    errorId: `${adapterName}.${this.instance}.${rootId}.info.error`,
+                    onlineId: `${this.name}.${this.instance}.${rootId}.info.online`,
+                    errorId: `${this.name}.${this.instance}.${rootId}.info.error`,
                 },
             },
             native: {},
@@ -432,6 +515,8 @@ class envertech_pv extends utils.Adapter {
             this.log.debug(`[stationdatainfo] processing station info ${key}`);
             await this.initStateObject(`${rootId}.${key}`, STATES_CFG[key]);
 
+            if (typeof STATEs[`${this.name}.${this.instance}.${rootId}.${key}`] === 'undefined') continue; // undesired object
+
             let val = result.data[key];
             if (STATES_CFG[key].cvt && typeof val === 'string') {
                 const match = result.data[key].match(STATES_CFG[key].cvt);
@@ -459,7 +544,7 @@ class envertech_pv extends utils.Adapter {
     async initObject(pObj) {
         this.log.debug(`initobject [${pObj._id}]`);
 
-        const fullId = `${adapterName}.${this.instance}.${pObj._id}`;
+        const fullId = `${this.name}.${this.instance}.${pObj._id}`;
 
         if (typeof STATEs[fullId] === 'undefined') {
             try {
@@ -492,7 +577,7 @@ class envertech_pv extends utils.Adapter {
             type: 'state',
             common: {
                 name: pObj.name,
-                desc: pObj.desc,
+                desc: translib.getTranslations(pObj.desc),
                 write: false,
                 read: true,
                 type: pObj.type,
@@ -528,17 +613,6 @@ class envertech_pv extends utils.Adapter {
 // ---------------------------------------------------------------------------------------------------------------------
 
 /**
- * here we start    const objs = await adapter.getForeignObjectsAsync( `${adapterName}.${adapter.instance}.${pPattern}` );
-    if (objs){
-        if ( Object.values(objs).length ) {
-            adapter.log.info(`removing states ${pPattern}...`);
-        }
-        for (const obj of Object.values(objs)) {
-            adapter.log.debug(`removing object ${obj._id}...`);
-            await adapter.delForeignObjectAsync( obj._id, {recursive: true} );
-        }
-    }
-
  * module export / startup
  */
 

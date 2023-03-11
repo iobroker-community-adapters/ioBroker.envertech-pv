@@ -81,6 +81,7 @@
         "main": "main.js",
         "icon": "envertech-pv.png",
         "enabled": true,
+        "messagebox": true,
         "extIcon": "https://raw.githubusercontent.com/iobroker-community-adapters/ioBroker.envertech-pv/master/admin/envertech-pv.png",
         "readme": "https://github.com/iobroker-community-adapters/ioBroker.envertech-pv/blob/master/README.md",
         "loglevel": "info",

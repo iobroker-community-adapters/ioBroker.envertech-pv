@@ -6,19 +6,33 @@
             "type": "panel",
             "label": "lblCloudPanel",
             "items": {
-                "_cloudInfo_1": {
+                "_cloudHdr_1": {
+                    "type": "header",
+                    "text": "txtCloudHeader_1",
+                    "size": 3
+                },
+                "_cloudInfo": {
                     "type": "staticText",
-                    "text": "txtCloudPanel",
+                    "text": "txtCloudInfo",
                     "style": {
                         "fontSize": 16
                     }
                 },
-                "_divider1": {
-                    "type": "divider"
+                "_cloudInfoOffline": {
+                    "type": "staticText",
+                    "hidden": "_alive",
+                    "newLine": true,
+                    "text": "txtCloudInfoOffline",
+                    "style": {
+                        "fontSize": 16,
+                        "color": "red"
+                    }
                 },
                 "cloudUsername": {
                     "type": "text",
                     "label": "lblCloudUsername",
+                    "hidden": "!_alive",
+                    "newLine": true,
                     "default": "",
                     "tooltip": "ttCloudUsername",
                     "help": "hlpCloudUsername"
@@ -26,29 +40,78 @@
                 "cloudPassword": {
                     "type": "password",
                     "label": "lblCloudPassword",
+                    "hidden": "!_alive",
                     "default": "",
                     "tooltip": "ttCloudPassword",
                     "help": "hlpCloudPassword"
                 },
-                "_divider2": {
-                    "type": "divider"
+                "_getStationId": {
+                    "type": "sendTo",
+                    "label": "lblGetStationId",
+                    "variant": "outlined",
+                    "showProcess": true,
+                    "command": "getStationId",
+                    "jsonData": "{ \"username\": \"${data.cloudUsername}\", \"password\": \"${data.cloudPassword}\" }",
+                    "useNative": true,
+                    "disabled": "data.cloudUsername==='' || data.cloudPassword===''",
+                    "hidden": "!_alive",
+                    "tooltip": "ttGetStationId",
+                    "help": "hlpGetStationId"
                 },
                 "cloudStationId": {
                     "type": "text",
                     "label": "lblCloudStationId",
-                    "default": "",
+                    "hidden": "!_alive",
+                    "readOnly": true,
                     "tooltip": "ttCloudStationId",
                     "help": "hlpCloudStationId"
                 },
-                "_divider3": {
-                    "type": "divider"
+                "_cloudHdr_2": {
+                    "type": "header",
+                    "text": "txtCloudHeader_2",
+                    "size": 3
                 },
-                "cloudPollIntvl": {
-                    "type": "number",
-                    "label": "lblCloudPollIntvl",
-                    "default": "60",
-                    "tooltip": "ttCloudPollIntvl",
-                    "help": "hlpCloudPollIntvl"
+                "stations": {
+                    "type": "table",
+                    "sm": 12,
+                    "md": 12,
+                    "lg": 12,
+                    "label": "",
+                    "showSecondAddAt": 5,
+                    "items": [
+                        {
+                            "type": "checkbox",
+                            "attr": "stationAct",
+                            "width": "10% ",
+                            "title": "lblStationAct",
+                            "filter": false,
+                            "sort": false,
+                            "default": true,
+                            "tooltip": "ttStationAct"
+                        },
+                        {
+                            "type": "text",
+                            "attr": "stationId",
+                            "width": "25% ",
+                            "title": "lblStationId",
+                            "filter": false,
+                            "sort": false,
+                            "default": "",
+                            "tooltip": "ttStationId"
+                        },
+                        {
+                            "type": "number",
+                            "attr": "pollIntvl",
+                            "width": "15% ",
+                            "title": "lblPollIntvl",
+                            "min": 10,
+                            "max": 3600,
+                            "filter": false,
+                            "sort": false,
+                            "default": "60",
+                            "tooltip": "ttPollIntvl"
+                        }
+                    ]
                 }
             }
         },
@@ -56,7 +119,37 @@
         "_optPanel": {
             "type": "panel",
             "label": "lblOptPanel",
-            "items": {}
+            "items": {
+                "optLogReq": {
+                    "type": "checkbox",
+                    "label": "",
+                    "default": false,
+                    "tooltip": "ttOptLogReq"
+                },
+                "_optLogReqTxt": {
+                    "type": "staticText",
+                    "text": "txtOptLogReq",
+                    "help": "hlpOptLogReq",
+                    "style": {
+                        "fontSize": 16
+                    }
+                },
+                "optLogNew": {
+                    "type": "checkbox",
+                    "label": "",
+                    "newLine": true,
+                    "default": true,
+                    "tooltip": "ttOptLogNew"
+                },
+                "_optLogNewTxt": {
+                    "type": "staticText",
+                    "text": "txtOptLogNew",
+                    "help": "hlpOptLogNew",
+                    "style": {
+                        "fontSize": 16
+                    }
+                }
+            }
         }
     }
 }
