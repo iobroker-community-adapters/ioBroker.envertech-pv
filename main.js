@@ -92,8 +92,7 @@ class envertech_pv extends utils.Adapter {
         this.on('unload', this.onUnload.bind(this));
 
         translib.init(this);
-        //const test = translib.translate('lblCloudPanel', 'de', ' (test)');
-
+        this.minDelayMs = (this.options?.minDelay || 15) * 1000;
         this.stations = {};
     }
 
@@ -130,11 +129,11 @@ class envertech_pv extends utils.Adapter {
             for (const station of this.config.stations) {
                 this.log.info(`[start] scanning station with id ${station.stationId}`);
 
-                let pollIntv = station.pollIntv;
-                if (pollIntv < 15) pollIntv = 15;
+                let pollIntvl = station.pollIntvl || 60;
+                if (pollIntvl < 15) pollIntvl = 15;
                 this.stations[station.stationId] = {
                     envCloud: new EnvCloud(this),
-                    pollIntv: pollIntv * 1000,
+                    pollIntvlMs: pollIntvl * 1000,
                     timer: null,
                 };
 
@@ -284,9 +283,9 @@ class envertech_pv extends utils.Adapter {
         await this.doQueryGateways(pStationId);
 
         // start next scan
-        let delay = this.stations[pStationId].pollIntv + start - Date.now();
-        if (delay < 0) delay = 0;
-        this.stations[pStationId].timeout = setTimeout(this.doScan.bind(this), delay, pStationId);
+        let delayMs = this.stations[pStationId].pollIntvlMs + start - Date.now();
+        if (delayMs < this.minDelayMs) delayMs = this.minDelayMs;
+        this.stations[pStationId].timeout = setTimeout(this.doScan.bind(this), delayMs, pStationId);
     }
 
     /**
@@ -352,7 +351,7 @@ class envertech_pv extends utils.Adapter {
 
             await this.initObject({
                 _id: `${gatewayId}.info`,
-                type: 'channel',
+                type: 'folder',
                 common: {
                     name: `gateway ${gatewayAlias} info`,
                 },
@@ -392,7 +391,7 @@ class envertech_pv extends utils.Adapter {
 
             await this.initObject({
                 _id: `${rootId}.info`,
-                type: 'channel',
+                type: 'folder',
                 common: {
                     name: `converter ${snAlias} info`,
                 },
@@ -553,6 +552,7 @@ class envertech_pv extends utils.Adapter {
                 this.log.debug('creating obj "' + pObj._id + '" with type ' + pObj.type);
                 await this.setObjectNotExistsAsync(pObj._id, pObj);
                 await this.extendObjectAsync(pObj._id, pObj);
+                STATEs[fullId] = 'X';
             } catch (e) {
                 this.log.error('error initializing obj "' + pObj._id + '" ' + e.message);
             }
