@@ -14,8 +14,11 @@
 'use strict';
 
 const utils = require('@iobroker/adapter-core');
+const translib = require('@mcm1957/iobroker.library').iobTranslator;
+//const translib = require('e:/github/mcm1957/iobroker.library/library.js').iobTranslator;
+
 //const jsl = require('./lib/jslib.js');
-const translib = require('./lib/translib.js');
+//const translib = require('./lib/translib.js');
 
 const EnvCloud = require('./lib/envertechCloud.js');
 
@@ -92,7 +95,10 @@ class envertech_pv extends utils.Adapter {
         this.on('unload', this.onUnload.bind(this));
 
         translib.init(this);
-        this.minDelayMs = (this.options?.minDelay || 15) * 1000;
+
+        this.minDelayMs = (this.options?.expertMinDelay || 15) * 1000;
+        this.cloudUrl = this.options?.expertUrl;
+        this.cloudTmo = this.options?.expertTimeout || 30;
         this.stations = {};
     }
 
@@ -132,7 +138,7 @@ class envertech_pv extends utils.Adapter {
                 let pollIntvl = station.pollIntvl || 60;
                 if (pollIntvl < 15) pollIntvl = 15;
                 this.stations[station.stationId] = {
-                    envCloud: new EnvCloud(this),
+                    envCloud: new EnvCloud(this, this.cloudUrl, this.cloudTmo),
                     pollIntvlMs: pollIntvl * 1000,
                     timer: null,
                 };
@@ -233,36 +239,6 @@ class envertech_pv extends utils.Adapter {
             }
         }
     }
-
-    /**
-     * doLogin - handle login request and retrieve stationId
-     *
-     * @return  0       if login successful
-     *          -1      if abort is requested
-     *          delay   time in ms to retry
-     *
-     */
-    /*    async doLogin() {
-        this.log.debug('doLogin triggered');
-
-        const result = await this.envCloud.login(this.config.cloudUsername, this.config.cloudPassword);
-        if (result.status !== 0) {
-            this.log.error(`[login] ${result.statustext}`);
-            if (result.status < 0) {
-                // error raised by axios
-            } else if (result.status == 1) {
-                if (result.statustext === 'User does not exist') return -1;
-            } else if (result.status >= 100) {
-                //
-            }
-            return 15000;
-        }
-
-        this.stationId = result.data.stationId;
-
-        return 0;
-    }
-*/
 
     /**
      * doScan - Scan station data

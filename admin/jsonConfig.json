@@ -150,6 +150,37 @@
                     }
                 }
             }
+        },
+        "_expertPanel": {
+            "type": "panel",
+            "label": "lblExpertPanel",
+            "items": {
+                "expertMinDelay": {
+                    "type": "number",
+                    "label": "lblExpertMinDelay",
+                    "default": 15,
+                    "min": 5,
+                    "max": 600,
+                    "tooltip": "ttExpertMinDelay",
+                    "help": "hlpExpertMinDelay"
+                },
+                "expertUrl": {
+                    "type": "text",
+                    "label": "lblExportUrl",
+                    "default": "https://www.envertecportal.com",
+                    "tooltip": "ttExpertUrl",
+                    "help": "hlpExpertUrl"
+                },
+                "expertTimeout": {
+                    "type": "number",
+                    "label": "lblExpertTimeout",
+                    "default": 30,
+                    "min": 5,
+                    "max": 600,
+                    "tooltip": "ttExpertTimeout",
+                    "help": "hlpExpertTimeout"
+                }
+            }
         }
     }
 }

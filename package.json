@@ -39,6 +39,7 @@
   },
   "dependencies": {
     "@iobroker/adapter-core": "^2.6.7",
+    "@mcm1957/iobroker.library": "^0.0.2",
     "axios": "^1.3.4"
   },
   "devDependencies": {
