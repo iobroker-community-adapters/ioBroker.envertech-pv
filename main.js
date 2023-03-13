@@ -17,12 +17,7 @@ const utils = require('@iobroker/adapter-core');
 const { iobInit, iobStates, iobTranslator } = require('@mcm1957/iobroker.library');
 //const { iobInit, iobStates, iobTranslator } = require('e:/github/mcm1957/iobroker.library/library.js');
 
-//const jsl = require('./lib/jslib.js');
-//const translib = require('./lib/translib.js');
-
 const EnvCloud = require('./lib/envertechCloud.js');
-
-const translib = iobTranslator;
 
 const STATEs = {};
 
@@ -96,7 +91,6 @@ class envertech_pv extends utils.Adapter {
         this.on('ready', this.onReady.bind(this));
         this.on('unload', this.onUnload.bind(this));
 
-        //translib.init(this);
         iobInit(this);
 
         this.minDelayMs = (this.options?.expertMinDelay || 15) * 1000;
@@ -118,20 +112,6 @@ class envertech_pv extends utils.Adapter {
         // reset
         await this.resetStateObjects();
 
-        /*
-        // login and retrieve station-id
-        let result = 0;
-        do {
-            result = await this.doLogin();
-            if (result === -1) {
-                this.log.error('[login] aborting - please correct config');
-                return;
-            }
-            await jsl.sleep(result);
-        } while (result);
-
-        this.log.info(`[login] successful login using station-id ${this.stationId}`);
-*/
         // start scanning loop
         let stationCnt = 0;
         if (this.config.stations) {
@@ -187,20 +167,19 @@ class envertech_pv extends utils.Adapter {
     async onMessage(pObj) {
         if (pObj) {
             this.log.debug(`onMessage - ${JSON.stringify(pObj)}`);
+            if (!pObj.callback) return;
             switch (pObj.command) {
                 case 'getStationId': {
                     if (pObj.message) {
                         const username = pObj.message?.username;
                         const password = pObj.message?.password;
                         if (username.trim() === '' || password.trim() === '') {
-                            if (pObj.callback) {
-                                this.sendTo(
-                                    pObj.from,
-                                    pObj.command,
-                                    { error: 'Username and password must not be empty' },
-                                    pObj.callback,
-                                );
-                            }
+                            this.sendTo(
+                                pObj.from,
+                                pObj.command,
+                                { error: 'Username and password must not be empty' },
+                                pObj.callback,
+                            );
                             return;
                         }
 
@@ -208,33 +187,22 @@ class envertech_pv extends utils.Adapter {
                         const result = await envCloud.login(username, password);
                         if (result.status !== 0) {
                             this.log.error(`[login] ${result.statustext}`);
-                            if (result.status < 0) {
-                                // error raised by axios
-                            } else if (result.status == 1) {
-                                // envertech error
-                            } else if (result.status >= 100) {
-                                // http error
-                            }
-                            if (pObj.callback) {
-                                this.sendTo(
-                                    pObj.from,
-                                    pObj.command,
-                                    { error: `Error retrieving station-id: ${result.statustext}` },
-                                    pObj.callback,
-                                );
-                            }
+                            this.sendTo(
+                                pObj.from,
+                                pObj.command,
+                                { error: `Error retrieving station-id: ${result.statustext}` },
+                                pObj.callback,
+                            );
                             return;
                         }
 
                         this.stationId = result.data.stationId;
-                        if (pObj.callback) {
-                            this.sendTo(
-                                pObj.from,
-                                pObj.command,
-                                { native: { cloudStationId: `${result.data.stationId}` } },
-                                pObj.callback,
-                            );
-                        }
+                        this.sendTo(
+                            pObj.from,
+                            pObj.command,
+                            { native: { cloudStationId: `${result.data.stationId}` } },
+                            pObj.callback,
+                        );
                         return;
                     }
                     break;
@@ -558,7 +526,7 @@ class envertech_pv extends utils.Adapter {
             type: 'state',
             common: {
                 name: pObj.name,
-                desc: translib.getTranslations(pObj.desc),
+                desc: iobTranslator.getTranslations(pObj.desc),
                 write: false,
                 read: true,
                 type: pObj.type,
