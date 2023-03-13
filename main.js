@@ -14,13 +14,15 @@
 'use strict';
 
 const utils = require('@iobroker/adapter-core');
-const translib = require('@mcm1957/iobroker.library').iobTranslator;
-//const translib = require('e:/github/mcm1957/iobroker.library/library.js').iobTranslator;
+const { iobInit, iobTranslator } = require('@mcm1957/iobroker.library');
+//const { iobInit, iobStates, iobTranslator } = require('e:/github/mcm1957/iobroker.library/library.js');
 
 //const jsl = require('./lib/jslib.js');
 //const translib = require('./lib/translib.js');
 
 const EnvCloud = require('./lib/envertechCloud.js');
+
+const translib = iobTranslator;
 
 const STATEs = {};
 
@@ -94,7 +96,8 @@ class envertech_pv extends utils.Adapter {
         this.on('ready', this.onReady.bind(this));
         this.on('unload', this.onUnload.bind(this));
 
-        translib.init(this);
+        //translib.init(this);
+        iobInit(this);
 
         this.minDelayMs = (this.options?.expertMinDelay || 15) * 1000;
         this.cloudUrl = this.options?.expertUrl;
@@ -276,33 +279,33 @@ class envertech_pv extends utils.Adapter {
         const result = await this.stations[pStationId].envCloud.getGatewayInfo(pStationId);
         if (result.status < 0) {
             // error raised by axios
-            let states;
-            states = await this.getStatesAsync(`ST-${pStationId}.GW-*.info.online`);
-            for (const key in states) await this.setState(key, { val: false, ack: true, q: 0x00 });
-            states = await this.getStatesAsync(`ST-${pStationId}.GW-*.info.error`);
-            for (const key in states) await this.setState(key, { val: false, ack: true, q: 0x00 });
-            states = await this.getStatesAsync(`ST-${pStationId}.GW-*.info.error_text`);
-            for (const key in states) await this.setState(key, { val: result.error_text, ack: true, q: 0x00 });
+            await iobStates.setStatesAsync(`ST-${pStationId}.GW-*.info.online`, { val: false, ack: true, q: 0x00 });
+            await iobStates.setStatesAsync(`ST-${pStationId}.GW-*.info.error`, { val: true, ack: true, q: 0x00 });
+            await iobStates.setStatesAsync(`ST-${pStationId}.GW-*.info.error_text`, {
+                val: result.error_text,
+                ack: true,
+                q: 0x00,
+            });
             return; // abort
         } else if (result.status == 1) {
             //
-            let states;
-            states = await this.getStatesAsync(`ST-${pStationId}.GW-*.info.online`);
-            for (const key in states) await this.setState(key, { val: false, ack: true, q: 0x00 });
-            states = await this.getStatesAsync(`ST-${pStationId}.GW-*.info.error`);
-            for (const key in states) await this.setState(key, { val: false, ack: true, q: 0x00 });
-            states = await this.getStatesAsync(`ST-${pStationId}.GW-*.info.error_text`);
-            for (const key in states) await this.setState(key, { val: result.error_text, ack: true, q: 0x00 });
+            await iobStates.setStatesAsync(`ST-${pStationId}.GW-*.info.online`, { val: false, ack: true, q: 0x00 });
+            await iobStates.setStatesAsync(`ST-${pStationId}.GW-*.info.error`, { val: true, ack: true, q: 0x00 });
+            await iobStates.setStatesAsync(`ST-${pStationId}.GW-*.info.error_text`, {
+                val: result.error_text,
+                ack: true,
+                q: 0x00,
+            });
             return; // abort
         } else if (result.status >= 100) {
             //
-            let states;
-            states = await this.getStatesAsync(`ST-${pStationId}.GW-*.info.online`);
-            for (const key in states) await this.setState(key, { val: false, ack: true, q: 0x00 });
-            states = await this.getStatesAsync(`ST-${pStationId}.GW-*.info.error`);
-            for (const key in states) await this.setState(key, { val: false, ack: true, q: 0x00 });
-            states = await this.getStatesAsync(`ST-${pStationId}.GW-*.info.error_text`);
-            for (const key in states) await this.setState(key, { val: result.error_text, ack: true, q: 0x00 });
+            await iobStates.setStatesAsync(`ST-${pStationId}.GW-*.info.online`, { val: false, ack: true, q: 0x00 });
+            await iobStates.setStatesAsync(`ST-${pStationId}.GW-*.info.error`, { val: true, ack: true, q: 0x00 });
+            await iobStates.setStatesAsync(`ST-${pStationId}.GW-*.info.error_text`, {
+                val: result.error_text,
+                ack: true,
+                q: 0x00,
+            });
             return; // abort
         }
         if (!result.data.QueryResults) return;
@@ -575,16 +578,9 @@ class envertech_pv extends utils.Adapter {
     async resetStateObjects() {
         this.log.debug(`resetStateobjects`);
 
-        let states;
-
-        states = await this.getStatesAsync('*');
-        for (const key in states) await this.setState(key, { ack: true, q: 0x02 });
-
-        states = await this.getStatesAsync('*.info.online');
-        for (const key in states) await this.setState(key, { val: false, ack: true, q: 0x00 });
-
-        states = await this.getStatesAsync('*.info.error');
-        for (const key in states) await this.setState(key, { val: false, ack: true, q: 0x00 });
+        await iobStates.setStatesAsync('*', { ack: true, q: 0x02 });
+        await iobStates.setStatesAsync('*.info.online', { val: false, ack: true, q: 0x00 });
+        await iobStates.setStatesAsync('*.info.error', { val: false, ack: true, q: 0x00 });
     }
 } /* end of adapter class */
 
