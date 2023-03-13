@@ -14,7 +14,7 @@
 'use strict';
 
 const utils = require('@iobroker/adapter-core');
-const { iobInit, iobTranslator } = require('@mcm1957/iobroker.library');
+const { iobInit, iobTranslator, iobTranslator } = require('@mcm1957/iobroker.library');
 //const { iobInit, iobStates, iobTranslator } = require('e:/github/mcm1957/iobroker.library/library.js');
 
 //const jsl = require('./lib/jslib.js');
