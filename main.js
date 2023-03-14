@@ -121,7 +121,11 @@ class envertech_pv extends utils.Adapter {
                 let pollIntvl = station.pollIntvl || 60;
                 if (pollIntvl < 15) pollIntvl = 15;
                 this.stations[station.stationId] = {
-                    envCloud: new EnvCloud(this, this.cloudUrl, this.cloudTmo),
+                    envCloud: new EnvCloud(this, {
+                        url: this.config.expertUrl,
+                        timeout: this.cloudTmo,
+                        log: this.config.optLogReq,
+                    }),
                     pollIntvlMs: pollIntvl * 1000,
                     timer: null,
                 };
@@ -183,7 +187,7 @@ class envertech_pv extends utils.Adapter {
                             return;
                         }
 
-                        const envCloud = new EnvCloud(this);
+                        const envCloud = new EnvCloud(this, { log: this.config.optLogReq });
                         const result = await envCloud.login(username, password);
                         if (result.status !== 0) {
                             this.log.error(`[login] ${result.statustext}`);
@@ -243,6 +247,11 @@ class envertech_pv extends utils.Adapter {
      */
     async doQueryGateways(pStationId) {
         this.log.debug(`doQueryGateways (${pStationId}`);
+
+        const stationId = `ST-${pStationId}`;
+
+        const cvtOnline = {};
+        const cvtOffline = {};
 
         const result = await this.stations[pStationId].envCloud.getGatewayInfo(pStationId);
         if (result.status < 0) {
@@ -313,6 +322,12 @@ class envertech_pv extends utils.Adapter {
             await this.initStateObject(`${gatewayId}.mppt_online`, STATES_CFG['_MpptOnline_']);
             await this.initStateObject(`${gatewayId}.mppt_offline`, STATES_CFG['_MpptOffline_']);
 
+            if (typeof cvtOnline[stationId] === 'undefined') cvtOnline[stationId] = 0;
+            if (typeof cvtOffline[stationId] === 'undefined') cvtOffline[stationId] = 0;
+
+            if (typeof cvtOnline[gatewayId] === 'undefined') cvtOnline[gatewayId] = 0;
+            if (typeof cvtOffline[gatewayId] === 'undefined') cvtOffline[gatewayId] = 0;
+
             /* prettier-ignore */
             await this.setStateAsync(`${gatewayId}.info.last_update`, { val: new Date().toLocaleString(), ack: true, q: 0x00 });
             await this.setStateAsync(`${gatewayId}.info.online`, { val: true, ack: true, q: 0x00 });
@@ -346,7 +361,6 @@ class envertech_pv extends utils.Adapter {
             });
 
             await this.initStateObject(`${rootId}.info.online`, STATES_CFG['_Online_']);
-            await this.setStateAsync(`${rootId}.info.online`, { val: true, ack: true, q: 0x00 });
 
             for (const key in row) {
                 this.log.debug(`[gatewayinfo] processing ${key}`);
@@ -355,6 +369,22 @@ class envertech_pv extends utils.Adapter {
                 if (typeof STATEs[`${this.name}.${this.instance}.${rootId}.${key}`] === 'undefined') continue; // undesired object
 
                 let val = row[key];
+
+                // process status field to set additions states
+                if (key === 'STATUS') {
+                    if (val == 0) {
+                        cvtOnline[stationId] = cvtOnline[stationId] + 1;
+                        cvtOnline[gatewayId] = cvtOnline[gatewayId] + 1;
+                        await this.setStateAsync(`${rootId}.info.online`, { val: true, ack: true, q: 0x00 });
+                    } else if (val == 1) {
+                        cvtOffline[stationId] = cvtOffline[stationId] + 1;
+                        cvtOffline[gatewayId] = cvtOffline[gatewayId] + 1;
+                        await this.setStateAsync(`${rootId}.info.online`, { val: false, ack: true, q: 0x00 });
+                    } else {
+                        this.log.debug(`[gateway] unexpected status value ${key} - ${val}`);
+                    }
+                }
+
                 if (STATES_CFG[key].cvt && typeof val === 'string') {
                     const match = result.data[key].match(STATES_CFG[key].cvt);
                     if (match) {
@@ -367,14 +397,18 @@ class envertech_pv extends utils.Adapter {
                 await this.setStateAsync(`${rootId}.${key}`, { val: val, ack: true, q: 0x00 });
             }
         }
-
         // data total count - total converters
-        /*
-        for (const key in content.Data.QueryResults) {
-            const obj = content.Data.QueryResults[key];
-            const gateway = obj['GATEWAYSN'].replace(/ /g, '-');
-            const alias = obj['SNALIAS'].replace(/ /g, '-');
-*/
+        await this.setStateAsync(`${stationId}.mppt_online`, { val: cvtOnline[stationId], ack: true, q: 0x00 });
+        await this.setStateAsync(`${stationId}.mppt_offline`, { val: cvtOffline[stationId], ack: true, q: 0x00 });
+
+        for (const gatewayId in cvtOnline) {
+            const val = cvtOnline[gatewayId];
+            await this.setStateAsync(`${gatewayId}.mppt_online`, { val: val, ack: true, q: 0x00 });
+        }
+        for (const gatewayId in cvtOffline) {
+            const val = cvtOffline[gatewayId];
+            await this.setStateAsync(`${gatewayId}.mppt_offline`, { val: val, ack: true, q: 0x00 });
+        }
     }
 
     /**
