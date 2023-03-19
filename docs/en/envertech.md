@@ -21,7 +21,7 @@ After retrieving the desired station-id you can configure one or more stations a
 
 ### TAB List of Cloud-Stations to monitor
 
-<p align=center><img src="img/envertech-pv_tab_cloudstations.jpg" width="600" /></p>
+<p align=center><img src="img/envertech_tab_cloudstations.jpg" width="600" /></p>
 
 | Parameter          | Type    | Description                               | Comment                                                |
 | ------------------ | ------- | ----------------------------------------- | ------------------------------------------------------ |
@@ -33,7 +33,7 @@ After retrieving the desired station-id you can configure one or more stations a
 
 Here you specify some general options
 
-<p align=center><img src="img/envertech-pv_tab_options.jpg" width="600" /></p>
+<p align=center><img src="img/envertech_tab_options.jpg" width="600" /></p>
 
 #### Enable logging of new data keys.
 

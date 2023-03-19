@@ -28,8 +28,8 @@ stored at states accessible by users.
 
 ## Documentation
 
-[english documentation](docs/en/envertech-pv.md) is available [here](docs/en/envertech-pv.md) <br>
-[german documentation](docs/de/envertech-pv.md) is available [here](docs/de/envertech-pv.md)
+[english documentation](docs/en/envertech.md) is available [here](docs/en/envertech.md) <br>
+[german documentation](docs/de/envertech.md) is available [here](docs/de/envertech.md)
 
 ## Credits
 
