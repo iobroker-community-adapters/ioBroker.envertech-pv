@@ -1,9 +1,8 @@
-# envertech-pv adapter information
+# Envertech-PV Adapter Information
 
 ## General information
 
-This adapter allows to retrieve data from envertech cloud service (www.envertecportal.com) by polling the webservice at regular intervals. All data retrieved is
-stored at states accessible by users.
+This adapter allows to retrieve data from envertech cloud service (www.envertecportal.com) by polling the webservice at regular intervals. All data retrieved is stored at states accessible by users.
 
 Access to envertech portal is secured by username / password combination. Envertech supports end user accounts and installation accounts. This adapter is only tested with end user accounts which allow access to exact one installation per account only. Each end user account is assigned to a station-id by envertech. The adapter allows cusage of multiple station-ids per adapter instance. This enables monitoring of more than one installation within one instance.
 
