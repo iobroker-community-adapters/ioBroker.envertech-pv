@@ -92,11 +92,6 @@ class envertech_pv extends utils.Adapter {
         this.on('unload', this.onUnload.bind(this));
 
         iobInit(this);
-
-        this.minDelayMs = (this.options?.expertMinDelay || 15) * 1000;
-        this.cloudUrl = this.options?.expertUrl;
-        this.cloudTmo = this.options?.expertTimeout || 30;
-        this.stations = {};
     }
 
     /**
@@ -108,6 +103,12 @@ class envertech_pv extends utils.Adapter {
      */
     async onReady() {
         this.log.debug('onReady triggered');
+
+        // check and setup config
+        this.minDelayMs = (this.config?.expertMinDelay || 15) * 1000;
+        this.cloudUrl = this.config?.expertUrl;
+        this.cloudTmo = this.config?.expertTimeout || 30;
+        this.stations = {};
 
         // reset
         await this.resetStateObjects();
@@ -187,7 +188,12 @@ class envertech_pv extends utils.Adapter {
                             return;
                         }
 
-                        const envCloud = new EnvCloud(this, { log: this.config.optLogReq });
+                        const envCloud = new EnvCloud(this, {
+                            url: this.config.expertUrl,
+                            timeout: this.cloudTmo,
+                            log: this.config.optLogReq,
+                        });
+
                         const result = await envCloud.login(username, password);
                         if (result.status !== 0) {
                             this.log.error(`[login] ${result.statustext}`);
