@@ -110,6 +110,8 @@ class envertech_pv extends utils.Adapter {
         this.cloudTmo = this.config?.expertTimeout || 30;
         this.stations = {};
 
+        await this.setStateAsync('info.connection', { val: false, ack: true, q: 0x00 });
+
         // reset
         await this.resetStateObjects();
 
@@ -150,6 +152,9 @@ class envertech_pv extends utils.Adapter {
      */
     onUnload(callback) {
         this.log.debug('onUnload triggered');
+
+        this.setState('info.connection', { val: false, ack: true, q: 0x00 });
+
         try {
             if (this.killthetimeout) {
                 this.log.debug('clearing and kill timeout');
@@ -222,6 +227,24 @@ class envertech_pv extends utils.Adapter {
     }
 
     /**
+     * updateInfoConnected - scan stations and set info.connected
+     *
+     * @return  nothing
+     *
+     */
+    async updateInfoConnected() {
+        this.log.debug(`updateInfoConnected triggered`);
+
+        let online = false;
+        for (const stationId in this.stations) {
+            if (this.stations[stationId].online) online = true;
+        }
+
+        this.log.debug(`info.connection set to ${online}`);
+        await this.setStateAsync('info.connection', { val: online, ack: true, q: 0x00 });
+    }
+
+    /**
      * doScan - Scan station data
      *
      * @return  nothing
@@ -238,6 +261,9 @@ class envertech_pv extends utils.Adapter {
 
         // scan gateways and converters
         await this.doQueryGateways(pStationId);
+
+        // update global status
+        await this.updateInfoConnected();
 
         // start next scan
         let delayMs = this.stations[pStationId].pollIntvlMs + start - Date.now();
@@ -269,6 +295,7 @@ class envertech_pv extends utils.Adapter {
                 ack: true,
                 q: 0x00,
             });
+            this.stations[pStationId].online = false;
             return; // abort
         } else if (result.status == 1) {
             //
@@ -279,6 +306,7 @@ class envertech_pv extends utils.Adapter {
                 ack: true,
                 q: 0x00,
             });
+            this.stations[pStationId].online = false;
             return; // abort
         } else if (result.status >= 100) {
             //
@@ -289,10 +317,12 @@ class envertech_pv extends utils.Adapter {
                 ack: true,
                 q: 0x00,
             });
+            this.stations[pStationId].online = false;
             return; // abort
         }
         if (!result.data.QueryResults) return;
 
+        this.stations[pStationId].online = true;
         for (const row of result.data.QueryResults) {
             const gatewayAlias = row['GATEWAYALIAS'];
             const gatewaySn = row['GATEWAYSN'];
@@ -437,6 +467,7 @@ class envertech_pv extends utils.Adapter {
                 await this.setStateAsync(`${rootId}.info.error_text`, { val: result.statustext, ack: true, q: 0x00 });
                 await this.setStateAsync(`${rootId}.info.online`, { val: false, ack: true, q: 0x00 });
             }
+            this.stations[pStationId].online = false;
             return; // abort
         } else if (result.status == 1) {
             if (this.stationInitialized) {
@@ -444,6 +475,7 @@ class envertech_pv extends utils.Adapter {
                 await this.setStateAsync(`${rootId}.info.online`, { val: false, ack: true, q: 0x00 });
                 await this.setStateAsync(`${rootId}.info.error`, { val: true, ack: true, q: 0x00 });
             }
+            this.stations[pStationId].online = false;
             return; // abort
         } else if (result.status >= 100) {
             // http error
@@ -453,9 +485,11 @@ class envertech_pv extends utils.Adapter {
                 await this.setStateAsync(`${rootId}.info.error_text`, { val: result.statustext, ack: true, q: 0x00 });
                 await this.setStateAsync(`${rootId}.info.online`, { val: false, ack: true, q: 0x00 });
             }
+            this.stations[pStationId].online = false;
             return; // abort
         }
 
+        this.stations[pStationId].online = true;
         await this.initObject({
             _id: `${rootId}`,
             type: 'folder',
