@@ -31,6 +31,7 @@
                 "cloudUsername": {
                     "type": "text",
                     "label": "lblCloudUsername",
+                    "doNotSave": true,
                     "hidden": "!_alive",
                     "newLine": true,
                     "default": "",
@@ -40,6 +41,7 @@
                 "cloudPassword": {
                     "type": "password",
                     "label": "lblCloudPassword",
+                    "doNotSave": true,
                     "hidden": "!_alive",
                     "default": "",
                     "tooltip": "ttCloudPassword",
@@ -61,6 +63,7 @@
                 "cloudStationId": {
                     "type": "text",
                     "label": "lblCloudStationId",
+                    "doNotSave": true,
                     "hidden": "!_alive",
                     "readOnly": true,
                     "tooltip": "ttCloudStationId",
