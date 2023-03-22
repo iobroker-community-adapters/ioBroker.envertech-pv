@@ -18,35 +18,44 @@ As described earlier every station is identified by its station-id. Retrieving t
 
 After retrieving the desired station-id you can configure one or more stations at table "List of Cloud-Stations to monitor" - one per line.
 
-### TAB List of Cloud-Stations to monitor
+### TAB Cloud Configuration
 
 <p align=center><img src="img/envertech_tab_cloudstations.jpg" width="600" /></p>
 
 | Parameter          | Type    | Description                               | Comment                                                |
 | ------------------ | ------- | ----------------------------------------- | ------------------------------------------------------ |
-| active             | boolean | if marked, station will be monitored      | can be used to disable a single OID                    |
+| Active             | boolean | if marked, station will be monitored      | can be used to disable a single station                |
 | Station-Id         | text    | Station-Id identifying station to monitor | enter station-id retrieved using username and password |
 | Poll Intervall (s) | integer | polling interval                          | specify intervall to poll data from cloud service      |
 
-### TAB Options
+### TAB General Options
 
 Here you specify some general options
 
 <p align=center><img src="img/envertech_tab_options.jpg" width="600" /></p>
 
-#### Enable logging of new data keys.
+-   Enable logging of http requests <br>
+    Setting this option activates logging of hhtp request and resonde data while communicating with envertech webservice.
 
-Setting this option activates logging of a warning if some data is reported by envertech webservice which is not yet implemented.
+-   Enable logging of new data keys <br>
+    Setting this option activates logging of a warning if some data is reported by envertech webservice which is not yet implemented.
 
-#### Enable logging of http requests."
-
-Setting this option activates logging of hhtp request and resonde data while communicating with envertech webservice.
-
-### TAB Expert Only
+### TAB Expert Options
 
 Here you can specify some special options. It is recommended to keep all those options unchanged unless instructed otherwise.
 
-## Manual find Station ID
+<p align=center><img src="img/envertech_tab_expert.jpg" width="600" /></p>
+
+-   Envertech cloud service url <br>
+    The url to access the envertech cloud service could be changed here.
+
+-   Http request timeout (s) <br>
+    This option defines a general timeout for all http requests. The value is specified as seconds.
+
+-   Minimum delay (s) <br>
+    This option defined a minimum delay in seconds between the completion of a poll cycle and start of the next cycle..
+
+## Additional Information
 
 In case retrieving the station-id using username and password within the adapter, you can get your station-id this way too:
 
