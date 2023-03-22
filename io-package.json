@@ -15,21 +15,58 @@
                 "pl": "przeprowadził adapter do organizacji iobroker-kommunity-profit\nUwaga: Jest to pośrednie wydanie.",
                 "uk": "перехідний адаптер для організації iobroker-community-adapters\nПримітка: Це проміжний реліз.",
                 "zh-cn": "变通器\n注:这是中间释放。."
-            },
-            "0.0.8": {
-                "en": "added settings for more log output",
-                "de": "zusätzliche Einstellungen für mehr log ausgabe",
-                "ru": "добавлены настройки для большего вывода лога",
-                "pt": "configurações adicionadas para mais saída de log",
-                "nl": "voegde instellingen toe voor meer logboeken",
-                "fr": "paramètres ajoutés pour plus de sortie de journal",
-                "it": "impostazioni aggiuntive per più uscita log",
-                "es": "ajustes añadidos para más salida de registro",
-                "pl": "dodać ustawienia dla więcej wyjściowych logów",
-                "uk": "додано параметри для отримання більш виходу журналу",
-                "zh-cn": "增加产出环境"
             }
         },
+        "messages": [
+            {
+                "condition": {
+                    "operand": "and",
+                    "rules": ["oldVersion<1.0.0", "newVersion>=1.0.0"]
+                },
+                "title": {
+                    "en": "Important notice!",
+                    "de": "Wichtiger Hinweis!",
+                    "ru": "Важное замечание!",
+                    "pt": "Notícia importante!",
+                    "nl": "Belangrijke mededeling!",
+                    "fr": "Avis important!",
+                    "it": "Avviso IMPORTANTE!",
+                    "es": "Noticia importante!",
+                    "pl": "Ważna uwaga!",
+                    "zh-cn": "重要通知!",
+                    "uk": "Важливе повідомлення!"
+                },
+                "text": {
+                    "en": "Configuration data and state structure have changed with release 1.0.0. Please deinstall existing releases older than 1.0.0 and delete all stateobjects before upgrading to version 2.0.0 or newer.\n",
+                    "de": "Konfigurationsdaten und Zustandsstruktur haben sich mit Release 1.0.0 geändert. Bitte deinstallieren Sie bestehende Releases älter als 1.0.0 und löschen Sie alle Stateobjects vor dem Upgrade auf Version 2.0.0 oder neuer.\n",
+                    "ru": "Конфигурационные данные и структура государства изменились с выпуском 1.0.0 Пожалуйста, деинсталлируйте существующие релизы старше 1.0.0 и удалите все государственные объекты перед обновлением до версии 2.0.0 или новее.\n",
+                    "pt": "Os dados de configuração e a estrutura do estado mudaram com a versão 1.0.0 Por favor, desinstalar versões existentes com mais de 1.0.0 e excluir todos os objetos de estado antes de atualizar para a versão 2.0.0 ou mais recente.\n",
+                    "nl": "Configuration data en staatsstructuur zijn veranderd met vrijlating 1.0. Vernietig alle bestaande vrijlating, ouder dan 1.0. En ontleed alle staatobjecten voor het upgraden naar versie 2,0 of nieuwer.\n",
+                    "fr": "Les données de configuration et la structure d'état ont changé avec la version 1.0.0 Veuillez désinstaller les versions existantes de plus de 1.0.0 et supprimer tous les objets avant de mettre à niveau la version 2.0.0 ou plus récente.\n",
+                    "it": "I dati di configurazione e la struttura dello stato sono cambiati con il rilascio 1.0.0 Si prega di disinstallare le versioni esistenti di età superiore a 1.0.0 ed eliminare tutti gli oggetti di stato prima di aggiornare alla versione 2.0.0 o più recente.\n",
+                    "es": "Los datos de configuración y la estructura estatal han cambiado con la versión 1.0.0 Por favor desinstalar versiones existentes mayores de 1.0.0 y eliminar todos los stateobjects antes de actualizar a la versión 2.0.0 o más reciente.\n",
+                    "pl": "Zmiana danych i struktur państwowych została zmieniona na 1.0.0. Please deinstall istniejących wersji jest starszy od 1.0.0 i usunęło wszystkie stanowe obiekty przed modernizacją wersji 2.0.0 lub nowsze.\n",
+                    "uk": "Настроювання даних та структури держави змінено з релізом 1.0.0 Будь ласка, видаліть існуючі релізи старше 1.0.0 і видаліть всі державніоб'єкти до оновлення версії 2.0.0 або новачка.\n",
+                    "zh-cn": "综合数据和国家结构已发生变化,释放了1.0.0 请尽量减少超过1.0.0的现有排放,并在升级到2.0.0或新版之前删除所有国家目标。.\n"
+                },
+                "link": "https://github.com/iobroker-community-adapters/ioBroker.envertech-pv#changelog",
+                "level": "warn",
+                "linkText": {
+                    "en": "Changelog",
+                    "de": "Änderungsprotokoll",
+                    "ru": "Список изменений",
+                    "pt": "Registro de alterações",
+                    "nl": "Wijzigingslog",
+                    "fr": "Journal des modifications",
+                    "it": "Registro delle modifiche",
+                    "es": "registro de cambios",
+                    "pl": "Dziennik zmian",
+                    "zh-cn": "变更日志",
+                    "uk": "Журнал змін"
+                },
+                "buttons": ["agree", "cancel"]
+            }
+        ],
         "title": "envertech-pv",
         "titleLang": {
             "en": "Envertech-PV",
@@ -57,10 +94,7 @@
             "uk": "Адаптер для читання даних з www.envertecportal.com",
             "zh-cn": "从 www.envertecportal.com 读取数据的适配器"
         },
-        "authors": [
-            "adcrafter27 <adcrafter27@gmail.com>",
-            "mcm1957 <mcm57@gmx.at>"
-        ],
+        "authors": ["adcrafter27 <adcrafter27@gmail.com>", "mcm1957 <mcm57@gmx.at>"],
         "keywords": [
             "Envertech",
             "Envertec",
