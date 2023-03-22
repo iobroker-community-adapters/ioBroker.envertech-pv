@@ -53,7 +53,7 @@ Best is to set the adapter to Debug log mode (Instances -> Expert mode -> Column
 -   (mcm1957) added: support to retrieve station-id by username and password
 -   (mcm1957) added: support to chek multiple stations within one instance
 -   (mcm1957) changed: units and roles for states have been reconfigured
--   (mcm1957) changed: state structure changed to support multiple stations
+-   (mcm1957) changed: state structure changed to support multiple stations (and planned local access)
 -   (mcm1957) changed: userinterface migrated to jsonConfig (admin5)
 -   (mcm1957) changed: adapter is running as daemon now
 -   (mcm1957) changed: communication has been changed from deprecated "request" to "axios" package

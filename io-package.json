@@ -21,7 +21,10 @@
             {
                 "condition": {
                     "operand": "and",
-                    "rules": ["oldVersion<1.0.0", "newVersion>=1.0.0"]
+                    "rules": [
+                        "oldVersion<1.0.0",
+                        "newVersion>=1.0.0"
+                    ]
                 },
                 "title": {
                     "en": "Important notice!",
@@ -64,7 +67,10 @@
                     "zh-cn": "变更日志",
                     "uk": "Журнал змін"
                 },
-                "buttons": ["agree", "cancel"]
+                "buttons": [
+                    "agree",
+                    "cancel"
+                ]
             }
         ],
         "title": "envertech-pv",
@@ -94,7 +100,10 @@
             "uk": "Адаптер для читання даних з www.envertecportal.com",
             "zh-cn": "从 www.envertecportal.com 读取数据的适配器"
         },
-        "authors": ["adcrafter27 <adcrafter27@gmail.com>", "mcm1957 <mcm57@gmx.at>"],
+        "authors": [
+            "adcrafter27 <adcrafter27@gmail.com>",
+            "mcm1957 <mcm57@gmx.at>"
+        ],
         "keywords": [
             "Envertech",
             "Envertec",

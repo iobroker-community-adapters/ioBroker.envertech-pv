@@ -50,8 +50,8 @@
     "hlpExpertMinDelay": "Minimum delay in seconds between two http requests",
     "hlpExpertTimeout": "timeout in seconds for all http requests",
     "hlpExpertUrl": "URL of envertech cloud service - do not change.",
-    "hlpOptLogNew": "",
-    "hlpOptLogReq": "",
+    "hlpOptLogNew": "New data keys reported by envertech will be logged.",
+    "hlpOptLogReq": "Http requests and responses will be logged.",
     "lblCloudPanel": "Cloud Configuration",
     "lblCloudPassword": "Password",
     "lblCloudStationId": "Station-id",
@@ -61,6 +61,8 @@
     "lblExpertTimeout": "http request timeout (s)",
     "lblExportUrl": "Envertech Cloud Service URL",
     "lblGetStationId": "Get Station-Id",
+    "lblOptLogNew": "Enable logging of new data keys.",
+    "lblOptLogReq": "Enable logging of http requests.",
     "lblOptPanel": "General Options",
     "lblPollIntvl": "Poll Intervall (s)",
     "lblStationAct": "Active",
@@ -83,7 +85,5 @@
     "txtCloudInfo": "You can retrieve the the station-id by filling in username and password used to access the Envertech cloud.<br>After pressing the button 'Get Station-Id' the station-id will show up. Copy the station-id into the comfiguration table below.",
     "txtCloudInfoOffline": "Note: the adapterinstance must be started to retrieve the instance id using username and password.",
     "txtCloudPanel": "Configure parameters to access Envertec cloud services",
-    "txtGetStationId": "Press button to retrieve the station-id for user",
-    "txtOptLogNew": "Enable logging of new data keys.",
-    "txtOptLogReq": "Enable logging of http requests."
+    "txtGetStationId": "Press button to retrieve the station-id for user"
 }

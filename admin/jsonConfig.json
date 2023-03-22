@@ -125,32 +125,18 @@
             "items": {
                 "optLogReq": {
                     "type": "checkbox",
-                    "label": "",
+                    "label": "lblOptLogReq",
                     "default": false,
-                    "tooltip": "ttOptLogReq"
-                },
-                "_optLogReqTxt": {
-                    "type": "staticText",
-                    "text": "txtOptLogReq",
                     "help": "hlpOptLogReq",
-                    "style": {
-                        "fontSize": 16
-                    }
+                    "tooltip": "ttOptLogReq"
                 },
                 "optLogNew": {
                     "type": "checkbox",
-                    "label": "",
+                    "label": "lblOptLogNew",
                     "newLine": true,
                     "default": true,
-                    "tooltip": "ttOptLogNew"
-                },
-                "_optLogNewTxt": {
-                    "type": "staticText",
-                    "text": "txtOptLogNew",
                     "help": "hlpOptLogNew",
-                    "style": {
-                        "fontSize": 16
-                    }
+                    "tooltip": "ttOptLogNew"
                 }
             }
         },
