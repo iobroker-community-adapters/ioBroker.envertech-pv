@@ -158,18 +158,10 @@
             "type": "panel",
             "label": "lblExpertPanel",
             "items": {
-                "expertMinDelay": {
-                    "type": "number",
-                    "label": "lblExpertMinDelay",
-                    "default": 15,
-                    "min": 5,
-                    "max": 600,
-                    "tooltip": "ttExpertMinDelay",
-                    "help": "hlpExpertMinDelay"
-                },
                 "expertUrl": {
                     "type": "text",
                     "label": "lblExportUrl",
+                    "newLine": true,
                     "default": "https://www.envertecportal.com",
                     "tooltip": "ttExpertUrl",
                     "help": "hlpExpertUrl"
@@ -177,11 +169,22 @@
                 "expertTimeout": {
                     "type": "number",
                     "label": "lblExpertTimeout",
+                    "newLine": true,
                     "default": 30,
                     "min": 5,
                     "max": 600,
                     "tooltip": "ttExpertTimeout",
                     "help": "hlpExpertTimeout"
+                },
+                "expertMinDelay": {
+                    "type": "number",
+                    "label": "lblExpertMinDelay",
+                    "newLine": true,
+                    "default": 15,
+                    "min": 5,
+                    "max": 600,
+                    "tooltip": "ttExpertMinDelay",
+                    "help": "hlpExpertMinDelay"
                 }
             }
         }

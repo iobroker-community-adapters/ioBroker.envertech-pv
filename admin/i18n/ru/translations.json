@@ -47,7 +47,7 @@
     "hlpCloudPassword": "Укажите пароль для доступа к Envertech Portal",
     "hlpCloudStationId": "Введите идентификатор станции вашей учетной записи",
     "hlpCloudUsername": "Укажите имя пользователя для доступа к порталу Envertech.",
-    "hlpExpertMinDelay": "",
+    "hlpExpertMinDelay": "Минимальная задержка в секундах между двумя http-запросами",
     "hlpExpertTimeout": "тайм-аут в секундах для всех http-запросов",
     "hlpExpertUrl": "URL облачного сервиса envertech - не менять.",
     "hlpOptLogNew": "Этот параметр определяет, следует ли регистрировать новые ключи, о которых сообщает envertech.",

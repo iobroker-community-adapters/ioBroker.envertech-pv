@@ -47,7 +47,7 @@
     "hlpCloudPassword": "Geben Sie das Passwort für den Zugriff auf das Envertech Portal an",
     "hlpCloudStationId": "Geben Sie die Stations-ID Ihres Kontos ein",
     "hlpCloudUsername": "Geben Sie den Benutzernamen für den Zugriff auf das Envertech-Portal an",
-    "hlpExpertMinDelay": "",
+    "hlpExpertMinDelay": "Minimale Verzögerung in Sekunden zwischen zwei HTTP-Anfragen",
     "hlpExpertTimeout": "Timeout in Sekunden für alle HTTP-Anfragen",
     "hlpExpertUrl": "URL des envertech Cloud-Dienstes - nicht ändern.",
     "hlpOptLogNew": "Diese Option steuert, ob neue Schlüssel, die von envertech gemeldet werden, protokolliert werden sollen.",

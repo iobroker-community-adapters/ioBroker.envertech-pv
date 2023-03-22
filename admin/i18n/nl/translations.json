@@ -47,7 +47,7 @@
     "hlpCloudPassword": "Geef het wachtwoord op om toegang te krijgen tot de Envertech Portal",
     "hlpCloudStationId": "Voer de station-id van uw account in",
     "hlpCloudUsername": "Geef de gebruikersnaam op om toegang te krijgen tot de Envertech Portal",
-    "hlpExpertMinDelay": "",
+    "hlpExpertMinDelay": "Minimale vertraging in seconden tussen twee http-verzoeken",
     "hlpExpertTimeout": "time-out in seconden voor alle http-verzoeken",
     "hlpExpertUrl": "URL van de envertech-cloudservice - niet wijzigen.",
     "hlpOptLogNew": "Deze optie bepaalt of nieuwe door envertech gerapporteerde sleutels moeten worden gelogd.",

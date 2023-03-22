@@ -47,7 +47,7 @@
     "hlpCloudPassword": "Specify the password to access the Envertech Portal",
     "hlpCloudStationId": "Station-id associated to specified account",
     "hlpCloudUsername": "Specify the username to access the Envertech Portal",
-    "hlpExpertMinDelay": "",
+    "hlpExpertMinDelay": "Minimum delay in seconds between two http requests",
     "hlpExpertTimeout": "timeout in seconds for all http requests",
     "hlpExpertUrl": "URL of envertech cloud service - do not change.",
     "hlpOptLogNew": "",

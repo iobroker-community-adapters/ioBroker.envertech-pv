@@ -47,7 +47,7 @@
     "hlpCloudPassword": "指定访问 Envertech 门户的密码",
     "hlpCloudStationId": "输入您帐户的站号",
     "hlpCloudUsername": "指定访问 Envertech 门户的用户名",
-    "hlpExpertMinDelay": "",
+    "hlpExpertMinDelay": "两个 http 请求之间的最小延迟秒数",
     "hlpExpertTimeout": "所有 http 请求的超时秒数",
     "hlpExpertUrl": "恩沃云服务的 URL - 不要改变。",
     "hlpOptLogNew": "此选项控制是否应记录 envertech 报告的新密钥。",

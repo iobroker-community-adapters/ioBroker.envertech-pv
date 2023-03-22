@@ -47,7 +47,7 @@
     "hlpCloudPassword": "Especifique la contraseña para acceder al Portal de Envertech",
     "hlpCloudStationId": "Ingrese la identificación de la estación de su cuenta",
     "hlpCloudUsername": "Especifique el nombre de usuario para acceder al Portal de Envertech",
-    "hlpExpertMinDelay": "",
+    "hlpExpertMinDelay": "Retraso mínimo en segundos entre dos solicitudes http",
     "hlpExpertTimeout": "tiempo de espera en segundos para todas las solicitudes http",
     "hlpExpertUrl": "URL del servicio en la nube de envertech: no cambiar.",
     "hlpOptLogNew": "Esta opción controla si se deben registrar las nuevas claves informadas por envertech.",
