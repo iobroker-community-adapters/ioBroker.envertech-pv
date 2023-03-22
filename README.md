@@ -33,7 +33,7 @@ stored at states accessible by users.
 
 ## Credits
 
-Providing this adapter would not have been possible without the great work of @adcrafter27 (https://github.com/adcrafter27).
+Providing this adapter would not have been possible without the great work of @adcrafter27 (https://github.com/adcrafter27) who analyzed and documented to rest-api used to access envertech cloud.
 
 ## How to report issues and feature requests
 
@@ -48,10 +48,16 @@ Best is to set the adapter to Debug log mode (Instances -> Expert mode -> Column
     ### **WORK IN PROGRESS**
 -->
 
-### 0.1.0-alpha.0 (2023-01-19)
+### **WORK IN PROGRESS**
 
--   (mcm1957) moved adapter to iobroker-community-adapters organisation
--   (mcm1957) Note: This is an intermediate release.
+-   (mcm1957) added: support to retrieve station-id by username and password
+-   (mcm1957) added: support to chek multiple stations within one instance
+-   (mcm1957) changed: units and roles for states have been reconfigured
+-   (mcm1957) changed: state structure changed to support multiple stations
+-   (mcm1957) changed: userinterface migrated to jsonConfig (admin5)
+-   (mcm1957) changed: adapter is running as daemon now
+-   (mcm1957) changed: communication has been changed from deprecated "request" to "axios" package
+-   (mcm1957) changed: moved adapter to iobroker-community-adapters organisation
 
 ### 0.0.8
 

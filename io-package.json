@@ -38,7 +38,7 @@
                 },
                 "text": {
                     "en": "Configuration data and state structure have changed with release 1.0.0. Please deinstall existing releases older than 1.0.0 and delete all stateobjects before upgrading to version 2.0.0 or newer.\n",
-                    "de": "Konfigurationsdaten und Zustandsstruktur haben sich mit Release 1.0.0 geändert. Bitte deinstallieren Sie bestehende Releases älter als 1.0.0 und löschen Sie alle Stateobjects vor dem Upgrade auf Version 2.0.0 oder neuer.\n",
+                    "de": "Konfigurationsdaten und Zustandsstruktur haben sich mit Release 1.0.0 geändert. Bitte deinstallieren Sie bestehende Releases älter als 1.0.0 und löschen Sie alle Zustanmdsobjekte vor dem Upgrade auf Version 2.0.0 oder neuer.\n",
                     "ru": "Конфигурационные данные и структура государства изменились с выпуском 1.0.0 Пожалуйста, деинсталлируйте существующие релизы старше 1.0.0 и удалите все государственные объекты перед обновлением до версии 2.0.0 или новее.\n",
                     "pt": "Os dados de configuração e a estrutura do estado mudaram com a versão 1.0.0 Por favor, desinstalar versões existentes com mais de 1.0.0 e excluir todos os objetos de estado antes de atualizar para a versão 2.0.0 ou mais recente.\n",
                     "nl": "Configuration data en staatsstructuur zijn veranderd met vrijlating 1.0. Vernietig alle bestaande vrijlating, ouder dan 1.0. En ontleed alle staatobjecten voor het upgraden naar versie 2,0 of nieuwer.\n",
