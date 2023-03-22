@@ -322,6 +322,11 @@ class envertech_pv extends utils.Adapter {
         }
         if (!result.data.QueryResults) return;
 
+        if (result.data.PageNumber != 1 || result.data.TotalPage != 1) {
+            this.log.warn(
+                `[gateway] unxpected data received - PageNumber:{$result.data.PageNumber}, TotalPage:{result.data.TotalPage} - please report to developer`,
+            );
+        }
         this.stations[pStationId].online = true;
         for (const row of result.data.QueryResults) {
             const gatewayAlias = row['GATEWAYALIAS'];
@@ -400,6 +405,13 @@ class envertech_pv extends utils.Adapter {
 
             for (const key in row) {
                 this.log.debug(`[gatewayinfo] processing ${key}`);
+
+                if (!STATES_CFG[key]) {
+                    if (this.config.optLogNew)
+                        this.log.warn(`[gateway] object ${key} not configured - report to developer.`);
+                    continue;
+                }
+
                 await this.initStateObject(`${rootId}.${key}`, STATES_CFG[key]);
 
                 if (typeof STATEs[`${this.name}.${this.instance}.${rootId}.${key}`] === 'undefined') continue; // undesired object
@@ -436,6 +448,13 @@ class envertech_pv extends utils.Adapter {
         // data total count - total converters
         await this.setStateAsync(`${stationId}.mppt_online`, { val: cvtOnline[stationId], ack: true, q: 0x00 });
         await this.setStateAsync(`${stationId}.mppt_offline`, { val: cvtOffline[stationId], ack: true, q: 0x00 });
+
+        if (result.data.TotalCount != cvtOnline[stationId] + cvtOffline[stationId]) {
+            this.log.warn(`[gateway] inconsistent counters detected - please report to developer`);
+            this.log.warn(
+                `[gateway] TotalCount: ${result.data.TotalCount}, cvtOnline:${cvtOnline[stationId]}, cvtOffline:${cvtOffline[stationId]}`,
+            );
+        }
 
         for (const gatewayId in cvtOnline) {
             const val = cvtOnline[gatewayId];
@@ -535,6 +554,13 @@ class envertech_pv extends utils.Adapter {
 
         for (const key in result.data) {
             this.log.debug(`[stationdatainfo] processing station info ${key}`);
+
+            if (!STATES_CFG[key]) {
+                if (this.config.optLogNew)
+                    this.log.warn(`[station] object ${key} not configured - report to developer.`);
+                continue;
+            }
+
             await this.initStateObject(`${rootId}.${key}`, STATES_CFG[key]);
 
             if (typeof STATEs[`${this.name}.${this.instance}.${rootId}.${key}`] === 'undefined') continue; // undesired object
@@ -595,6 +621,7 @@ class envertech_pv extends utils.Adapter {
         this.log.debug(`initStateobject (${pId})`);
 
         if (!pObj.type) return;
+
         await this.initObject({
             _id: pId,
             type: 'state',
