@@ -1,5 +1,7 @@
 ![Logo](admin/envertech-pv.png)
+
 # ioBroker.envertech-pv
+
 [![NPM version](https://img.shields.io/npm/v/iobroker.envertech-pv.svg)](https://www.npmjs.com/package/iobroker.envertech-pv)
 ![Current version in stable repository](https://iobroker.live/badges/envertech-pv-stable.svg)
 ![Number of Installations](https://iobroker.live/badges/envertech-pv-installed.svg)
@@ -16,26 +18,22 @@ For more details and for information how to disable the error reporting see [Sen
 
 ## ioBroker.envertech-pv
 
-This adapter supports retrieving PV data from www.envertecportal.com website.
+This adapter allows to retrieve data from envertech cloud service (www.envertecportal.com) by polling the webservice at regular intervals. All data retrieved is
+stored at states accessible by users.
 
 ## Disclaimer
+
 **All product and company names or logos are trademarks™ or registered® trademarks of their respective holders. Use of them does not imply any affiliation with or endorsement by them or any associated subsidiaries! This personal project is maintained in spare time and has no business goal.**
 **Envertec® is a registered trademark of Zhejiang Envertech Corporation Limited**
 
+## Documentation
 
-## Manual find Station ID
-
-Die Station ID erhält ihr folgendermaßen:
-Meldet euch mit euren Zugangsdaten unter www.envertecportal.com an.
-Nach dem Login einen Rechtsklick auf die Seite und "Seitenquelltext anzeigen" klicken.
-Danach sucht ihr nach "var stationId =".
-Sollte ca. so aussehen: var stationId = '3EH583732993048DDX706VT57F8708452'; oder 4 stellen.
-Ihr benötigt nur die zahlen und Buchstaben Kombination (3EH58373299348DDX706VT57F8708452).
-Diese zahlen und Buchstaben Kombination müsst ihr unter den Einstellungen im Adapter eintragen.
-
+[english documentation](docs/en/envertech.md) is available [here](docs/en/envertech.md) <br>
+[german documentation](docs/de/envertech.md) is available [here](docs/de/envertech.md)
 
 ## Credits
-Providing this adapter would not have been possible without the great work of @adcrafter27 (https://github.com/adcrafter27).
+
+Providing this adapter would not have been possible without the great work of @adcrafter27 (https://github.com/adcrafter27) who analyzed and documented to rest-api used to access envertech cloud.
 
 ## How to report issues and feature requests
 
@@ -49,32 +47,48 @@ Best is to set the adapter to Debug log mode (Instances -> Expert mode -> Column
     Placeholder for the next version (at the beginning of the line):
     ### **WORK IN PROGRESS**
 -->
-### 0.1.0-alpha.0 (2023-01-19)
-* (mcm1957) moved adapter to iobroker-community-adapters organisation
-* (mcm1957) Note: This is an intermediate release.
+
+### **WORK IN PROGRESS**
+
+-   (mcm1957) added: support to retrieve station-id by username and password
+-   (mcm1957) added: support to chek multiple stations within one instance
+-   (mcm1957) changed: units and roles for states have been reconfigured
+-   (mcm1957) changed: state structure changed to support multiple stations (and planned local access)
+-   (mcm1957) changed: userinterface migrated to jsonConfig (admin5)
+-   (mcm1957) changed: adapter is running as daemon now
+-   (mcm1957) changed: communication has been changed from deprecated "request" to "axios" package
+-   (mcm1957) changed: moved adapter to iobroker-community-adapters organisation
 
 ### 0.0.8
-* (adcrafter27) add setting for more log output
+
+-   (adcrafter27) add setting for more log output
 
 ### 0.0.7
-* (adcrafter27) add more functions
+
+-   (adcrafter27) add more functions
 
 ### 0.0.6
-* (adcrafter27) code fix
+
+-   (adcrafter27) code fix
 
 ### 0.0.5
-* (adcrafter27) release
+
+-   (adcrafter27) release
 
 ### 0.0.3
-* (adcrafter27) Update new functions
+
+-   (adcrafter27) Update new functions
 
 ### 0.0.2
-* (adcrafter27) First test release
+
+-   (adcrafter27) First test release
 
 ### 0.0.1
-* (adcrafter27) initial release
+
+-   (adcrafter27) initial release
 
 ## License
+
 MIT License
 
 Copyright (c) 2023 mcm1957 <mcm57@gmx.at>, adcrafter27 <adcrafter27@gmail.com>

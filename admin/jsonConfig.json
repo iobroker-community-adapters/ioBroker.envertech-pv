@@ -1,0 +1,178 @@
+{
+    "i18n": true,
+    "type": "tabs",
+    "items": {
+        "_cloudPanel": {
+            "type": "panel",
+            "label": "lblCloudPanel",
+            "items": {
+                "_cloudHdr_1": {
+                    "type": "header",
+                    "text": "txtCloudHeader_1",
+                    "size": 3
+                },
+                "_cloudInfo": {
+                    "type": "staticText",
+                    "text": "txtCloudInfo",
+                    "style": {
+                        "fontSize": 16
+                    }
+                },
+                "_cloudInfoOffline": {
+                    "type": "staticText",
+                    "hidden": "_alive",
+                    "newLine": true,
+                    "text": "txtCloudInfoOffline",
+                    "style": {
+                        "fontSize": 16,
+                        "color": "red"
+                    }
+                },
+                "cloudUsername": {
+                    "type": "text",
+                    "label": "lblCloudUsername",
+                    "doNotSave": true,
+                    "hidden": "!_alive",
+                    "newLine": true,
+                    "default": "",
+                    "tooltip": "ttCloudUsername",
+                    "help": "hlpCloudUsername"
+                },
+                "cloudPassword": {
+                    "type": "password",
+                    "label": "lblCloudPassword",
+                    "doNotSave": true,
+                    "hidden": "!_alive",
+                    "default": "",
+                    "tooltip": "ttCloudPassword",
+                    "help": "hlpCloudPassword"
+                },
+                "_getStationId": {
+                    "type": "sendTo",
+                    "label": "lblGetStationId",
+                    "variant": "outlined",
+                    "showProcess": true,
+                    "command": "getStationId",
+                    "jsonData": "{ \"username\": \"${data.cloudUsername}\", \"password\": \"${data.cloudPassword}\" }",
+                    "useNative": true,
+                    "disabled": "data.cloudUsername==='' || data.cloudPassword===''",
+                    "hidden": "!_alive",
+                    "tooltip": "ttGetStationId",
+                    "help": "hlpGetStationId"
+                },
+                "cloudStationId": {
+                    "type": "text",
+                    "label": "lblCloudStationId",
+                    "doNotSave": true,
+                    "hidden": "!_alive",
+                    "readOnly": true,
+                    "tooltip": "ttCloudStationId",
+                    "help": "hlpCloudStationId"
+                },
+                "_cloudHdr_2": {
+                    "type": "header",
+                    "text": "txtCloudHeader_2",
+                    "size": 3
+                },
+                "stations": {
+                    "type": "table",
+                    "sm": 12,
+                    "md": 12,
+                    "lg": 12,
+                    "label": "",
+                    "showSecondAddAt": 5,
+                    "items": [
+                        {
+                            "type": "checkbox",
+                            "attr": "stationAct",
+                            "width": "10% ",
+                            "title": "lblStationAct",
+                            "filter": false,
+                            "sort": false,
+                            "default": true,
+                            "tooltip": "ttStationAct"
+                        },
+                        {
+                            "type": "text",
+                            "attr": "stationId",
+                            "width": "25% ",
+                            "title": "lblStationId",
+                            "filter": false,
+                            "sort": false,
+                            "default": "",
+                            "tooltip": "ttStationId"
+                        },
+                        {
+                            "type": "number",
+                            "attr": "pollIntvl",
+                            "width": "15% ",
+                            "title": "lblPollIntvl",
+                            "min": 10,
+                            "max": 3600,
+                            "filter": false,
+                            "sort": false,
+                            "default": "60",
+                            "tooltip": "ttPollIntvl"
+                        }
+                    ]
+                }
+            }
+        },
+
+        "_optPanel": {
+            "type": "panel",
+            "label": "lblOptPanel",
+            "items": {
+                "optLogReq": {
+                    "type": "checkbox",
+                    "label": "lblOptLogReq",
+                    "default": false,
+                    "help": "hlpOptLogReq",
+                    "tooltip": "ttOptLogReq"
+                },
+                "optLogNew": {
+                    "type": "checkbox",
+                    "label": "lblOptLogNew",
+                    "newLine": true,
+                    "default": true,
+                    "help": "hlpOptLogNew",
+                    "tooltip": "ttOptLogNew"
+                }
+            }
+        },
+        "_expertPanel": {
+            "type": "panel",
+            "label": "lblExpertPanel",
+            "items": {
+                "expertUrl": {
+                    "type": "text",
+                    "label": "lblExportUrl",
+                    "newLine": true,
+                    "default": "https://www.envertecportal.com",
+                    "tooltip": "ttExpertUrl",
+                    "help": "hlpExpertUrl"
+                },
+                "expertTimeout": {
+                    "type": "number",
+                    "label": "lblExpertTimeout",
+                    "newLine": true,
+                    "default": 30,
+                    "min": 5,
+                    "max": 600,
+                    "tooltip": "ttExpertTimeout",
+                    "help": "hlpExpertTimeout"
+                },
+                "expertMinDelay": {
+                    "type": "number",
+                    "label": "lblExpertMinDelay",
+                    "newLine": true,
+                    "default": 15,
+                    "min": 5,
+                    "max": 600,
+                    "tooltip": "ttExpertMinDelay",
+                    "help": "hlpExpertMinDelay"
+                }
+            }
+        }
+    }
+}
