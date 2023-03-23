@@ -50,14 +50,14 @@ Best is to set the adapter to Debug log mode (Instances -> Expert mode -> Column
 
 ### **WORK IN PROGRESS**
 
--   (mcm1957) added: support to retrieve station-id by username and password
--   (mcm1957) added: support to chek multiple stations within one instance
--   (mcm1957) changed: units and roles for states have been reconfigured
--   (mcm1957) changed: state structure changed to support multiple stations (and planned local access)
--   (mcm1957) changed: userinterface migrated to jsonConfig (admin5)
--   (mcm1957) changed: adapter is running as daemon now
--   (mcm1957) changed: communication has been changed from deprecated "request" to "axios" package
--   (mcm1957) changed: moved adapter to iobroker-community-adapters organisation
+-   (mcm1957) NEW: Support to retrieve station-id by username and password has been added.
+-   (mcm1957) NEW: Support to check multiple stations within one instance has been added.
+-   (mcm1957) changed: Units and roles for states have been reconfigured.
+-   (mcm1957) changed: State structure has been changed to support multiple stations (and for future local access).
+-   (mcm1957) changed: Userinterface has been migrated to jsonConfig (admin5).
+-   (mcm1957) changed: The adapter is running as daemon.
+-   (mcm1957) changed: The communication has been changed from deprecated "request" to "axios" package.
+-   (mcm1957) changed: The adapter has been moved to iobroker-community-adapters organisation.
 
 ### 0.0.8
 
