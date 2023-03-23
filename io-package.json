@@ -1,9 +1,9 @@
 {
     "common": {
         "name": "envertech-pv",
-        "version": "1.0.0",
+        "version": "1.0.1",
         "news": {
-            "1.0.0": {
+            "1.0.1": {
                 "en": "NEW: Support to retrieve station-id by username and password has been added.\nNEW: Support to check multiple stations within one instance has been added.\nchanged: Units and roles for states have been reconfigured.\nchanged: State structure has been changed to support multiple stations (and for future local access).\nchanged: Userinterface has been migrated to jsonConfig (admin5).\nchanged: The adapter is running as daemon.\nchanged: The communication has been changed from deprecated \"request\" to \"axios\" package.\nchanged: The adapter has been moved to iobroker-community-adapters organisation.",
                 "de": "NEU: Unterstützung zum Abrufen von der Station-ID durch Eingabe von Benutzername und Passwort wurde hinzugefügt.\nNEU: Unterstützung zur Überprüfung mehrerer Stationen innerhalb einer Instanz wurde hinzugefügt.\ngeändert: Einheiten und Rollen für Zustände wurden überarbeitet.\ngeändert: Die Struktur der States wurde geändert, um mehrere Stationen zu unterstützen (und als Vorbereitung für einen zukünftigen lokalen Zugriff).\ngeändert: Die Benutzeroberfläche wurde auf jsonConfig (admin5) umgestellt.\ngeändert: Der Adapter läuft nun als Daemon.\ngeändert: Die Kommunikation wurde vom deprecated 'request' Paket auf das 'axios' Paket umgestellt.\ngeändert: Der Adapter wurde in die iobroker-community-adapters Organisation verschoben.",
                 "ru": "НОВИНКА: Добавлена поддержка для восстановления входной станции по имени пользователя и пароля.\nNEW: Добавлена поддержка для проверки нескольких станций в рамках одного экземпляра.\nизменено: Реконфигурированы подразделения и роли для государств.\nизменено: Государственная структура была изменена для поддержки нескольких станций (и для будущего местного доступа.).\nизменено: Userinterface была передана jsonConfig (admin5.).\nизменено: Адаптер работает как daemon.\nизменено: Сообщение было изменено из определенного запроса в пакет axios.\nизменено: Адаптер переехал в организацию iobroker-community-adapters.",
@@ -15,19 +15,6 @@
                 "pl": "NEW: Wsparcie do odzyskania stacji przez nazwę użytkownika i hasło.\nNEW: Wsparcie do kontroli wielu stacji w jednym przypadku.\nzmieniono: Jednostki i role państw zostały zrekonfigurowane.\nzmieniono: Zmieniono strukturę państwową w celu wsparcia wielu stacji (i dla przyszłego dostępu).\nzmieniono: Userinterface zostało przeniesione do jsonConfig (admin5).\nzmieniono: Adaptator biegnie jako daemon.\nzmieniono: Komunikacja została zmieniona z prośby o axios.\nzmieniono: Adaptacja została przeniesiona do organizacji iobroker-community-adapters.",
                 "uk": "НОВИНКА: Додана підтримка відновлення станції за допомогою імені користувача та пароля.\nНОВИНКА: Додана підтримка перевірок декількох станцій в одному екземплярі.\nзмінено: Реконфігуровано підрозділи та ролі для держав.\nзмінено: Державна структура була змінена для підтримки кількох станцій (і для майбутнього місцевого доступу).\nзмінено: Користувачінтерфейс мігрувати на jsonConfig (адміністратор5.).\nзмінено: Адаптер працює як дамон.\nзмінено: У зв'язку було змінено запит на аксіо пакет.\nзмінено: Перехідник був переміщений до організації iobroker-community-adapters.",
                 "zh-cn": "NEW:支持以用户名称和密码检索站。.\nNEW:支持在一例内检查多个站。.\n修改: 重组了各州的单位和作用。.\n修改: 已经改变了国家结构,以支助多个工作地点(以及今后当地出入)。.\n修改: 用户移到Json Config(admin5)上。.\n修改: 适应者正处空。.\n修改: 来文已从过时的要求改为轴线包。.\n修改: 适应者已移到小贩子组织。."
-            },
-            "0.1.0-alpha.0": {
-                "en": "moved adapter to iobroker-community-adapters organisation\nNote: This is an intermediate release.",
-                "de": "Adapter zur Iobroker-community-adapter-organisation verschoben\nHinweis: Dies ist eine Zwischenversion.",
-                "ru": "переехал адаптер в организацию iobroker-community-adapters\nПримечание: Это промежуточный релиз.",
-                "pt": "adaptador movido para iobroker-community-adapters organização\nNota: Esta é uma versão intermediária.",
-                "nl": "verhuisde adapter naar iobroker-community-adapters organisatie\nDit is een tussentijdse vrijlating.",
-                "fr": "adaptateur déplacé à l'organisation iobroker-community-adapters\nRemarque : C'est une version intermédiaire.",
-                "it": "ha spostato l'adattatore all'organizzazione di iobroker-community-adapters\nNota: Questa è una versione intermedia.",
-                "es": "adaptador movido a la organización de ibroker-community-adapters\nNota: Esta es una versión intermedia.",
-                "pl": "przeprowadził adapter do organizacji iobroker-kommunity-profit\nUwaga: Jest to pośrednie wydanie.",
-                "uk": "перехідний адаптер для організації iobroker-community-adapters\nПримітка: Це проміжний реліз.",
-                "zh-cn": "变通器\n注:这是中间释放。."
             }
         },
         "messages": [
