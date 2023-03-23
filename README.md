@@ -47,8 +47,7 @@ Best is to set the adapter to Debug log mode (Instances -> Expert mode -> Column
     Placeholder for the next version (at the beginning of the line):
     ### **WORK IN PROGRESS**
 -->
-
-### **WORK IN PROGRESS**
+### 1.0.0 (2023-03-23)
 
 -   (mcm1957) NEW: Support to retrieve station-id by username and password has been added.
 -   (mcm1957) NEW: Support to check multiple stations within one instance has been added.

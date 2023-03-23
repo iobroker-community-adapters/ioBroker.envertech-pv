@@ -1,176 +1,189 @@
 {
-    "common": {
-        "name": "envertech-pv",
-        "version": "0.1.0-alpha.0",
-        "news": {
-            "0.1.0-alpha.0": {
-                "en": "moved adapter to iobroker-community-adapters organisation\nNote: This is an intermediate release.",
-                "de": "Adapter zur Iobroker-community-adapter-organisation verschoben\nHinweis: Dies ist eine Zwischenversion.",
-                "ru": "переехал адаптер в организацию iobroker-community-adapters\nПримечание: Это промежуточный релиз.",
-                "pt": "adaptador movido para iobroker-community-adapters organização\nNota: Esta é uma versão intermediária.",
-                "nl": "verhuisde adapter naar iobroker-community-adapters organisatie\nDit is een tussentijdse vrijlating.",
-                "fr": "adaptateur déplacé à l'organisation iobroker-community-adapters\nRemarque : C'est une version intermédiaire.",
-                "it": "ha spostato l'adattatore all'organizzazione di iobroker-community-adapters\nNota: Questa è una versione intermedia.",
-                "es": "adaptador movido a la organización de ibroker-community-adapters\nNota: Esta es una versión intermedia.",
-                "pl": "przeprowadził adapter do organizacji iobroker-kommunity-profit\nUwaga: Jest to pośrednie wydanie.",
-                "uk": "перехідний адаптер для організації iobroker-community-adapters\nПримітка: Це проміжний реліз.",
-                "zh-cn": "变通器\n注:这是中间释放。."
-            }
-        },
-        "messages": [
-            {
-                "condition": {
-                    "operand": "and",
-                    "rules": [
-                        "oldVersion<1.0.0",
-                        "newVersion>=1.0.0"
-                    ]
-                },
-                "title": {
-                    "en": "Important notice!",
-                    "de": "Wichtiger Hinweis!",
-                    "ru": "Важное замечание!",
-                    "pt": "Notícia importante!",
-                    "nl": "Belangrijke mededeling!",
-                    "fr": "Avis important!",
-                    "it": "Avviso IMPORTANTE!",
-                    "es": "Noticia importante!",
-                    "pl": "Ważna uwaga!",
-                    "zh-cn": "重要通知!",
-                    "uk": "Важливе повідомлення!"
-                },
-                "text": {
-                    "en": "Configuration data and state structure have changed with release 1.0.0. Please deinstall existing releases older than 1.0.0 and delete all stateobjects before upgrading to version 2.0.0 or newer.\n",
-                    "de": "Konfigurationsdaten und Zustandsstruktur haben sich mit Release 1.0.0 geändert. Bitte deinstallieren Sie bestehende Releases älter als 1.0.0 und löschen Sie alle Zustanmdsobjekte vor dem Upgrade auf Version 2.0.0 oder neuer.\n",
-                    "ru": "Конфигурационные данные и структура государства изменились с выпуском 1.0.0 Пожалуйста, деинсталлируйте существующие релизы старше 1.0.0 и удалите все государственные объекты перед обновлением до версии 2.0.0 или новее.\n",
-                    "pt": "Os dados de configuração e a estrutura do estado mudaram com a versão 1.0.0 Por favor, desinstalar versões existentes com mais de 1.0.0 e excluir todos os objetos de estado antes de atualizar para a versão 2.0.0 ou mais recente.\n",
-                    "nl": "Configuration data en staatsstructuur zijn veranderd met vrijlating 1.0. Vernietig alle bestaande vrijlating, ouder dan 1.0. En ontleed alle staatobjecten voor het upgraden naar versie 2,0 of nieuwer.\n",
-                    "fr": "Les données de configuration et la structure d'état ont changé avec la version 1.0.0 Veuillez désinstaller les versions existantes de plus de 1.0.0 et supprimer tous les objets avant de mettre à niveau la version 2.0.0 ou plus récente.\n",
-                    "it": "I dati di configurazione e la struttura dello stato sono cambiati con il rilascio 1.0.0 Si prega di disinstallare le versioni esistenti di età superiore a 1.0.0 ed eliminare tutti gli oggetti di stato prima di aggiornare alla versione 2.0.0 o più recente.\n",
-                    "es": "Los datos de configuración y la estructura estatal han cambiado con la versión 1.0.0 Por favor desinstalar versiones existentes mayores de 1.0.0 y eliminar todos los stateobjects antes de actualizar a la versión 2.0.0 o más reciente.\n",
-                    "pl": "Zmiana danych i struktur państwowych została zmieniona na 1.0.0. Please deinstall istniejących wersji jest starszy od 1.0.0 i usunęło wszystkie stanowe obiekty przed modernizacją wersji 2.0.0 lub nowsze.\n",
-                    "uk": "Настроювання даних та структури держави змінено з релізом 1.0.0 Будь ласка, видаліть існуючі релізи старше 1.0.0 і видаліть всі державніоб'єкти до оновлення версії 2.0.0 або новачка.\n",
-                    "zh-cn": "综合数据和国家结构已发生变化,释放了1.0.0 请尽量减少超过1.0.0的现有排放,并在升级到2.0.0或新版之前删除所有国家目标。.\n"
-                },
-                "link": "https://github.com/iobroker-community-adapters/ioBroker.envertech-pv#changelog",
-                "level": "warn",
-                "linkText": {
-                    "en": "Changelog",
-                    "de": "Änderungsprotokoll",
-                    "ru": "Список изменений",
-                    "pt": "Registro de alterações",
-                    "nl": "Wijzigingslog",
-                    "fr": "Journal des modifications",
-                    "it": "Registro delle modifiche",
-                    "es": "registro de cambios",
-                    "pl": "Dziennik zmian",
-                    "zh-cn": "变更日志",
-                    "uk": "Журнал змін"
-                },
-                "buttons": [
-                    "agree",
-                    "cancel"
-                ]
-            }
-        ],
-        "title": "envertech-pv",
-        "titleLang": {
-            "en": "Envertech-PV",
-            "de": "Envertech-PV",
-            "ru": "Envertech-PV",
-            "pt": "Envertech-PV",
-            "nl": "Envertech-PV",
-            "fr": "Envertech-PV",
-            "it": "Envertech-PV",
-            "es": "Envertech-PV",
-            "pl": "Envertech-PV",
-            "uk": "Енвертех-ПВ",
-            "zh-cn": "D. 全 技术"
-        },
-        "desc": {
-            "en": "Adapter to read data from www.envertecportal.com",
-            "de": "Adapter zum Auslesen von Daten von www.envertecportal.com",
-            "ru": "Адаптер для чтения данных с www.envertecportal.com",
-            "pt": "Adaptador para ler dados de www.envertecportal.com",
-            "nl": "Adapter om gegevens uit te lezen van www.envertecportal.com",
-            "fr": "Adaptateur pour lire les données de www.envertecportal.com",
-            "it": "Adattatore per leggere i dati da www.envertecportal.com",
-            "es": "Adaptador para leer datos de www.envertecportal.com",
-            "pl": "Adapter do odczytu danych z www.envertecportal.com",
-            "uk": "Адаптер для читання даних з www.envertecportal.com",
-            "zh-cn": "从 www.envertecportal.com 读取数据的适配器"
-        },
-        "authors": [
-            "adcrafter27 <adcrafter27@gmail.com>",
-            "mcm1957 <mcm57@gmx.at>"
-        ],
-        "keywords": [
-            "Envertech",
-            "Envertec",
-            "envertecportal.com",
-            "envertecportal",
-            "Envertec.com",
-            "microinverter",
-            "EVB300",
-            "EVB202",
-            "EVB201",
-            "evt720",
-            "evt560",
-            "evt360",
-            "evt300"
-        ],
-        "license": "MIT",
-        "platform": "Javascript/Node.js",
-        "main": "main.js",
-        "icon": "envertech-pv.png",
-        "enabled": true,
-        "messagebox": true,
-        "extIcon": "https://raw.githubusercontent.com/iobroker-community-adapters/ioBroker.envertech-pv/master/admin/envertech-pv.png",
-        "readme": "https://github.com/iobroker-community-adapters/ioBroker.envertech-pv/blob/master/README.md",
-        "loglevel": "info",
-        "mode": "daemon",
-        "allowInit": true,
-        "type": "energy",
-        "connectionType": "cloud",
-        "dataSource": "poll",
-        "compact": true,
-        "adminUI": {
-            "config": "json"
-        },
-        "dependencies": [
-            {
-                "js-controller": ">=3.3.22"
-            }
-        ],
-        "globalDependencies": [
-            {
-                "admin": ">=5.1.13"
-            }
-        ]
+  "common": {
+    "name": "envertech-pv",
+    "version": "1.0.0",
+    "news": {
+      "1.0.0": {
+        "en": "NEW: Support to retrieve station-id by username and password has been added.\nNEW: Support to check multiple stations within one instance has been added.\nchanged: Units and roles for states have been reconfigured.\nchanged: State structure has been changed to support multiple stations (and for future local access).\nchanged: Userinterface has been migrated to jsonConfig (admin5).\nchanged: The adapter is running as daemon.\nchanged: The communication has been changed from deprecated \"request\" to \"axios\" package.\nchanged: The adapter has been moved to iobroker-community-adapters organisation.",
+        "de": "NEU: Unterstützung zum Abrufen von der Station-ID durch Eingabe von Benutzername und Passwort wurde hinzugefügt.\nNEU: Unterstützung zur Überprüfung mehrerer Stationen innerhalb einer Instanz wurde hinzugefügt.\ngeändert: Einheiten und Rollen für Zustände wurden überarbeitet.\ngeändert: Die Struktur der States wurde geändert, um mehrere Stationen zu unterstützen (und als Vorbereitung für einen zukünftigen lokalen Zugriff).\ngeändert: Die Benutzeroberfläche wurde auf jsonConfig (admin5) umgestellt.\ngeändert: Der Adapter läuft nun als Daemon.\ngeändert: Die Kommunikation wurde vom deprecated "request" Paket auf das "axios" Paket umgestellt.\ngeändert: Der Adapter wurde in die iobroker-community-adapters Organisation verschoben.",
+        "ru": "НОВИНКА: Добавлена поддержка для восстановления входной станции по имени пользователя и пароля.\nNEW: Добавлена поддержка для проверки нескольких станций в рамках одного экземпляра.\nизменено: Реконфигурированы подразделения и роли для государств.\nизменено: Государственная структура была изменена для поддержки нескольких станций (и для будущего местного доступа.).\nизменено: Userinterface была передана jsonConfig (admin5.).\nизменено: Адаптер работает как daemon.\nизменено: Сообщение было изменено из определенного запроса в пакет axios.\nизменено: Адаптер переехал в организацию iobroker-community-adapters.",
+        "pt": "NOVO: O suporte para recuperar o status por nome de usuário e senha foi adicionado.\nNOVO: O suporte para verificar várias estações dentro de uma instância foi adicionado.\nmudou: Unidades e papéis para estados foram reconfigurados.\nmudou: A estrutura estatal foi alterada para apoiar várias estações (e para acesso local futuro).\nmudou: A interface do usuário foi migrada para jsonConfig (admin5.).\nmudou: O adaptador está funcionando como daemon.\nmudou: A comunicação foi alterada a partir do pedido desprezado para o pacote de axios.\nmudou: O adaptador foi movido para a organização iobroker-community-adapters.",
+        "nl": "Steun om station-id te halen door gebruikersnaam en wachtwoord is toegevoegd.\nVersterking om meerdere stations te controleren binnen één instantie is toegevoegd.\n_ Units en rollen voor staten zijn hervat.\n_ Staatsstructuur is veranderd om meerdere stations te ondersteunen voor toekomstige lokale toegang.\n_ Userinterface is gemigreerd naar JsonConfig (admin5).\n_ De adapter loopt als dagemon.\n_ De communicatie is veranderd van gedepreceerde verzoek naar Axios pakket.\n_ De adapter is verplaatst naar iobroker-community-apters organisatie.",
+        "fr": "NOUVEAU: Le support pour récupérer station-id par nom d'utilisateur et mot de passe a été ajouté.\nNOUVEAU: L'appui pour vérifier plusieurs stations dans une instance a été ajouté.\nchangé: Les unités et les rôles des États ont été reconfigurés.\nchangé: La structure de l ' État a été modifiée pour soutenir plusieurs stations (et pour l ' accès local futur).\nchangé: L'interface utilisateur a été migrée vers jsonConfig (admin5.).\nchangé: L'adaptateur fonctionne comme démon.\nchangé: La communication a été remplacée par une demande axios.\nchangé: L'adaptateur a été déplacé à l'organisation iobroker-community-adapters.",
+        "it": "NOVITÀ: Il supporto per recuperare la stazione-id tramite username e password è stato aggiunto.\nNOVITÀ: Il supporto per controllare più stazioni all'interno di un'istanza è stato aggiunto.\ncambiato: Unità e ruoli per gli stati sono stati riconfigurati.\ncambiato: La struttura dello stato è stata modificata per supportare più stazioni (e per il futuro accesso locale.).\ncambiato: Interfaccia utente è stata migrata a jsonConfig (admin5.).\ncambiato: L'adattatore è in esecuzione come daemon.\ncambiato: La comunicazione è stata modificata da richiesta deprecata al pacchetto assios.\ncambiato: L'adattatore è stato spostato nell'organizzazione degli adattatori di iobroker-community.",
+        "es": "NOTICIA: Se ha añadido soporte para recuperar la dirección de la estación por nombre de usuario y contraseña.\nNOTICIA: Se ha añadido soporte para comprobar múltiples estaciones en un solo caso.\ncambiado: Se han reconfigurado unidades y papeles para los estados.\ncambiado: Se ha modificado la estructura estatal para apoyar múltiples estaciones (y para el futuro acceso local).\ncambiado: La interfaz de usuario ha sido migrada a jsonConfig (admin5.).\ncambiado: El adaptador funciona como daemon.\ncambiado: La comunicación se ha modificado de la solicitud deprecatada al paquete axios.\ncambiado: El adaptador ha sido trasladado a la organización de ibroker-community-adapters.",
+        "pl": "NEW: Wsparcie do odzyskania stacji przez nazwę użytkownika i hasło.\nNEW: Wsparcie do kontroli wielu stacji w jednym przypadku.\nzmieniono: Jednostki i role państw zostały zrekonfigurowane.\nzmieniono: Zmieniono strukturę państwową w celu wsparcia wielu stacji (i dla przyszłego dostępu).\nzmieniono: Userinterface zostało przeniesione do jsonConfig (admin5).\nzmieniono: Adaptator biegnie jako daemon.\nzmieniono: Komunikacja została zmieniona z prośby o axios.\nzmieniono: Adaptacja została przeniesiona do organizacji iobroker-community-adapters.",
+        "uk": "НОВИНКА: Додана підтримка відновлення станції за допомогою імені користувача та пароля.\nНОВИНКА: Додана підтримка перевірок декількох станцій в одному екземплярі.\nзмінено: Реконфігуровано підрозділи та ролі для держав.\nзмінено: Державна структура була змінена для підтримки кількох станцій (і для майбутнього місцевого доступу).\nзмінено: Користувачінтерфейс мігрувати на jsonConfig (адміністратор5.).\nзмінено: Адаптер працює як дамон.\nзмінено: У зв'язку було змінено запит на аксіо пакет.\nзмінено: Перехідник був переміщений до організації iobroker-community-adapters.",
+        "zh-cn": "NEW:支持以用户名称和密码检索站。.\nNEW:支持在一例内检查多个站。.\n修改: 重组了各州的单位和作用。.\n修改: 已经改变了国家结构,以支助多个工作地点(以及今后当地出入)。.\n修改: 用户移到Json Config(admin5)上。.\n修改: 适应者正处空。.\n修改: 来文已从过时的要求改为轴线包。.\n修改: 适应者已移到小贩子组织。."
+      },
+      "0.1.0-alpha.0": {
+        "en": "moved adapter to iobroker-community-adapters organisation\nNote: This is an intermediate release.",
+        "de": "Adapter zur Iobroker-community-adapter-organisation verschoben\nHinweis: Dies ist eine Zwischenversion.",
+        "ru": "переехал адаптер в организацию iobroker-community-adapters\nПримечание: Это промежуточный релиз.",
+        "pt": "adaptador movido para iobroker-community-adapters organização\nNota: Esta é uma versão intermediária.",
+        "nl": "verhuisde adapter naar iobroker-community-adapters organisatie\nDit is een tussentijdse vrijlating.",
+        "fr": "adaptateur déplacé à l'organisation iobroker-community-adapters\nRemarque : C'est une version intermédiaire.",
+        "it": "ha spostato l'adattatore all'organizzazione di iobroker-community-adapters\nNota: Questa è una versione intermedia.",
+        "es": "adaptador movido a la organización de ibroker-community-adapters\nNota: Esta es una versión intermedia.",
+        "pl": "przeprowadził adapter do organizacji iobroker-kommunity-profit\nUwaga: Jest to pośrednie wydanie.",
+        "uk": "перехідний адаптер для організації iobroker-community-adapters\nПримітка: Це проміжний реліз.",
+        "zh-cn": "变通器\n注:这是中间释放。."
+      }
     },
-    "native": {},
-    "objects": [],
-    "instanceObjects": [
-        {
-            "_id": "info",
-            "type": "channel",
-            "common": {
-                "name": "Information"
-            },
-            "native": {}
+    "messages": [
+      {
+        "condition": {
+          "operand": "and",
+          "rules": [
+            "oldVersion<1.0.0",
+            "newVersion>=1.0.0"
+          ]
         },
-        {
-            "_id": "info.connection",
-            "type": "state",
-            "common": {
-                "role": "indicator.connected",
-                "name": "Device or service connected",
-                "type": "boolean",
-                "read": true,
-                "write": false,
-                "def": false
-            },
-            "native": {}
-        }
+        "title": {
+          "en": "Important notice!",
+          "de": "Wichtiger Hinweis!",
+          "ru": "Важное замечание!",
+          "pt": "Notícia importante!",
+          "nl": "Belangrijke mededeling!",
+          "fr": "Avis important!",
+          "it": "Avviso IMPORTANTE!",
+          "es": "Noticia importante!",
+          "pl": "Ważna uwaga!",
+          "zh-cn": "重要通知!",
+          "uk": "Важливе повідомлення!"
+        },
+        "text": {
+          "en": "Configuration data and state structure have changed with release 1.0.0. Please deinstall existing releases older than 1.0.0 and delete all stateobjects before upgrading to version 2.0.0 or newer.\n",
+          "de": "Konfigurationsdaten und Zustandsstruktur haben sich mit Release 1.0.0 geändert. Bitte deinstallieren Sie bestehende Releases älter als 1.0.0 und löschen Sie alle Zustanmdsobjekte vor dem Upgrade auf Version 2.0.0 oder neuer.\n",
+          "ru": "Конфигурационные данные и структура государства изменились с выпуском 1.0.0 Пожалуйста, деинсталлируйте существующие релизы старше 1.0.0 и удалите все государственные объекты перед обновлением до версии 2.0.0 или новее.\n",
+          "pt": "Os dados de configuração e a estrutura do estado mudaram com a versão 1.0.0 Por favor, desinstalar versões existentes com mais de 1.0.0 e excluir todos os objetos de estado antes de atualizar para a versão 2.0.0 ou mais recente.\n",
+          "nl": "Configuration data en staatsstructuur zijn veranderd met vrijlating 1.0. Vernietig alle bestaande vrijlating, ouder dan 1.0. En ontleed alle staatobjecten voor het upgraden naar versie 2,0 of nieuwer.\n",
+          "fr": "Les données de configuration et la structure d'état ont changé avec la version 1.0.0 Veuillez désinstaller les versions existantes de plus de 1.0.0 et supprimer tous les objets avant de mettre à niveau la version 2.0.0 ou plus récente.\n",
+          "it": "I dati di configurazione e la struttura dello stato sono cambiati con il rilascio 1.0.0 Si prega di disinstallare le versioni esistenti di età superiore a 1.0.0 ed eliminare tutti gli oggetti di stato prima di aggiornare alla versione 2.0.0 o più recente.\n",
+          "es": "Los datos de configuración y la estructura estatal han cambiado con la versión 1.0.0 Por favor desinstalar versiones existentes mayores de 1.0.0 y eliminar todos los stateobjects antes de actualizar a la versión 2.0.0 o más reciente.\n",
+          "pl": "Zmiana danych i struktur państwowych została zmieniona na 1.0.0. Please deinstall istniejących wersji jest starszy od 1.0.0 i usunęło wszystkie stanowe obiekty przed modernizacją wersji 2.0.0 lub nowsze.\n",
+          "uk": "Настроювання даних та структури держави змінено з релізом 1.0.0 Будь ласка, видаліть існуючі релізи старше 1.0.0 і видаліть всі державніоб'єкти до оновлення версії 2.0.0 або новачка.\n",
+          "zh-cn": "综合数据和国家结构已发生变化,释放了1.0.0 请尽量减少超过1.0.0的现有排放,并在升级到2.0.0或新版之前删除所有国家目标。.\n"
+        },
+        "link": "https://github.com/iobroker-community-adapters/ioBroker.envertech-pv#changelog",
+        "level": "warn",
+        "linkText": {
+          "en": "Changelog",
+          "de": "Änderungsprotokoll",
+          "ru": "Список изменений",
+          "pt": "Registro de alterações",
+          "nl": "Wijzigingslog",
+          "fr": "Journal des modifications",
+          "it": "Registro delle modifiche",
+          "es": "registro de cambios",
+          "pl": "Dziennik zmian",
+          "zh-cn": "变更日志",
+          "uk": "Журнал змін"
+        },
+        "buttons": [
+          "agree",
+          "cancel"
+        ]
+      }
+    ],
+    "title": "envertech-pv",
+    "titleLang": {
+      "en": "Envertech-PV",
+      "de": "Envertech-PV",
+      "ru": "Envertech-PV",
+      "pt": "Envertech-PV",
+      "nl": "Envertech-PV",
+      "fr": "Envertech-PV",
+      "it": "Envertech-PV",
+      "es": "Envertech-PV",
+      "pl": "Envertech-PV",
+      "uk": "Енвертех-ПВ",
+      "zh-cn": "D. 全 技术"
+    },
+    "desc": {
+      "en": "Adapter to read data from www.envertecportal.com",
+      "de": "Adapter zum Auslesen von Daten von www.envertecportal.com",
+      "ru": "Адаптер для чтения данных с www.envertecportal.com",
+      "pt": "Adaptador para ler dados de www.envertecportal.com",
+      "nl": "Adapter om gegevens uit te lezen van www.envertecportal.com",
+      "fr": "Adaptateur pour lire les données de www.envertecportal.com",
+      "it": "Adattatore per leggere i dati da www.envertecportal.com",
+      "es": "Adaptador para leer datos de www.envertecportal.com",
+      "pl": "Adapter do odczytu danych z www.envertecportal.com",
+      "uk": "Адаптер для читання даних з www.envertecportal.com",
+      "zh-cn": "从 www.envertecportal.com 读取数据的适配器"
+    },
+    "authors": [
+      "adcrafter27 <adcrafter27@gmail.com>",
+      "mcm1957 <mcm57@gmx.at>"
+    ],
+    "keywords": [
+      "Envertech",
+      "Envertec",
+      "envertecportal.com",
+      "envertecportal",
+      "Envertec.com",
+      "microinverter",
+      "EVB300",
+      "EVB202",
+      "EVB201",
+      "evt720",
+      "evt560",
+      "evt360",
+      "evt300"
+    ],
+    "license": "MIT",
+    "platform": "Javascript/Node.js",
+    "main": "main.js",
+    "icon": "envertech-pv.png",
+    "enabled": true,
+    "messagebox": true,
+    "extIcon": "https://raw.githubusercontent.com/iobroker-community-adapters/ioBroker.envertech-pv/master/admin/envertech-pv.png",
+    "readme": "https://github.com/iobroker-community-adapters/ioBroker.envertech-pv/blob/master/README.md",
+    "loglevel": "info",
+    "mode": "daemon",
+    "allowInit": true,
+    "type": "energy",
+    "connectionType": "cloud",
+    "dataSource": "poll",
+    "compact": true,
+    "adminUI": {
+      "config": "json"
+    },
+    "dependencies": [
+      {
+        "js-controller": ">=3.3.22"
+      }
+    ],
+    "globalDependencies": [
+      {
+        "admin": ">=5.1.13"
+      }
     ]
+  },
+  "native": {},
+  "objects": [],
+  "instanceObjects": [
+    {
+      "_id": "info",
+      "type": "channel",
+      "common": {
+        "name": "Information"
+      },
+      "native": {}
+    },
+    {
+      "_id": "info.connection",
+      "type": "state",
+      "common": {
+        "role": "indicator.connected",
+        "name": "Device or service connected",
+        "type": "boolean",
+        "read": true,
+        "write": false,
+        "def": false
+      },
+      "native": {}
+    }
+  ]
 }
