@@ -12,6 +12,7 @@
 /* jshint strict: false */
 /* jslint node: true */
 'use strict';
+0;
 
 const utils = require('@iobroker/adapter-core');
 const { iobInit, iobStates, iobTranslator } = require('@mcm1957/iobroker.library');
@@ -99,7 +100,7 @@ class envertech_pv extends utils.Adapter {
      *
      * @param
      * @return
-     *
+     *0
      */
     async onReady() {
         this.log.debug('onReady triggered');
@@ -156,11 +157,10 @@ class envertech_pv extends utils.Adapter {
         this.setState('info.connection', { val: false, ack: true, q: 0x00 });
 
         try {
-            if (this.killthetimeout) {
-                this.log.debug('clearing and kill timeout');
-                clearTimeout(this.killthetimeout);
+            for (const station of this.config.stations) {
+                if (station.timeout) this.clearTimeout(station.timeout);
+                station.envCloud = null;
             }
-            this.log.debug('cleaned everything up...');
             callback();
         } catch (e) {
             callback();
@@ -268,7 +268,7 @@ class envertech_pv extends utils.Adapter {
         // start next scan
         let delayMs = this.stations[pStationId].pollIntvlMs + start - Date.now();
         if (delayMs < this.minDelayMs) delayMs = this.minDelayMs;
-        this.stations[pStationId].timeout = setTimeout(this.doScan.bind(this), delayMs, pStationId);
+        this.stations[pStationId].timeout = this.setTimeout(this.doScan.bind(this), delayMs, pStationId);
     }
 
     /**
