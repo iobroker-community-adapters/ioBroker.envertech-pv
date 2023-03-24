@@ -157,7 +157,7 @@ class envertech_pv extends utils.Adapter {
         this.setState('info.connection', { val: false, ack: true, q: 0x00 });
 
         try {
-            for (const station of this.config.stations) {
+            for (const station of this.stations) {
                 if (station.timeout) this.clearTimeout(station.timeout);
                 station.envCloud = null;
             }
