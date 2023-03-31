@@ -50,10 +50,10 @@ Best is to set the adapter to Debug log mode (Instances -> Expert mode -> Column
 
 ### **WORK IN PROGRESS**
 
--   (mcm1957) changed: handlimg of statuscode '2' has been added (#44).
+-   (mcm1957) changed: Handlimg of statuscode '2' has been added (#44).
 -   (mcm1957) changed: Unload code has been fixed.
 -   (mcm1957) changed: Unload code has been fixed.
--   (mcm1957) changed: dependencies have been updated.
+-   (mcm1957) changed: Dependencies have been updated.
 
 ### 1.0.1 (2023-03-23)
 
