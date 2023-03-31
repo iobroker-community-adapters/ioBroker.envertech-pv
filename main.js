@@ -428,8 +428,16 @@ class envertech_pv extends utils.Adapter {
                         cvtOffline[stationId] = cvtOffline[stationId] + 1;
                         cvtOffline[gatewayId] = cvtOffline[gatewayId] + 1;
                         await this.setStateAsync(`${rootId}.info.online`, { val: false, ack: true, q: 0x00 });
+                    } else if (val == 2) {
+                        /* unknown value - might be starting up */
+                        cvtOffline[stationId] = cvtOffline[stationId] + 1;
+                        cvtOffline[gatewayId] = cvtOffline[gatewayId] + 1;
+                        await this.setStateAsync(`${rootId}.info.online`, { val: false, ack: true, q: 0x00 });
                     } else {
-                        this.log.debug(`[gateway] unexpected status value ${key} - ${val}`);
+                        this.log.warn(`[gateway] unexpected STATUS value '${val}'`);
+                        cvtOffline[stationId] = cvtOffline[stationId] + 1;
+                        cvtOffline[gatewayId] = cvtOffline[gatewayId] + 1;
+                        await this.setStateAsync(`${rootId}.info.online`, { val: false, ack: true, q: 0x00 });
                     }
                 }
 
