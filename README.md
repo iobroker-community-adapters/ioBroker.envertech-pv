@@ -47,8 +47,7 @@ Best is to set the adapter to Debug log mode (Instances -> Expert mode -> Column
     Placeholder for the next version (at the beginning of the line):
     ### **WORK IN PROGRESS**
 -->
-
-### **WORK IN PROGRESS**
+### 1.0.2 (2023-03-31)
 
 -   (mcm1957) changed: Handling of statuscode '2' has been added (#44).
 -   (mcm1957) changed: Unload code has been fixed.

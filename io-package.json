@@ -1,8 +1,21 @@
 {
     "common": {
         "name": "envertech-pv",
-        "version": "1.0.1",
+        "version": "1.0.2",
         "news": {
+            "1.0.2": {
+                "en": "changed: Handling of statuscode '2' has been added (#44).\nchanged: Unload code has been fixed.\nchanged: Some translations have been updated.\nchanged: Dependencies have been updated.",
+                "de": "geändert: Die Handhabung des Statuscodes 2 wurde hinzugefügt (#44.).\ngeändert: Unloadcode wurde bereinigt.\ngeändert: Einige Übersetzungen wurden aktualisiert.\ngeändert: Abhängigkeiten wurden aktualisiert.",
+                "ru": "изменено: Добавлена обработка кода статуса 2 (#44.).\nизменено: Код разгрузки был исправлен.\nизменено: Некоторые переводы были обновлены.\nизменено: Обновлены зависимости.",
+                "pt": "mudou: O manuseio do statuscode 2 foi adicionado (#44.).\nmudou: O código de descarga foi corrigido.\nmudou: Algumas traduções foram atualizadas.\nmudou: As dependências foram atualizadas.",
+                "nl": "_ Handeling van statuscode 2 is toegevoegd.\n_ De code is gerepareerd.\n_ Sommige vertalingen zijn geüpdateerd.\n_ Afhankelijkheid is geüpdateerd.",
+                "fr": "changé: La manipulation du code de statut 2 a été ajoutée (#44.).\nchangé: Le code de déchargement a été corrigé.\nchangé: Certaines traductions ont été mises à jour.\nchangé: Les dépendances ont été mises à jour.",
+                "it": "cambiato: La gestione del codice di stato 2 è stata aggiunta (#44.).\ncambiato: Il codice di scarico è stato fissato.\ncambiato: Alcune traduzioni sono state aggiornate.\ncambiato: Le dipendenze sono state aggiornate.",
+                "es": "cambiado: Se ha añadido el manejo del código de estado 2 (#44.).\ncambiado: Se ha fijado el código de descarga.\ncambiado: Se han actualizado algunas traducciones.\ncambiado: Se han actualizado las dependencias.",
+                "pl": "zmieniono: Dodano numer 2 (#44).\nzmieniono: Zastosowano kod ładowania.\nzmieniono: Niektóre tłumaczenia zostały zaktualizowane.\nzmieniono: W zależności zostały zaktualizowane.",
+                "uk": "змінено: Додана обробка коду стану 2 (#44.).\nзмінено: Виправлено код розвантаження.\nзмінено: Було оновлено деякі переклади.\nзмінено: Оновлено залежність.",
+                "zh-cn": "修改: 添加了第2号现状(第44号)。.\n修改: 未用法已经确定。.\n修改: 一些翻译已经更新。.\n修改: 情况已经更新。."
+            },
             "1.0.1": {
                 "en": "NEW: Support to retrieve station-id by username and password has been added.\nNEW: Support to check multiple stations within one instance has been added.\nchanged: Units and roles for states have been reconfigured.\nchanged: State structure has been changed to support multiple stations (and for future local access).\nchanged: Userinterface has been migrated to jsonConfig (admin5).\nchanged: The adapter is running as daemon.\nchanged: The communication has been changed from deprecated \"request\" to \"axios\" package.\nchanged: The adapter has been moved to iobroker-community-adapters organisation.",
                 "de": "NEU: Unterstützung zum Abrufen von der Station-ID durch Eingabe von Benutzername und Passwort wurde hinzugefügt.\nNEU: Unterstützung zur Überprüfung mehrerer Stationen innerhalb einer Instanz wurde hinzugefügt.\ngeändert: Einheiten und Rollen für Zustände wurden überarbeitet.\ngeändert: Die Struktur der States wurde geändert, um mehrere Stationen zu unterstützen (und als Vorbereitung für einen zukünftigen lokalen Zugriff).\ngeändert: Die Benutzeroberfläche wurde auf jsonConfig (admin5) umgestellt.\ngeändert: Der Adapter läuft nun als Daemon.\ngeändert: Die Kommunikation wurde vom deprecated 'request' Paket auf das 'axios' Paket umgestellt.\ngeändert: Der Adapter wurde in die iobroker-community-adapters Organisation verschoben.",
