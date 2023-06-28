@@ -5,7 +5,7 @@
 [![NPM version](https://img.shields.io/npm/v/iobroker.envertech-pv.svg)](https://www.npmjs.com/package/iobroker.envertech-pv)
 ![Current version in stable repository](https://iobroker.live/badges/envertech-pv-stable.svg)
 ![Number of Installations](https://iobroker.live/badges/envertech-pv-installed.svg)
-[![Test and Release](https://github.com/iobroker-community-adapters/ioBroker.envertech-pv/workflows/Test%20and%20Release/badge.svg)
+![Test and Release](https://github.com/iobroker-community-adapters/ioBroker.envertech-pv/workflows/Test%20and%20Release/badge.svg)
 [![Translation status](https://weblate.iobroker.net/widgets/adapters/-/envertech-pv/svg-badge.svg)](https://weblate.iobroker.net/engage/adapters/?utm_source=widget)
 [![Downloads](https://img.shields.io/npm/dm/iobroker.envertech-pv.svg)](https://www.npmjs.com/package/iobroker.envertech-pv)
 
@@ -18,28 +18,25 @@ For more details and for information how to disable the error reporting see [Sen
 
 ## ioBroker.envertech-pv
 
-This adapter allows to retrieve data from envertech cloud service (www.envertecportal.com) by polling the webservice at regular intervals. All data retrieved is
-stored at states accessible by users.
+The ioBroker.envertech-pv adapter empowers you to access and gather data from the [envertech cloud service](www.envertecportal.com) easily. By regularly polling the web service, this adapter ensures that all valuable information is promptly retrieved and stored in easily accessible states.
 
 ## Disclaimer
 
 **All product and company names or logos are trademarks™ or registered® trademarks of their respective holders. Use of them does not imply any affiliation with or endorsement by them or any associated subsidiaries! This personal project is maintained in spare time and has no business goal.**
-**Envertec® is a registered trademark of Zhejiang Envertech Corporation Limited**
+**Envertech® is a registered trademark of Zhejiang Envertech Corporation Limited**
 
 ## Documentation
 
-[english documentation](docs/en/envertech.md) is available [here](docs/en/envertech.md) <br>
-[german documentation](docs/de/envertech.md) is available [here](docs/de/envertech.md)
+[**English** documentation](docs/en/envertech.md)    
+[**German** documentation](docs/de/envertech.md)
 
 ## Credits
 
-Providing this adapter would not have been possible without the great work of @adcrafter27 (https://github.com/adcrafter27) who analyzed and documented to rest-api used to access envertech cloud.
+This adapter would not have been possible without the great work of @adcrafter27 (https://github.com/adcrafter27), who analyzed and documented the REST API used to access the envertech cloud service.
 
 ## How to report issues and feature requests
 
-Please use GitHub issues for this.
-
-Best is to set the adapter to Debug log mode (Instances -> Expert mode -> Column Log level). Then please get the logfile from disk (subdirectory "log" in ioBroker installation directory and not from Admin because Admin cuts the lines). If you do not like providing it in GitHub issue you can also send it to me via email (mcm57@gmx.at). Please add a reference to the relevant GitHub issue AND also describe what I see in the log at which time.
+Ideally, please use GitHub issues for this, with the best method achieved by setting the adapter to Debug log mode (Instances -> Expert mode -> Column Log level). Then retrieve the logfile from disk via the  'log' ioBroker subdirectory, **not** from Admin, which will cut lines. If you prefer to avoid providing it in a GitHub issue, email me (mcm57@gmx.at). Please reference the relevant **GitHub issue**, provide corresponding **descriptive commentary** and add **log timestamp(s)** where appropriate.
 
 ## Changelog
 
