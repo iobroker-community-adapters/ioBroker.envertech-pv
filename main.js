@@ -74,7 +74,11 @@ const STATES_CFG = {
     'SITETIME':     {'type': 'string', 'name': 'site datetime',     'desc': 'descSiteDateTime',  'role': 'value',                 'unit': '',    'cvt': null },     //'3/5/2023 1:34:58 PM',
     'STATIONID':    {'type': 'string', 'name': 'station id',        'desc': 'descStationId',     'role': 'value',                 'unit': '',    'cvt': null },     //null,
     'STATUS':       {'type': 'number', 'name': 'status',            'desc': 'descStatus',        'role': 'value',                 'unit': '',    'cvt': null },     //'0',
-    'SNID':         {'type': 'string', 'name': 'sn id',             'desc': 'descSnId',          'role': 'value',                 'unit': '',    'cvt': null },     //'9489A29C25BD4A468594E976AD2411E4'0
+    'SNID':         {'type': 'string', 'name': 'sn id',             'desc': 'descSnId',          'role': 'value',                 'unit': '',    'cvt': null },     //'9489A29C25BD4A468594E976AD2411E4'
+    'MGMERR':       {'type': null,     'name': '',                  'desc': 'descMgmErr',        'role': '',                      'unit': '',    'cvt': null },     //'200'
+    'MGSERR':       {'type': null,     'name': '',                  'desc': 'descMgsErr',        'role': '',                      'unit': '',    'cvt': null },     //'0'
+    'MGMVER':       {'type': null,     'name': '',                  'desc': 'descMgmVer',        'role': '',                      'unit': '',    'cvt': null },     //'66'
+    'MGSVER':       {'type': null,     'name': '',                  'desc': 'descMgsVer',        'role': '',                      'unit': '',    'cvt': null },     //'33'
 };
 
 /**
