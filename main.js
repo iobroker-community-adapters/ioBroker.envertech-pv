@@ -12,7 +12,6 @@
 /* jshint strict: false */
 /* jslint node: true */
 'use strict';
-0;
 
 const utils = require('@iobroker/adapter-core');
 const { iobInit, iobStates, iobTranslator } = require('@mcm1957/iobroker.library');
@@ -39,7 +38,7 @@ const STATES_CFG = {
     'UnitEMonth':   {'type': 'number', 'name': 'unit earned month', 'desc': 'descUnitEMonth',   'role': 'value.power.production', 'unit': 'kWh', 'cvt': /(?<val>\d+(\.\d+)?)\s+\w+/ },     // '6.99 kWh',
     'UnitEYear':    {'type': 'number', 'name': 'unit earned year',  'desc': 'descUnitEYear',    'role': 'value.power.production', 'unit': 'kWh', 'cvt': /(?<val>\d+(\.\d+)?)\s+\w+/ },     //'40.9 kWh',
     'UnitETotal':   {'type': 'number', 'name': 'unit earned total', 'desc': 'descUnitETotal',   'role': 'value.power.production', 'unit': 'kWh', 'cvt': /(?<val>\d+(\.\d+)?)\s+\w+/ },     //'353.49 kWh',
-    'Power':        {'type': 'number', 'name': 'power',             'desc': 'descUnitPower',    'role': 'value.power',            'unit': 'kW',  'cvt': null },     // 0,
+    'Power':        {'type': 'number', 'name': 'power',             'desc': 'descUnitPower',    'role': 'value.power',            'unit': 'W',   'cvt': null },     // 0,
     'PowerStr':     {'type': null,     'name': '',                  'desc': '',                 'role': '',                       'unit': '',    'cvt': /(?<val>\d+(\.\d+)?)\s+\w+/ },     // '0 W',        *ignore*
     'Capacity':     {'type': null,     'name': '',                  'desc': '',                 'role': '',                       'unit': '',    'cvt': null },     // 0.9,          *ignore*
     'StrCO2':       {'type': 'number', 'name': 'co2 saved',         'desc': 'descStrCO2',       'role': 'value',                  'unit': 't',   'cvt': /(?<val>\d+(\.\d+)?)\s+\w+/ },     //'0.352 ton',
@@ -57,7 +56,7 @@ const STATES_CFG = {
     'CreateTime':   {'type': 'string', 'name': 'create time',       'desc': 'descCreateTime',   'role': 'value',                  'unit': '',    'cvt': null },     //'21/12/2022 GMT +1',
     'CreateYear':   {'type': 'number', 'name': 'create year',       'desc': 'descCreateYear',   'role': 'value',                  'unit': '',    'cvt': null },     //2022,
     'CreateMonth':  {'type': 'number', 'name': 'create month',      'desc': 'descCreateMonth',  'role': 'value',                  'unit': '',    'cvt': null },     //12,
-    'Etoday':       {'type': 'number', 'name': 'earning today',     'desc': 'descEtoday',       'role': 'value.power.production', 'unit': 'Wh',  'cvt': null },     //2.12,
+    'Etoday':       {'type': 'number', 'name': 'earning today',     'desc': 'descEtoday',       'role': 'value.power.production', 'unit': 'kWh', 'cvt': null },     //2.12,
     'InvTotal':     {'type': 'number', 'name': 'total inverts',     'desc': 'descInvTotal',     'role': 'value',                  'unit': '',    'cvt': null },     //2
 
     'GATEWAYALIAS': {'type': 'string', 'name': 'gateway alias',     'desc': 'descGatewayAlias',  'role': 'info.name',             'unit': '',    'cvt': null },     //'EVB300_94001732',
@@ -66,12 +65,12 @@ const STATES_CFG = {
     'SN':           {'type': 'string', 'name': 'convertser sn',     'desc': 'descConverterSn',   'role': 'info.serial',           'unit': '',    'cvt': null },     //'12866103',
     'DCVOLTAGE':    {'type': 'number', 'name': 'dc voltage',        'desc': 'descDcVoltage',     'role': 'value.voltage',         'unit': 'V',   'cvt': null },     //'32.54',
     'ACVOLTAGE':    {'type': 'number', 'name': 'ac voltage',        'desc': 'descAcVoltage',     'role': 'value.voltage',         'unit': 'V',   'cvt': null },     //'242.25',
-    'ACCURRENCY':   {'type': null,     'name': '',                  'desc': 'descAccurency',     'role': '',                      'unit': '',   'cvt': null },     //'0',
+    'ACCURRENCY':   {'type': null,     'name': '',                  'desc': 'descAccurency',     'role': '',                      'unit': '',    'cvt': null },     //'0',
     'POWER':        {'type': 'number', 'name': 'power',             'desc': 'descPower',         'role': 'value.power',           'unit': 'W',   'cvt': null },     //'14.19',
     'FREQUENCY':    {'type': 'number', 'name': 'frequency',         'desc': 'descFrequency',     'role': 'value.frequency',       'unit': 'Hz',  'cvt': null },     //'50.02',
     'DAYENERGY':    {'type': 'number', 'name': 'day energy',        'desc': 'descDayEnergy',     'role': 'value.power.production','unit': 'kWh', 'cvt': null },     //'0.24',
     'ENERGY':       {'type': 'number', 'name': 'energy',            'desc': 'descEnergy',        'role': 'value.power.production','unit': 'kWh', 'cvt': null },     //'202.52',
-    'TEMPERATURE':  {'type': 'number', 'name': 'temperature',       'desc': 'descTemperature',   'role': 'value.temperature',     'unit': '°C',   'cvt': null },     //'15.4',
+    'TEMPERATURE':  {'type': 'number', 'name': 'temperature',       'desc': 'descTemperature',   'role': 'value.temperature',     'unit': '°C',  'cvt': null },     //'15.4',
     'SITETIME':     {'type': 'string', 'name': 'site datetime',     'desc': 'descSiteDateTime',  'role': 'value',                 'unit': '',    'cvt': null },     //'3/5/2023 1:34:58 PM',
     'STATIONID':    {'type': 'string', 'name': 'station id',        'desc': 'descStationId',     'role': 'value',                 'unit': '',    'cvt': null },     //null,
     'STATUS':       {'type': 'number', 'name': 'status',            'desc': 'descStatus',        'role': 'value',                 'unit': '',    'cvt': null },     //'0',
