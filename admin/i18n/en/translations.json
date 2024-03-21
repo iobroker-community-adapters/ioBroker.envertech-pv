@@ -6,7 +6,7 @@
     "descCreateMonth": "month of registration of station",
     "descCreateTime": "timestamp of registration of station",
     "descCreateYear": "year of registration of station",
-    "descDayEnergy": "current dc voltage reported by converter",
+    "descDayEnergy": "daily energy produced",
     "descDcVoltage": "DC voltage reported by converter",
     "descEnergy": "energy (kWh) produced today by this converter",
     "descError": "indicator set to true if an error is active",
