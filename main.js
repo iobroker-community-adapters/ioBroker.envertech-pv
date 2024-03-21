@@ -571,7 +571,7 @@ class envertech_pv extends utils.Adapter {
 
             if (!STATES_CFG[key]) {
                 if (this.config.optLogNew)
-                    this.log.warn(`[station] object ${key} not configured - report to developer.`);
+                    this.log.warn(`[station] object ${key} : ${result.data[key]} not configured - report to developer.`);
                 continue;
             }
 
