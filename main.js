@@ -449,7 +449,10 @@ class envertech_pv extends utils.Adapter {
                     if (match) {
                         val = match.groups.val;
                     } else {
-                        this.log.debug(`[gateway] unexpected data format for ${key} - ${val}`);
+                        if (this.config.optLogNew)
+                            this.log.warn(`[gateway] unexpected data format for ${key} - ${val}`);
+                        else
+                            this.log.debug(`[gateway] unexpected data format for ${key} - ${val}`);
                     }
                 }
                 if (STATES_CFG[key].type === 'number') val = Number(val);
