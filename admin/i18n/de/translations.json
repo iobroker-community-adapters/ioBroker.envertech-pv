@@ -6,7 +6,7 @@
     "descCreateMonth": "Monat der Registrierung der Anlage",
     "descCreateTime": "Zeitstempel der Registrierung der Anlage",
     "descCreateYear": "Jahr der Registrierung der Anlage",
-    "descDayEnergy": "aktuelle Gleichspannung, die vom Umrichter gemeldet wird",
+    "descDayEnergy": "tägliche Energieproduktion",
     "descDcVoltage": "Vom Umrichter gemeldete Gleichspannung",
     "descEnergy": "Energie (kWh), die heute von diesem Umrichter produziert wurde",
     "descError": "Zustand wird auf wahr gesetzt, wenn ein Fehler aktiv ist",
