@@ -43,7 +43,7 @@ const STATES_CFG = {
     'Capacity':     {'type': null,     'name': '',                  'desc': '',                 'role': '',                       'unit': '',    'cvt': null },     // 0.9,          *ignore*
     'StrCO2':       {'type': 'number', 'name': 'co2 saved',         'desc': 'descStrCO2',       'role': 'value',                  'unit': 't',   'cvt': /(?<val>\d+(\.\d+)?)\s+\w+/ },     //'0.352 ton',
     'StrTrees':     {'type': 'number', 'name': 'trees',             'desc': 'descStrTrees',     'role': 'value',                  'unit': '',    'cvt': null },     // '1',
-    'StrIncome':    {'type': 'number', 'name': 'income',            'desc': 'descStrIncome',    'role': 'value',                  'unit': '',    'cvt': /\w+\s+(?<val>\d+(\.\d+)?)/ },     //:'€ 0.00',
+    'StrIncome':    {'type': 'number', 'name': 'income',            'desc': 'descStrIncome',    'role': 'value',                  'unit': '',    'cvt': /\S+\s+(?<val>\d+(\.\d+)?)/ },     //:'€ 0.00',
     'PwImg':        {'type': null,     'name': '',                  'desc': '',                 'role': '',                       'unit': '',    'cvt': null },     //'Default.jpg', *ignore*
     'StationName':  {'type': 'string', 'name': 'station name',      'desc': 'descStationName',  'role': 'info.name',              'unit': '',    'cvt': null },     //'KTG6',
     'InvModel1':    {'type': 'string', 'name': 'inverter #1 model', 'desc': 'descInvModel1',    'role': 'info.name',              'unit': '',    'cvt': null },     //null,
