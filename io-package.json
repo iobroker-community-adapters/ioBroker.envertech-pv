@@ -1,8 +1,21 @@
 {
   "common": {
     "name": "envertech-pv",
-    "version": "1.1.0",
+    "version": "1.2.0",
     "news": {
+      "1.2.0": {
+        "en": "New states GridPower and LoadPower have been added [#147].\nProcessing of strIncome has been fixed [#46].\nIncorrect description has been corrected [#50].\nState roles have been checked and adapter [#75].\nDependencies have been updated.",
+        "de": "Neue Zustände GridPower und LoadPower wurden hinzugefügt [#147].\nDie Verarbeitung von strIncome wurde korrigiert [#46].\nFalsche Beschreibungen wurden korrigiert [#50].\nZustandsrollen wurden überprüft und Adapter [#75].\nAbhängigkeiten wurden aktualisiert.",
+        "ru": "Добавлены новые государства GridPower и LoadPower [#147].\nОбработка стрИнкома была исправлена [#46].\nНеправильное описание было исправлено [#50].\nБыли проверены и адаптированы государственные роли [#75].\nЗависимость была обновлена.",
+        "pt": "Novos estados GridPower e LoadPower foram adicionados [#147].\nO processamento do strIncome foi corrigido [#46].\nA descrição incorreta foi corrigida [#50].\nAs funções estatais foram verificadas e o adaptador [#75].\nAs dependências foram atualizadas.",
+        "nl": "Nieuwe staten GridPower en LoadPower zijn toegevoegd [#147].\nDe verwerking van strIncome is vastgesteld [#46].\nOnjuiste beschrijving is gecorrigeerd [#50].\nStaat rollen zijn gecontroleerd en adapter [#75].\nAfhankelijkheden zijn bijgewerkt.",
+        "fr": "De nouveaux états GridPower et LoadPower ont été ajoutés [#147].\nLe traitement de strIncome a été corrigé [#46].\nUne description incorrecte a été corrigée [#50].\nLes rôles d'État ont été vérifiés et adaptateurs [#75].\nLes dépendances ont été actualisées.",
+        "it": "Nuovi stati GridPower e LoadPower sono stati aggiunti [#147].\nL'elaborazione di strIncome è stata fissata [#46].\nLa descrizione non corretta è stata corretta [#50].\nI ruoli di stato sono stati controllati e adattatori [#75].\nLe dipendenze sono state aggiornate.",
+        "es": "Nuevos estados GridPower y LoadPower han sido añadidos [#147].\nEl procesamiento de strIncome se ha fijado [#46].\nSe ha corregido la descripción incorrecta [#50].\nSe han comprobado y adaptador los papeles del Estado [#75].\nSe han actualizado las dependencias.",
+        "pl": "Dodano nowe stany GridPower i LoadPower [# 147].\nPrzetwarzanie strIncome zostało ustalone [# 46].\nNieprawidłowy opis został poprawiony [# 50].\nRole państwa zostały sprawdzone i adapter [# 75].\nZaktualizowano zależność.",
+        "uk": "Додано новий стан GridPower і LoadPower [#147].\n[#46].\nВиправлено неправильний опис [#50].\nДержавні ролі були перевірені та перехідники [#75].\nОновлено залежність.",
+        "zh-cn": "新增状态网格Power和负载Power[#147].\n收入的处理已经固定 [# 46] .\n不正确的描述已被更正[#50].\n国家角色已经检查和调整器[#75].\n附属关系已经更新."
+      },
       "1.1.0": {
         "en": "Adapter requires nodejs 18 now.\nIncorrect energy units have been corrected. [#113]\nNew internal information returned by api is no longer reported as unknown. [#110]\nDependencies have been updated.",
         "de": "Adapter benötigt jetzt Nodejs 18.\nFalsche Einheiten wurden korrigiert. (#113)\nNeue interne Informationen des Api werden nicht mehr als unbekannt gemeldet. (#110)\nAbhängigkeiten wurden aktualisiert.",
