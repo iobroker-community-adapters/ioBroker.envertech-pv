@@ -58,6 +58,8 @@ const STATES_CFG = {
     'CreateMonth':  {'type': 'number', 'name': 'create month',      'desc': 'descCreateMonth',  'role': 'value',                  'unit': '',    'cvt': null },     //12,
     'Etoday':       {'type': 'number', 'name': 'earning today',     'desc': 'descEtoday',       'role': 'value.power.production', 'unit': 'kWh', 'cvt': null },     //2.12,
     'InvTotal':     {'type': 'number', 'name': 'total inverts',     'desc': 'descInvTotal',     'role': 'value',                  'unit': '',    'cvt': null },     //2
+    'GridPower':    {'type': 'number', 'name': 'power from grid',   'desc': 'descGridPower',    'role': 'value.power',            'unit': 'W',   'cvt': /(?<val>\d+(\.\d+)?)\s+\w+/ },     //'0 W'
+    'LoadPower':    {'type': 'number', 'name': 'load power',        'desc': 'descLoadPower',    'role': 'value.power',            'unit': 'W',   'cvt': /(?<val>\d+(\.\d+)?)\s+\w+/ },     //'0 W'
 
     'GATEWAYALIAS': {'type': 'string', 'name': 'gateway alias',     'desc': 'descGatewayAlias',  'role': 'info.name',             'unit': '',    'cvt': null },     //'EVB300_94001732',
     'GATEWAYSN':    {'type': 'string', 'name': 'gateway sn',        'desc': 'descGatewaySn',     'role': 'info.serial',           'unit': '',    'cvt': null },     //'94001732',

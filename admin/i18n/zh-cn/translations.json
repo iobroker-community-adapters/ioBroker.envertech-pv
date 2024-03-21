@@ -85,5 +85,7 @@
     "txtCloudInfo": "您可以通过填写用于访问恩沃云的用户名和密码来检索站ID。<br>按下“获取站ID”按钮后，将显示站ID。将 station-id 复制到下面的配置表中。",
     "txtCloudInfoOffline": "注意：必须启动适配器实例才能使用用户名和密码检索实例 ID。",
     "txtCloudPanel": "配置参数访问Envertec云服务",
-    "txtGetStationId": "按按钮检索用户的站 ID"
+    "txtGetStationId": "按按钮检索用户的站 ID",
+    "descGridPower": "网关序列号",
+    "descLoadPower": "负载使用功率"
 }

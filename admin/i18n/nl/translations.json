@@ -85,5 +85,7 @@
     "txtCloudInfo": "U kunt de station-ID ophalen door de gebruikersnaam en het wachtwoord in te vullen die gebruikt worden om toegang te krijgen tot de Envertech-cloud.<br>Nadat u op de knop 'Get Station-Id' heeft gedrukt, verschijnt de station-ID. Kopieer het station-ID naar de onderstaande configuratietabel.",
     "txtCloudInfoOffline": "Opmerking: de adapterinstance moet worden gestart om de instance-ID op te halen met behulp van gebruikersnaam en wachtwoord.",
     "txtCloudPanel": "Configureer parameters voor toegang tot Envertec-cloudservices",
-    "txtGetStationId": "Druk op de knop om de station-ID voor de gebruiker op te halen"
+    "txtGetStationId": "Druk op de knop om de station-ID voor de gebruiker op te halen",
+    "descGridPower": "serienummer van de gateway",
+    "descLoadPower": "Stroomverbruik door belasting"
 }

@@ -85,5 +85,7 @@
     "txtCloudInfo": "Możesz pobrać identyfikator stacji, wprowadzając nazwę użytkownika i hasło używane do uzyskania dostępu do chmury Envertech.<br>Po naciśnięciu przycisku „Pobierz identyfikator stacji” pojawi się identyfikator stacji. Skopiuj identyfikator stacji do poniższej tabeli konfiguracyjnej.",
     "txtCloudInfoOffline": "Uwaga: instancja adaptera musi zostać uruchomiona, aby pobrać identyfikator instancji przy użyciu nazwy użytkownika i hasła.",
     "txtCloudPanel": "Skonfiguruj parametry, aby uzyskać dostęp do usług w chmurze Envertec",
-    "txtGetStationId": "Naciśnij przycisk, aby pobrać identyfikator stacji dla użytkownika"
+    "txtGetStationId": "Naciśnij przycisk, aby pobrać identyfikator stacji dla użytkownika",
+    "descGridPower": "numer seryjny bramy",
+    "descLoadPower": "Moc zużywana przez obciążenie"
 }

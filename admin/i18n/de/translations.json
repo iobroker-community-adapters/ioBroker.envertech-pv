@@ -85,5 +85,7 @@
     "txtCloudInfo": "Sie können die Station-ID abrufen, indem Sie den Benutzernamen und das Passwort eingeben, die für den Zugriff auf die Envertech-Cloud verwendet werden.<br>Nachdem Sie auf die Schaltfläche „Station-ID abrufen“ geklickt haben, wird die Station-ID angezeigt. Kopieren Sie die Station-ID in die untenstehende Konfigurationstabelle.",
     "txtCloudInfoOffline": "Hinweis: Die Adapterinstanz muss gestartet werden, um die Instanz-ID mit Benutzername und Passwort abzurufen.",
     "txtCloudPanel": "Konfigurieren Sie Parameter für den Zugriff auf Envertec Cloud-Dienste",
-    "txtGetStationId": "Drücken Sie die Taste, um die Station-ID für den Benutzer abzurufen"
+    "txtGetStationId": "Drücken Sie die Taste, um die Station-ID für den Benutzer abzurufen",
+    "descGridPower": "Seriennummer des Gateways",
+    "descLoadPower": "Von der Last verbrauchte Leistung"
 }

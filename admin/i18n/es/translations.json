@@ -85,5 +85,7 @@
     "txtCloudInfo": "Puede recuperar la identificación de la estación ingresando el nombre de usuario y la contraseña utilizados para acceder a la nube de Envertech.<br>Después de presionar el botón 'Obtener ID de la estación', aparecerá la identificación de la estación. Copie el ID de la estación en la tabla de configuración a continuación.",
     "txtCloudInfoOffline": "Nota: se debe iniciar la instancia del adaptador para recuperar la identificación de la instancia usando el nombre de usuario y la contraseña.",
     "txtCloudPanel": "Configurar parámetros para acceder a los servicios en la nube de Envertec",
-    "txtGetStationId": "Presione el botón para recuperar la identificación de la estación para el usuario."
+    "txtGetStationId": "Presione el botón para recuperar la identificación de la estación para el usuario.",
+    "descGridPower": "número de serie de la puerta de enlace",
+    "descLoadPower": "Potencia utilizada por la carga"
 }

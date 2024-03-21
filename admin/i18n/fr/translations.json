@@ -85,5 +85,7 @@
     "txtCloudInfo": "Vous pouvez récupérer l'identifiant de la station en remplissant le nom d'utilisateur et le mot de passe utilisés pour accéder au cloud Envertech.<br>Après avoir appuyé sur le bouton « Obtenir l'identifiant de la station », l'identifiant de la station apparaîtra. Copiez l'identifiant de la station dans le tableau de configuration ci-dessous.",
     "txtCloudInfoOffline": "Remarque : l'instance d'adaptateur doit être démarrée pour récupérer l'identifiant de l'instance à l'aide du nom d'utilisateur et du mot de passe.",
     "txtCloudPanel": "Configurer les paramètres pour accéder aux services cloud Envertec",
-    "txtGetStationId": "Appuyez sur le bouton pour récupérer l'identifiant de la station pour l'utilisateur"
+    "txtGetStationId": "Appuyez sur le bouton pour récupérer l'identifiant de la station pour l'utilisateur",
+    "descGridPower": "numéro de série de la passerelle",
+    "descLoadPower": "Puissance utilisée par la charge"
 }

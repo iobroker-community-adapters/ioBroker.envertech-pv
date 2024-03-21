@@ -85,5 +85,7 @@
     "txtCloudInfo": "È possibile recuperare l'id della stazione inserendo nome utente e password utilizzati per accedere al cloud Envertech.<br>Dopo aver premuto il pulsante \"Ottieni Station-Id\", verrà visualizzato l'id della stazione. Copia l'id della stazione nella tabella di configurazione di seguito.",
     "txtCloudInfoOffline": "Nota: l'istanza dell'adattatore deve essere avviata per recuperare l'ID dell'istanza utilizzando nome utente e password.",
     "txtCloudPanel": "Configura i parametri per accedere ai servizi cloud Envertec",
-    "txtGetStationId": "Premere il pulsante per recuperare l'id della stazione per l'utente"
+    "txtGetStationId": "Premere il pulsante per recuperare l'id della stazione per l'utente",
+    "descGridPower": "numero di serie del gateway",
+    "descLoadPower": "Potenza utilizzata dal carico"
 }
