@@ -1,9 +1,9 @@
 {
   "common": {
     "name": "envertech-pv",
-    "version": "1.3.0",
+    "version": "1.3.1",
     "news": {
-      "1.3.0": {
+      "1.3.1": {
         "en": "Adapter supports multiple pages returned from Envertech now. This will allow more than 20 inverters per station.\nAdapter requires js-controller >= 5 now.\nDependencies have been updated.",
         "de": "Adapter unterstützt nun mehrere von Envertech zurückgegebene Seiten. Dies ermöglicht mehr als 20 Wechselrichter pro Station.\nAdapter benötigt js-controller >= 5 jetzt.\nAbhängigkeiten wurden aktualisiert.",
         "ru": "Адаптер поддерживает несколько страниц, вернувшихся из Envertech. Это позволит более 20 инверторов на станцию.\nАдаптер требует js-контроллер >= Сейчас 5.\nЗависимость была обновлена.",
