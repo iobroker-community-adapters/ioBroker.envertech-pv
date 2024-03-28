@@ -472,10 +472,7 @@ class envertech_pv extends utils.Adapter {
         } while (actPage < lastPage);
 
         // data total count - total converters
-        await this.initStateObject(`${gatewayId}.mppt_online`, STATES_CFG['_MpptOnline_']);
         await this.setStateAsync(`${stationId}.mppt_online`, { val: cvtOnline[stationId], ack: true, q: 0x00 });
-
-        await this.initStateObject(`${gatewayId}.mppt_offline`, STATES_CFG['_MpptOffline_']);
         await this.setStateAsync(`${stationId}.mppt_offline`, { val: cvtOffline[stationId], ack: true, q: 0x00 });
 
         if (totalCount != cvtOnline[stationId] + cvtOffline[stationId]) {
