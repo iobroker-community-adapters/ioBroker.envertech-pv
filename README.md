@@ -44,6 +44,11 @@ Ideally, please use GitHub issues for this, with the best method achieved by set
     Placeholder for the next version (at the beginning of the line):
     ### **WORK IN PROGRESS**
 -->
+### **WORK IN PROGRESS**
+-   (mcm1957) Adapter supports multiple pages returned from evertech naw. This will allow more than 20 inverters per station.
+-   (mcm1957) Adapter requires js-controller >= 5 now.
+-   (mcm1957) Dependencies have been updated.
+
 ### 1.2.0 (2024-03-21)
 -   (mcm1957) New states GridPower and LoadPower have been added [#147].
 -   (mcm1957) Processing of strIncome has been fixed [#46].
