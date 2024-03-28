@@ -112,7 +112,6 @@
         ]
       }
     ],
-    "title": "envertech-pv",
     "titleLang": {
       "en": "Envertech-PV",
       "de": "Envertech-PV",
@@ -158,7 +157,10 @@
       "evt360",
       "evt300"
     ],
-    "license": "MIT",
+    "licenseInformation": {
+      "license": "MIT",
+      "type": "free"
+    },
     "platform": "Javascript/Node.js",
     "main": "main.js",
     "icon": "envertech-pv.png",
@@ -167,6 +169,7 @@
     "extIcon": "https://raw.githubusercontent.com/iobroker-community-adapters/ioBroker.envertech-pv/master/admin/envertech-pv.png",
     "readme": "https://github.com/iobroker-community-adapters/ioBroker.envertech-pv/blob/master/README.md",
     "loglevel": "info",
+    "tier": 2,
     "mode": "daemon",
     "allowInit": true,
     "type": "energy",
@@ -178,7 +181,7 @@
     },
     "dependencies": [
       {
-        "js-controller": ">=3.3.22"
+        "js-controller": ">=5.0.0"
       }
     ],
     "globalDependencies": [
