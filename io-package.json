@@ -162,7 +162,6 @@
       "type": "free"
     },
     "platform": "Javascript/Node.js",
-    "main": "main.js",
     "icon": "envertech-pv.png",
     "enabled": true,
     "messagebox": true,
