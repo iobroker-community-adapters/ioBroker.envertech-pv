@@ -290,177 +290,185 @@ class envertech_pv extends utils.Adapter {
         const cvtOnline = {};
         const cvtOffline = {};
 
-        const result = await this.stations[pStationId].envCloud.getGatewayInfo(pStationId);
-        if (result.status < 0) {
-            // error raised by axios
-            await iobStates.setStatesAsync(`ST-${pStationId}.GW-*.info.online`, { val: false, ack: true, q: 0x00 });
-            await iobStates.setStatesAsync(`ST-${pStationId}.GW-*.info.error`, { val: true, ack: true, q: 0x00 });
-            await iobStates.setStatesAsync(`ST-${pStationId}.GW-*.info.error_text`, {
-                val: result.error_text,
-                ack: true,
-                q: 0x00,
-            });
-            this.stations[pStationId].online = false;
-            return; // abort
-        } else if (result.status == 1) {
-            //
-            await iobStates.setStatesAsync(`ST-${pStationId}.GW-*.info.online`, { val: false, ack: true, q: 0x00 });
-            await iobStates.setStatesAsync(`ST-${pStationId}.GW-*.info.error`, { val: true, ack: true, q: 0x00 });
-            await iobStates.setStatesAsync(`ST-${pStationId}.GW-*.info.error_text`, {
-                val: result.error_text,
-                ack: true,
-                q: 0x00,
-            });
-            this.stations[pStationId].online = false;
-            return; // abort
-        } else if (result.status >= 100) {
-            //
-            await iobStates.setStatesAsync(`ST-${pStationId}.GW-*.info.online`, { val: false, ack: true, q: 0x00 });
-            await iobStates.setStatesAsync(`ST-${pStationId}.GW-*.info.error`, { val: true, ack: true, q: 0x00 });
-            await iobStates.setStatesAsync(`ST-${pStationId}.GW-*.info.error_text`, {
-                val: result.error_text,
-                ack: true,
-                q: 0x00,
-            });
-            this.stations[pStationId].online = false;
-            return; // abort
-        }
-        if (!result.data.QueryResults) return;
-
-        if (result.data.PageNumber != 1 || result.data.TotalPage != 1) {
-            this.log.warn(
-                `[gateway] unxpected data received - PageNumber:{$result.data.PageNumber}, TotalPage:{result.data.TotalPage} - please report to developer`,
-            );
-        }
-        this.stations[pStationId].online = true;
-        for (const row of result.data.QueryResults) {
-            const gatewayAlias = row['GATEWAYALIAS'];
-            const gatewaySn = row['GATEWAYSN'];
-
-            const gatewayId = `ST-${pStationId}.GW-${gatewaySn}`;
-            await this.initObject({
-                _id: `${gatewayId}`,
-                type: 'device',
-                common: {
-                    name: `gateway ${gatewayAlias}`,
-                    statusStates: {
-                        onlineId: `${this.name}.${this.instance}.${gatewayId}.info.online`,
-                        errorId: `${this.name}.${this.instance}.${gatewayId}.info.error`,
-                    },
-                },
-                native: {},
-            });
-
-            await this.initObject({
-                _id: `${gatewayId}.info`,
-                type: 'folder',
-                common: {
-                    name: `gateway ${gatewayAlias} info`,
-                },
-                native: {},
-            });
-
-            await this.initStateObject(`${gatewayId}.info.error`, STATES_CFG['_Error_']);
-            await this.initStateObject(`${gatewayId}.info.error_text`, STATES_CFG['_ErrorText_']);
-            await this.initStateObject(`${gatewayId}.info.last_update`, STATES_CFG['_LastUpdate_']);
-            await this.initStateObject(`${gatewayId}.info.online`, STATES_CFG['_Online_']);
-
-            await this.initStateObject(`${gatewayId}.mppt_online`, STATES_CFG['_MpptOnline_']);
-            await this.initStateObject(`${gatewayId}.mppt_offline`, STATES_CFG['_MpptOffline_']);
-
-            if (typeof cvtOnline[stationId] === 'undefined') cvtOnline[stationId] = 0;
-            if (typeof cvtOffline[stationId] === 'undefined') cvtOffline[stationId] = 0;
-
-            if (typeof cvtOnline[gatewayId] === 'undefined') cvtOnline[gatewayId] = 0;
-            if (typeof cvtOffline[gatewayId] === 'undefined') cvtOffline[gatewayId] = 0;
-
-            /* prettier-ignore */
-            await this.setStateAsync(`${gatewayId}.info.last_update`, { val: new Date().toLocaleString(), ack: true, q: 0x00 });
-            await this.setStateAsync(`${gatewayId}.info.online`, { val: true, ack: true, q: 0x00 });
-            await this.setStateAsync(`${gatewayId}.info.error`, { val: false, ack: true, q: 0x00 });
-            await this.setStateAsync(`${gatewayId}.info.error_text`, { val: null, ack: true, q: 0x00 });
-
-            const snAlias = row['SNALIAS'];
-            const sn = row['SN'];
-
-            const rootId = `ST-${pStationId}.GW-${gatewaySn}.CVT-${sn}`;
-            await this.initObject({
-                _id: `${rootId}`,
-                type: 'channel',
-                common: {
-                    name: `converter ${snAlias}`,
-                    statusStates: {
-                        onlineId: `${this.name}.${this.instance}.${rootId}.info.online`,
-                        errorId: `${this.name}.${this.instance}.${rootId}.info.error`,
-                    },
-                },
-                native: {},
-            });
-
-            await this.initObject({
-                _id: `${rootId}.info`,
-                type: 'folder',
-                common: {
-                    name: `converter ${snAlias} info`,
-                },
-                native: {},
-            });
-
-            await this.initStateObject(`${rootId}.info.online`, STATES_CFG['_Online_']);
-
-            for (const key in row) {
-                this.log.debug(`[gatewayinfo] processing ${key}`);
-
-                if (!STATES_CFG[key]) {
-                    if (this.config.optLogNew)
-                        this.log.warn(`[gateway] object ${key} not configured - report to developer.`);
-                    continue;
-                }
-
-                await this.initStateObject(`${rootId}.${key}`, STATES_CFG[key]);
-
-                if (typeof STATEs[`${this.name}.${this.instance}.${rootId}.${key}`] === 'undefined') continue; // undesired object
-
-                let val = row[key];
-
-                // process status field to set additions states
-                if (key === 'STATUS') {
-                    if (val == 0) {
-                        cvtOnline[stationId] = cvtOnline[stationId] + 1;
-                        cvtOnline[gatewayId] = cvtOnline[gatewayId] + 1;
-                        await this.setStateAsync(`${rootId}.info.online`, { val: true, ack: true, q: 0x00 });
-                    } else if (val == 1) {
-                        cvtOffline[stationId] = cvtOffline[stationId] + 1;
-                        cvtOffline[gatewayId] = cvtOffline[gatewayId] + 1;
-                        await this.setStateAsync(`${rootId}.info.online`, { val: false, ack: true, q: 0x00 });
-                    } else if (val == 2) {
-                        /* unknown value - might be starting up */
-                        cvtOffline[stationId] = cvtOffline[stationId] + 1;
-                        cvtOffline[gatewayId] = cvtOffline[gatewayId] + 1;
-                        await this.setStateAsync(`${rootId}.info.online`, { val: false, ack: true, q: 0x00 });
-                    } else {
-                        this.log.warn(`[gateway] unexpected STATUS value '${val}'`);
-                        cvtOffline[stationId] = cvtOffline[stationId] + 1;
-                        cvtOffline[gatewayId] = cvtOffline[gatewayId] + 1;
-                        await this.setStateAsync(`${rootId}.info.online`, { val: false, ack: true, q: 0x00 });
-                    }
-                }
-
-                if (STATES_CFG[key].cvt && typeof val === 'string') {
-                    const match = result.data[key].match(STATES_CFG[key].cvt);
-                    if (match) {
-                        val = match.groups.val;
-                    } else {
-                        if (this.config.optLogNew)
-                            this.log.warn(`[gateway] unexpected data format for ${key} - ${val}`);
-                        else
-                            this.log.debug(`[gateway] unexpected data format for ${key} - ${val}`);
-                    }
-                }
-                if (STATES_CFG[key].type === 'number') val = Number(val);
-                await this.setStateAsync(`${rootId}.${key}`, { val: val, ack: true, q: 0x00 });
+        let actPage = 0; // page index to read
+        let lastPage = 1; // will be adapted by data retrieved at first page
+        do {
+            actPage++;
+            const result = await this.stations[pStationId].envCloud.getGatewayInfo(pStationId, actPage);
+            if (result.status < 0) {
+                // error raised by axios
+                await iobStates.setStatesAsync(`ST-${pStationId}.GW-*.info.online`, { val: false, ack: true, q: 0x00 });
+                await iobStates.setStatesAsync(`ST-${pStationId}.GW-*.info.error`, { val: true, ack: true, q: 0x00 });
+                await iobStates.setStatesAsync(`ST-${pStationId}.GW-*.info.error_text`, {
+                    val: result.error_text,
+                    ack: true,
+                    q: 0x00,
+                });
+                this.stations[pStationId].online = false;
+                return; // abort
+            } else if (result.status == 1) {
+                //
+                await iobStates.setStatesAsync(`ST-${pStationId}.GW-*.info.online`, { val: false, ack: true, q: 0x00 });
+                await iobStates.setStatesAsync(`ST-${pStationId}.GW-*.info.error`, { val: true, ack: true, q: 0x00 });
+                await iobStates.setStatesAsync(`ST-${pStationId}.GW-*.info.error_text`, {
+                    val: result.error_text,
+                    ack: true,
+                    q: 0x00,
+                });
+                this.stations[pStationId].online = false;
+                return; // abort
+            } else if (result.status >= 100) {
+                //
+                await iobStates.setStatesAsync(`ST-${pStationId}.GW-*.info.online`, { val: false, ack: true, q: 0x00 });
+                await iobStates.setStatesAsync(`ST-${pStationId}.GW-*.info.error`, { val: true, ack: true, q: 0x00 });
+                await iobStates.setStatesAsync(`ST-${pStationId}.GW-*.info.error_text`, {
+                    val: result.error_text,
+                    ack: true,
+                    q: 0x00,
+                });
+                this.stations[pStationId].online = false;
+                return; // abort
             }
-        }
+            if (!result.data.QueryResults) return;
+
+            if ( result.data.PageNumber != actPage ) {
+                this.log.warn(
+                    `[gateway] unxpected data received - pageNumber:${result.data.PageNumber}, expected ${actPage}`,
+                );
+            }
+            lastPage=result.data.TotalPage;
+
+            this.stations[pStationId].online = true;
+            for (const row of result.data.QueryResults) {
+                const gatewayAlias = row['GATEWAYALIAS'];
+                const gatewaySn = row['GATEWAYSN'];
+
+                const gatewayId = `ST-${pStationId}.GW-${gatewaySn}`;
+                await this.initObject({
+                    _id: `${gatewayId}`,
+                    type: 'device',
+                    common: {
+                        name: `gateway ${gatewayAlias}`,
+                        statusStates: {
+                            onlineId: `${this.name}.${this.instance}.${gatewayId}.info.online`,
+                            errorId: `${this.name}.${this.instance}.${gatewayId}.info.error`,
+                        },
+                    },
+                    native: {},
+                });
+
+                await this.initObject({
+                    _id: `${gatewayId}.info`,
+                    type: 'folder',
+                    common: {
+                        name: `gateway ${gatewayAlias} info`,
+                    },
+                    native: {},
+                });
+
+                await this.initStateObject(`${gatewayId}.info.error`, STATES_CFG['_Error_']);
+                await this.initStateObject(`${gatewayId}.info.error_text`, STATES_CFG['_ErrorText_']);
+                await this.initStateObject(`${gatewayId}.info.last_update`, STATES_CFG['_LastUpdate_']);
+                await this.initStateObject(`${gatewayId}.info.online`, STATES_CFG['_Online_']);
+
+                await this.initStateObject(`${gatewayId}.mppt_online`, STATES_CFG['_MpptOnline_']);
+                await this.initStateObject(`${gatewayId}.mppt_offline`, STATES_CFG['_MpptOffline_']);
+
+                if (typeof cvtOnline[stationId] === 'undefined') cvtOnline[stationId] = 0;
+                if (typeof cvtOffline[stationId] === 'undefined') cvtOffline[stationId] = 0;
+
+                if (typeof cvtOnline[gatewayId] === 'undefined') cvtOnline[gatewayId] = 0;
+                if (typeof cvtOffline[gatewayId] === 'undefined') cvtOffline[gatewayId] = 0;
+
+                /* prettier-ignore */
+                await this.setStateAsync(`${gatewayId}.info.last_update`, { val: new Date().toLocaleString(), ack: true, q: 0x00 });
+                await this.setStateAsync(`${gatewayId}.info.online`, { val: true, ack: true, q: 0x00 });
+                await this.setStateAsync(`${gatewayId}.info.error`, { val: false, ack: true, q: 0x00 });
+                await this.setStateAsync(`${gatewayId}.info.error_text`, { val: null, ack: true, q: 0x00 });
+
+                const snAlias = row['SNALIAS'];
+                const sn = row['SN'];
+
+                const rootId = `ST-${pStationId}.GW-${gatewaySn}.CVT-${sn}`;
+                await this.initObject({
+                    _id: `${rootId}`,
+                    type: 'channel',
+                    common: {
+                        name: `converter ${snAlias}`,
+                        statusStates: {
+                            onlineId: `${this.name}.${this.instance}.${rootId}.info.online`,
+                            errorId: `${this.name}.${this.instance}.${rootId}.info.error`,
+                        },
+                    },
+                    native: {},
+                });
+
+                await this.initObject({
+                    _id: `${rootId}.info`,
+                    type: 'folder',
+                    common: {
+                        name: `converter ${snAlias} info`,
+                    },
+                    native: {},
+                });
+
+                await this.initStateObject(`${rootId}.info.online`, STATES_CFG['_Online_']);
+
+                for (const key in row) {
+                    this.log.debug(`[gatewayinfo] processing ${key}`);
+
+                    if (!STATES_CFG[key]) {
+                        if (this.config.optLogNew)
+                            this.log.warn(`[gateway] object ${key} not configured - report to developer.`);
+                        continue;
+                    }
+
+                    await this.initStateObject(`${rootId}.${key}`, STATES_CFG[key]);
+
+                    if (typeof STATEs[`${this.name}.${this.instance}.${rootId}.${key}`] === 'undefined') continue; // undesired object
+
+                    let val = row[key];
+
+                    // process status field to set additions states
+                    if (key === 'STATUS') {
+                        if (val == 0) {
+                            cvtOnline[stationId] = cvtOnline[stationId] + 1;
+                            cvtOnline[gatewayId] = cvtOnline[gatewayId] + 1;
+                            await this.setStateAsync(`${rootId}.info.online`, { val: true, ack: true, q: 0x00 });
+                        } else if (val == 1) {
+                            cvtOffline[stationId] = cvtOffline[stationId] + 1;
+                            cvtOffline[gatewayId] = cvtOffline[gatewayId] + 1;
+                            await this.setStateAsync(`${rootId}.info.online`, { val: false, ack: true, q: 0x00 });
+                        } else if (val == 2) {
+                            /* unknown value - might be starting up */
+                            cvtOffline[stationId] = cvtOffline[stationId] + 1;
+                            cvtOffline[gatewayId] = cvtOffline[gatewayId] + 1;
+                            await this.setStateAsync(`${rootId}.info.online`, { val: false, ack: true, q: 0x00 });
+                        } else {
+                            this.log.warn(`[gateway] unexpected STATUS value '${val}'`);
+                            cvtOffline[stationId] = cvtOffline[stationId] + 1;
+                            cvtOffline[gatewayId] = cvtOffline[gatewayId] + 1;
+                            await this.setStateAsync(`${rootId}.info.online`, { val: false, ack: true, q: 0x00 });
+                        }
+                    }
+
+                    if (STATES_CFG[key].cvt && typeof val === 'string') {
+                        const match = result.data[key].match(STATES_CFG[key].cvt);
+                        if (match) {
+                            val = match.groups.val;
+                        } else {
+                            if (this.config.optLogNew)
+                                this.log.warn(`[gateway] unexpected data format for ${key} - ${val}`);
+                            else
+                                this.log.debug(`[gateway] unexpected data format for ${key} - ${val}`);
+                        }
+                    }
+                    if (STATES_CFG[key].type === 'number') val = Number(val);
+                    await this.setStateAsync(`${rootId}.${key}`, { val: val, ack: true, q: 0x00 });
+                }
+            }
+        } while (actPage < lastPage);
+
         // data total count - total converters
         await this.setStateAsync(`${stationId}.mppt_online`, { val: cvtOnline[stationId], ack: true, q: 0x00 });
         await this.setStateAsync(`${stationId}.mppt_offline`, { val: cvtOffline[stationId], ack: true, q: 0x00 });
