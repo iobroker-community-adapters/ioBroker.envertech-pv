@@ -45,7 +45,7 @@ Ideally, please use GitHub issues for this, with the best method achieved by set
     ### **WORK IN PROGRESS**
 -->
 ### **WORK IN PROGRESS**
--   (mcm1957) Adapter supports multiple pages returned from evertech naw. This will allow more than 20 inverters per station.
+-   (mcm1957) Adapter supports multiple pages returned from evertech now. This will allow more than 20 inverters per station.
 -   (mcm1957) Adapter requires js-controller >= 5 now.
 -   (mcm1957) Dependencies have been updated.
 
