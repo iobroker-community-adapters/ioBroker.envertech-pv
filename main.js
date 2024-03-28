@@ -292,6 +292,7 @@ class envertech_pv extends utils.Adapter {
 
         let actPage = 0; // page index to read
         let lastPage = 1; // will be adapted by data retrieved at first page
+        let totalCount = 0; // will be adapted by data retrieved at first page
         do {
             actPage++;
             const result = await this.stations[pStationId].envCloud.getGatewayInfo(pStationId, actPage);
@@ -467,16 +468,20 @@ class envertech_pv extends utils.Adapter {
                     await this.setStateAsync(`${rootId}.${key}`, { val: val, ack: true, q: 0x00 });
                 }
             }
+            totalCount = result.data.TotalCount; // set total count for final check
         } while (actPage < lastPage);
 
         // data total count - total converters
+        await this.initStateObject(`${gatewayId}.mppt_online`, STATES_CFG['_MpptOnline_']);
         await this.setStateAsync(`${stationId}.mppt_online`, { val: cvtOnline[stationId], ack: true, q: 0x00 });
+
+        await this.initStateObject(`${gatewayId}.mppt_offline`, STATES_CFG['_MpptOffline_']);
         await this.setStateAsync(`${stationId}.mppt_offline`, { val: cvtOffline[stationId], ack: true, q: 0x00 });
 
-        if (result.data.TotalCount != cvtOnline[stationId] + cvtOffline[stationId]) {
+        if (totalCount != cvtOnline[stationId] + cvtOffline[stationId]) {
             this.log.warn(`[gateway] inconsistent counters detected - please report to developer`);
             this.log.warn(
-                `[gateway] TotalCount: ${result.data.TotalCount}, cvtOnline:${cvtOnline[stationId]}, cvtOffline:${cvtOffline[stationId]}`,
+                `[gateway] TotalCount: ${totalCount}, cvtOnline:${cvtOnline[stationId]}, cvtOffline:${cvtOffline[stationId]}`,
             );
         }
 
