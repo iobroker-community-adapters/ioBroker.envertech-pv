@@ -6,8 +6,6 @@
  *
  */
 
-// @ts-nocheck
-
 /* jshint -W097 */
 /* jshint strict: false */
 /* jslint node: true */
@@ -23,64 +21,64 @@ const STATEs = {};
 
 /* prettier-ignore */
 const STATES_CFG = {
-    '_Error_':      {'type': 'boolean', 'name': 'error flag',       'desc': 'descError',        'role': 'indicator.maintenance',  'unit': '',    'cvt': null },
-    '_ErrorText_':  {'type': 'string',  'name': 'error text',       'desc': 'descErrorText',    'role': 'text',                   'unit': '',    'cvt': null },
-    '_LastData_':   {'type': 'string',  'name': 'last data',        'desc': 'descLastData',     'role': 'text',                   'unit': '',    'cvt': null },
-    '_LastUpdate_': {'type': 'string',  'name': 'last update',      'desc': 'descLastUpdate',   'role': 'date',                   'unit': '',    'cvt': null },
-    '_Online_':     {'type': 'boolean', 'name': 'online flag',      'desc': 'descOnline',       'role': 'indicator.reachable',    'unit': '',    'cvt': null },
+    _Error_:      {type: 'boolean', name: 'error flag',       desc: 'descError',        role: 'indicator.maintenance',  unit: '',    cvt: null },
+    _ErrorText_:  {type: 'string',  name: 'error text',       desc: 'descErrorText',    role: 'text',                   unit: '',    cvt: null },
+    _LastData_:   {type: 'string',  name: 'last data',        desc: 'descLastData',     role: 'text',                   unit: '',    cvt: null },
+    _LastUpdate_: {type: 'string',  name: 'last update',      desc: 'descLastUpdate',   role: 'date',                   unit: '',    cvt: null },
+    _Online_:     {type: 'boolean', name: 'online flag',      desc: 'descOnline',       role: 'indicator.reachable',    unit: '',    cvt: null },
 
-    '_MpptOnline_': {'type': 'number', 'name': 'mppt online',       'desc': 'descMpptOnline',   'role': 'value',                  'unit': '',    'cvt': /(?<val>\d+(\.\d+)?)\s+\w+/ },     // '0,9 kWp'
-    '_MpptOffline_':{'type': 'number', 'name': 'mppt offline',      'desc': 'descMpptOffline',  'role': 'value',                  'unit': '',    'cvt': /(?<val>\d+(\.\d+)?)\s+\w+/ },     // '0,9 kWp'
-    '_StationId_':  {'type': 'string', 'name': 'station id',        'desc': 'descStationId',    'role': 'info.serial',            'unit': '',    'cvt': null },                            // ''
+    _MpptOnline_: {type: 'number', name: 'mppt online',       desc: 'descMpptOnline',   role: 'value',                  unit: '',    cvt: /(?<val>\d+(\.\d+)?)\s+\w+/ },     // '0,9 kWp'
+    _MpptOffline_:{type: 'number', name: 'mppt offline',      desc: 'descMpptOffline',  role: 'value',                  unit: '',    cvt: /(?<val>\d+(\.\d+)?)\s+\w+/ },     // '0,9 kWp'
+    _StationId_:  {type: 'string', name: 'station id',        desc: 'descStationId',    role: 'info.serial',            unit: '',    cvt: null },                            // ''
 
-    'UnitCapacity': {'type': 'number', 'name': 'unit capacity',     'desc': 'descUnitCapacity', 'role': 'value.power',            'unit': 'kWp', 'cvt': /(?<val>\d+(\.\d+)?)\s+\w+/ },     // '0,9 kWp'
-    'UnitEToday':   {'type': 'number', 'name': 'unit earned today', 'desc': 'descUnitEToday',   'role': 'value.power.produced',   'unit': 'kWh', 'cvt': /(?<val>\d+(\.\d+)?)\s+\w+/ },     // '2.12 kWh'
-    'UnitEMonth':   {'type': 'number', 'name': 'unit earned month', 'desc': 'descUnitEMonth',   'role': 'value.power.produced',   'unit': 'kWh', 'cvt': /(?<val>\d+(\.\d+)?)\s+\w+/ },     // '6.99 kWh',
-    'UnitEYear':    {'type': 'number', 'name': 'unit earned year',  'desc': 'descUnitEYear',    'role': 'value.power.produced',   'unit': 'kWh', 'cvt': /(?<val>\d+(\.\d+)?)\s+\w+/ },     //'40.9 kWh',
-    'UnitETotal':   {'type': 'number', 'name': 'unit earned total', 'desc': 'descUnitETotal',   'role': 'value.power.produced',   'unit': 'kWh', 'cvt': /(?<val>\d+(\.\d+)?)\s+\w+/ },     //'353.49 kWh',
-    'Power':        {'type': 'number', 'name': 'power',             'desc': 'descUnitPower',    'role': 'value.power',            'unit': 'W',   'cvt': null },     // 0,
-    'PowerStr':     {'type': null,     'name': '',                  'desc': '',                 'role': '',                       'unit': '',    'cvt': /(?<val>\d+(\.\d+)?)\s+\w+/ },     // '0 W',        *ignore*
-    'Capacity':     {'type': null,     'name': '',                  'desc': '',                 'role': '',                       'unit': '',    'cvt': null },     // 0.9,          *ignore*
-    'StrCO2':       {'type': 'number', 'name': 'co2 saved',         'desc': 'descStrCO2',       'role': 'value',                  'unit': 't',   'cvt': /(?<val>\d+(\.\d+)?)\s+\w+/ },     //'0.352 ton',
-    'StrTrees':     {'type': 'number', 'name': 'trees',             'desc': 'descStrTrees',     'role': 'value',                  'unit': '',    'cvt': null },     // '1',
-    'StrIncome':    {'type': 'number', 'name': 'income',            'desc': 'descStrIncome',    'role': 'value',                  'unit': '',    'cvt': /\S+\s+(?<val>\d+(\.\d+)?)/ },     //:'€ 0.00',
-    'PwImg':        {'type': null,     'name': '',                  'desc': '',                 'role': '',                       'unit': '',    'cvt': null },     //'Default.jpg', *ignore*
-    'StationName':  {'type': 'string', 'name': 'station name',      'desc': 'descStationName',  'role': 'info.name',              'unit': '',    'cvt': null },     //'KTG6',
-    'InvModel1':    {'type': 'string', 'name': 'inverter #1 model', 'desc': 'descInvModel1',    'role': 'info.name',              'unit': '',    'cvt': null },     //null,
-    'InvModel2':    {'type': 'string', 'name': 'inverter #2 model', 'desc': 'descInvModel2',    'role': 'info.name',              'unit': '',    'cvt': null },     //null,
-    'Lat':          {'type': 'number', 'name': 'latitude',          'desc': 'descLat',          'role': 'value.gps.latitude',     'unit': '',    'cvt': null },     //48.208201762059105,
-    'Lng':          {'type': 'number', 'name': 'longitude',         'desc': 'descLng',          'role': 'value.gps.longitude',    'unit': '',    'cvt': null },     //16.371216773986816,
-    'TimeZone':     {'type': 'number', 'name': 'timezone',          'desc': 'descTimeZone',     'role': 'value',                  'unit': '',    'cvt': null },     //1,
-    'StrPeakPower': {'type': 'number', 'name': 'peak power',        'desc': 'descStrPeakPower', 'role': 'value.power',            'unit': 'W',   'cvt': /(?<val>\d+(\.\d+)?)\s+\w+/ },     //'616.42 W',
-    'Installer':    {'type': 'string', 'name': 'installer',         'desc': 'descInstaller',    'role': 'info.name',              'unit': '',    'cvt': null },     //null,
-    'CreateTime':   {'type': 'string', 'name': 'create time',       'desc': 'descCreateTime',   'role': 'value',                  'unit': '',    'cvt': null },     //'21/12/2022 GMT +1',
-    'CreateYear':   {'type': 'number', 'name': 'create year',       'desc': 'descCreateYear',   'role': 'value',                  'unit': '',    'cvt': null },     //2022,
-    'CreateMonth':  {'type': 'number', 'name': 'create month',      'desc': 'descCreateMonth',  'role': 'value',                  'unit': '',    'cvt': null },     //12,
-    'Etoday':       {'type': 'number', 'name': 'earning today',     'desc': 'descEtoday',       'role': 'value.power.produced',   'unit': 'kWh', 'cvt': null },     //2.12,
-    'InvTotal':     {'type': 'number', 'name': 'total inverts',     'desc': 'descInvTotal',     'role': 'value',                  'unit': '',    'cvt': null },     //2
-    'GridPower':    {'type': 'number', 'name': 'power from grid',   'desc': 'descGridPower',    'role': 'value.power.consumed',   'unit': 'W',   'cvt': /(?<val>\d+(\.\d+)?)\s+\w+/ },     //'0 W'
-    'LoadPower':    {'type': 'number', 'name': 'load power',        'desc': 'descLoadPower',    'role': 'value.power.consumed',   'unit': 'W',   'cvt': /(?<val>\d+(\.\d+)?)\s+\w+/ },     //'0 W'
+    UnitCapacity: {type: 'number', name: 'unit capacity',     desc: 'descUnitCapacity', role: 'value.power',            unit: 'kWp', cvt: /(?<val>\d+(\.\d+)?)\s+\w+/ },     // '0,9 kWp'
+    UnitEToday:   {type: 'number', name: 'unit earned today', desc: 'descUnitEToday',   role: 'value.power.produced',   unit: 'kWh', cvt: /(?<val>\d+(\.\d+)?)\s+\w+/ },     // '2.12 kWh'
+    UnitEMonth:   {type: 'number', name: 'unit earned month', desc: 'descUnitEMonth',   role: 'value.power.produced',   unit: 'kWh', cvt: /(?<val>\d+(\.\d+)?)\s+\w+/ },     // '6.99 kWh',
+    UnitEYear:    {type: 'number', name: 'unit earned year',  desc: 'descUnitEYear',    role: 'value.power.produced',   unit: 'kWh', cvt: /(?<val>\d+(\.\d+)?)\s+\w+/ },     //'40.9 kWh',
+    UnitETotal:   {type: 'number', name: 'unit earned total', desc: 'descUnitETotal',   role: 'value.power.produced',   unit: 'kWh', cvt: /(?<val>\d+(\.\d+)?)\s+\w+/ },     //'353.49 kWh',
+    Power:        {type: 'number', name: 'power',             desc: 'descUnitPower',    role: 'value.power',            unit: 'W',   cvt: null },     // 0,
+    PowerStr:     {type: null,     name: '',                  desc: '',                 role: '',                       unit: '',    cvt: /(?<val>\d+(\.\d+)?)\s+\w+/ },     // '0 W',        *ignore*
+    Capacity:     {type: null,     name: '',                  desc: '',                 role: '',                       unit: '',    cvt: null },     // 0.9,          *ignore*
+    StrCO2:       {type: 'number', name: 'co2 saved',         desc: 'descStrCO2',       role: 'value',                  unit: 't',   cvt: /(?<val>\d+(\.\d+)?)\s+\w+/ },     //'0.352 ton',
+    StrTrees:     {type: 'number', name: 'trees',             desc: 'descStrTrees',     role: 'value',                  unit: '',    cvt: null },     // '1',
+    StrIncome:    {type: 'number', name: 'income',            desc: 'descStrIncome',    role: 'value',                  unit: '',    cvt: /\S+\s+(?<val>\d+(\.\d+)?)/ },     //:'€ 0.00',
+    PwImg:        {type: null,     name: '',                  desc: '',                 role: '',                       unit: '',    cvt: null },     //'Default.jpg', *ignore*
+    StationName:  {type: 'string', name: 'station name',      desc: 'descStationName',  role: 'info.name',              unit: '',    cvt: null },     //'KTG6',
+    InvModel1:    {type: 'string', name: 'inverter #1 model', desc: 'descInvModel1',    role: 'info.name',              unit: '',    cvt: null },     //null,
+    InvModel2:    {type: 'string', name: 'inverter #2 model', desc: 'descInvModel2',    role: 'info.name',              unit: '',    cvt: null },     //null,
+    Lat:          {type: 'number', name: 'latitude',          desc: 'descLat',          role: 'value.gps.latitude',     unit: '',    cvt: null },     //48.208201762059105,
+    Lng:          {type: 'number', name: 'longitude',         desc: 'descLng',          role: 'value.gps.longitude',    unit: '',    cvt: null },     //16.371216773986816,
+    TimeZone:     {type: 'number', name: 'timezone',          desc: 'descTimeZone',     role: 'value',                  unit: '',    cvt: null },     //1,
+    StrPeakPower: {type: 'number', name: 'peak power',        desc: 'descStrPeakPower', role: 'value.power',            unit: 'W',   cvt: /(?<val>\d+(\.\d+)?)\s+\w+/ },     //'616.42 W',
+    Installer:    {type: 'string', name: 'installer',         desc: 'descInstaller',    role: 'info.name',              unit: '',    cvt: null },     //null,
+    CreateTime:   {type: 'string', name: 'create time',       desc: 'descCreateTime',   role: 'value',                  unit: '',    cvt: null },     //'21/12/2022 GMT +1',
+    CreateYear:   {type: 'number', name: 'create year',       desc: 'descCreateYear',   role: 'value',                  unit: '',    cvt: null },     //2022,
+    CreateMonth:  {type: 'number', name: 'create month',      desc: 'descCreateMonth',  role: 'value',                  unit: '',    cvt: null },     //12,
+    Etoday:       {type: 'number', name: 'earning today',     desc: 'descEtoday',       role: 'value.power.produced',   unit: 'kWh', cvt: null },     //2.12,
+    InvTotal:     {type: 'number', name: 'total inverts',     desc: 'descInvTotal',     role: 'value',                  unit: '',    cvt: null },     //2
+    GridPower:    {type: 'number', name: 'power from grid',   desc: 'descGridPower',    role: 'value.power.consumed',   unit: 'W',   cvt: /(?<val>\d+(\.\d+)?)\s+\w+/ },     //'0 W'
+    LoadPower:    {type: 'number', name: 'load power',        desc: 'descLoadPower',    role: 'value.power.consumed',   unit: 'W',   cvt: /(?<val>\d+(\.\d+)?)\s+\w+/ },     //'0 W'
 
-    'GATEWAYALIAS': {'type': 'string', 'name': 'gateway alias',     'desc': 'descGatewayAlias',  'role': 'info.name',             'unit': '',    'cvt': null },     //'EVB300_94001732',
-    'GATEWAYSN':    {'type': 'string', 'name': 'gateway sn',        'desc': 'descGatewaySn',     'role': 'info.serial',           'unit': '',    'cvt': null },     //'94001732',
-    'SNALIAS':      {'type': 'string', 'name': 'converter alias',   'desc': 'descConverterAlias','role': 'info.name',             'unit': '',    'cvt': null },     //'EVT west',
-    'SN':           {'type': 'string', 'name': 'convertser sn',     'desc': 'descConverterSn',   'role': 'info.serial',           'unit': '',    'cvt': null },     //'12866103',
-    'DCVOLTAGE':    {'type': 'number', 'name': 'dc voltage',        'desc': 'descDcVoltage',     'role': 'value.voltage',         'unit': 'V',   'cvt': null },     //'32.54',
-    'ACVOLTAGE':    {'type': 'number', 'name': 'ac voltage',        'desc': 'descAcVoltage',     'role': 'value.voltage',         'unit': 'V',   'cvt': null },     //'242.25',
-    'ACCURRENCY':   {'type': null,     'name': '',                  'desc': 'descAccurency',     'role': '',                      'unit': '',    'cvt': null },     //'0',
-    'POWER':        {'type': 'number', 'name': 'power',             'desc': 'descPower',         'role': 'value.power',           'unit': 'W',   'cvt': null },     //'14.19',
-    'FREQUENCY':    {'type': 'number', 'name': 'frequency',         'desc': 'descFrequency',     'role': 'value.frequency',       'unit': 'Hz',  'cvt': null },     //'50.02',
-    'DAYENERGY':    {'type': 'number', 'name': 'day energy',        'desc': 'descDayEnergy',     'role': 'value.power.produced','unit': 'kWh', 'cvt': null },     //'0.24',
-    'ENERGY':       {'type': 'number', 'name': 'energy',            'desc': 'descEnergy',        'role': 'value.power.produced','unit': 'kWh', 'cvt': null },     //'202.52',
-    'TEMPERATURE':  {'type': 'number', 'name': 'temperature',       'desc': 'descTemperature',   'role': 'value.temperature',     'unit': '°C',  'cvt': null },     //'15.4',
-    'SITETIME':     {'type': 'string', 'name': 'site datetime',     'desc': 'descSiteDateTime',  'role': 'value',                 'unit': '',    'cvt': null },     //'3/5/2023 1:34:58 PM',
-    'STATIONID':    {'type': 'string', 'name': 'station id',        'desc': 'descStationId',     'role': 'value',                 'unit': '',    'cvt': null },     //null,
-    'STATUS':       {'type': 'number', 'name': 'status',            'desc': 'descStatus',        'role': 'value',                 'unit': '',    'cvt': null },     //'0',
-    'SNID':         {'type': 'string', 'name': 'sn id',             'desc': 'descSnId',          'role': 'value',                 'unit': '',    'cvt': null },     //'9489A29C25BD4A468594E976AD2411E4'
-    'MGMERR':       {'type': null,     'name': '',                  'desc': 'descMgmErr',        'role': '',                      'unit': '',    'cvt': null },     //'200'
-    'MGSERR':       {'type': null,     'name': '',                  'desc': 'descMgsErr',        'role': '',                      'unit': '',    'cvt': null },     //'0'
-    'MGMVER':       {'type': null,     'name': '',                  'desc': 'descMgmVer',        'role': '',                      'unit': '',    'cvt': null },     //'66'
-    'MGSVER':       {'type': null,     'name': '',                  'desc': 'descMgsVer',        'role': '',                      'unit': '',    'cvt': null },     //'33'
+    GATEWAYALIAS: {type: 'string', name: 'gateway alias',     desc: 'descGatewayAlias',  role: 'info.name',             unit: '',    cvt: null },     //'EVB300_94001732',
+    GATEWAYSN:    {type: 'string', name: 'gateway sn',        desc: 'descGatewaySn',     role: 'info.serial',           unit: '',    cvt: null },     //'94001732',
+    SNALIAS:      {type: 'string', name: 'converter alias',   desc: 'descConverterAlias',role: 'info.name',             unit: '',    cvt: null },     //'EVT west',
+    SN:           {type: 'string', name: 'convertser sn',     desc: 'descConverterSn',   role: 'info.serial',           unit: '',    cvt: null },     //'12866103',
+    DCVOLTAGE:    {type: 'number', name: 'dc voltage',        desc: 'descDcVoltage',     role: 'value.voltage',         unit: 'V',   cvt: null },     //'32.54',
+    ACVOLTAGE:    {type: 'number', name: 'ac voltage',        desc: 'descAcVoltage',     role: 'value.voltage',         unit: 'V',   cvt: null },     //'242.25',
+    ACCURRENCY:   {type: null,     name: '',                  desc: 'descAccurency',     role: '',                      unit: '',    cvt: null },     //'0',
+    POWER:        {type: 'number', name: 'power',             desc: 'descPower',         role: 'value.power',           unit: 'W',   cvt: null },     //'14.19',
+    FREQUENCY:    {type: 'number', name: 'frequency',         desc: 'descFrequency',     role: 'value.frequency',       unit: 'Hz',  cvt: null },     //'50.02',
+    DAYENERGY:    {type: 'number', name: 'day energy',        desc: 'descDayEnergy',     role: 'value.power.produced',unit: 'kWh', cvt: null },     //'0.24',
+    ENERGY:       {type: 'number', name: 'energy',            desc: 'descEnergy',        role: 'value.power.produced',unit: 'kWh', cvt: null },     //'202.52',
+    TEMPERATURE:  {type: 'number', name: 'temperature',       desc: 'descTemperature',   role: 'value.temperature',     unit: '°C',  cvt: null },     //'15.4',
+    SITETIME:     {type: 'string', name: 'site datetime',     desc: 'descSiteDateTime',  role: 'value',                 unit: '',    cvt: null },     //'3/5/2023 1:34:58 PM',
+    STATIONID:    {type: 'string', name: 'station id',        desc: 'descStationId',     role: 'value',                 unit: '',    cvt: null },     //null,
+    STATUS:       {type: 'number', name: 'status',            desc: 'descStatus',        role: 'value',                 unit: '',    cvt: null },     //'0',
+    SNID:         {type: 'string', name: 'sn id',             desc: 'descSnId',          role: 'value',                 unit: '',    cvt: null },     //'9489A29C25BD4A468594E976AD2411E4'
+    MGMERR:       {type: null,     name: '',                  desc: 'descMgmErr',        role: '',                      unit: '',    cvt: null },     //'200'
+    MGSERR:       {type: null,     name: '',                  desc: 'descMgsErr',        role: '',                      unit: '',    cvt: null },     //'0'
+    MGMVER:       {type: null,     name: '',                  desc: 'descMgmVer',        role: '',                      unit: '',    cvt: null },     //'66'
+    MGSVER:       {type: null,     name: '',                  desc: 'descMgsVer',        role: '',                      unit: '',    cvt: null },     //'33'
 };
 
 /**
@@ -103,9 +101,6 @@ class envertech_pv extends utils.Adapter {
     /**
      * onReady - will be called as soon as adapter is ready
      *
-     * @param
-     * @return
-     *0
      */
     async onReady() {
         this.log.debug('onReady triggered');
@@ -128,7 +123,9 @@ class envertech_pv extends utils.Adapter {
                 this.log.info(`[start] scanning station with id ${station.stationId}`);
 
                 let pollIntvl = station.pollIntvl || 60;
-                if (pollIntvl < 15) pollIntvl = 15;
+                if (pollIntvl < 15) {
+                    pollIntvl = 15;
+                }
                 this.stations[station.stationId] = {
                     envCloud: new EnvCloud(this, {
                         url: this.config.expertUrl,
@@ -144,17 +141,19 @@ class envertech_pv extends utils.Adapter {
                 this.delay(5000);
             }
         }
-        if (stationCnt) this.log.info(`scanning started for ${stationCnt} station(s)`);
-        else this.log.warn(`no active station(s) detected - check config`);
+        if (stationCnt) {
+            this.log.info(`scanning started for ${stationCnt} station(s)`);
+        } else {
+            this.log.warn(`no active station(s) detected - check config`);
+        }
         return;
     }
 
     /**
      * onUnload - called for adapter shuts down
      *
-     * @param {callback} callback 	callback function
-     * @return
-     *
+     * @param callback 	callback function
+     * @returns
      */
     onUnload(callback) {
         this.log.debug('onUnload triggered');
@@ -163,11 +162,13 @@ class envertech_pv extends utils.Adapter {
 
         try {
             for (const station of this.stations) {
-                if (station.timeout) this.clearTimeout(station.timeout);
+                if (station.timeout) {
+                    this.clearTimeout(station.timeout);
+                }
                 station.envCloud = null;
             }
             callback();
-        } catch (e) {
+        } catch {
             callback();
         }
     }
@@ -175,14 +176,15 @@ class envertech_pv extends utils.Adapter {
     /**
      * onMessage - called if adapter receives a message
      *
-     * @param {object} pObj 	message object
-     * @return
-     *
+     * @param pObj 	message object
+     * @returns
      */
     async onMessage(pObj) {
         if (pObj) {
             this.log.debug(`onMessage - ${JSON.stringify(pObj)}`);
-            if (!pObj.callback) return;
+            if (!pObj.callback) {
+                return;
+            }
             switch (pObj.command) {
                 case 'getStationId': {
                     if (pObj.message) {
@@ -234,15 +236,16 @@ class envertech_pv extends utils.Adapter {
     /**
      * updateInfoConnected - scan stations and set info.connected
      *
-     * @return  nothing
-     *
+     * @returns  nothing
      */
     async updateInfoConnected() {
         this.log.debug(`updateInfoConnected triggered`);
 
         let online = false;
         for (const stationId in this.stations) {
-            if (this.stations[stationId].online) online = true;
+            if (this.stations[stationId].online) {
+                online = true;
+            }
         }
 
         this.log.debug(`info.connection set to ${online}`);
@@ -252,8 +255,8 @@ class envertech_pv extends utils.Adapter {
     /**
      * doScan - Scan station data
      *
-     * @return  nothing
-     *
+     * @param pStationId
+     * @returns  nothing
      */
     async doScan(pStationId) {
         this.log.debug(`doScan triggered (${pStationId})`);
@@ -272,15 +275,17 @@ class envertech_pv extends utils.Adapter {
 
         // start next scan
         let delayMs = this.stations[pStationId].pollIntvlMs + start - Date.now();
-        if (delayMs < this.minDelayMs) delayMs = this.minDelayMs;
+        if (delayMs < this.minDelayMs) {
+            delayMs = this.minDelayMs;
+        }
         this.stations[pStationId].timeout = this.setTimeout(this.doScan.bind(this), delayMs, pStationId);
     }
 
     /**
      * doQueryGateways - Scan station data
      *
-     * @return  nothing
-     *
+     * @param pStationId
+     * @returns  nothing
      */
     async doQueryGateways(pStationId) {
         this.log.debug(`doQueryGateways (${pStationId}`);
@@ -330,14 +335,16 @@ class envertech_pv extends utils.Adapter {
                 this.stations[pStationId].online = false;
                 return; // abort
             }
-            if (!result.data.QueryResults) return;
+            if (!result.data.QueryResults) {
+                return;
+            }
 
-            if ( result.data.PageNumber != actPage ) {
+            if (result.data.PageNumber != actPage) {
                 this.log.warn(
                     `[gateway] unxpected data received - pageNumber:${result.data.PageNumber}, expected ${actPage}`,
                 );
             }
-            lastPage=result.data.TotalPage;
+            lastPage = result.data.TotalPage;
 
             this.stations[pStationId].online = true;
             for (const row of result.data.QueryResults) {
@@ -375,11 +382,19 @@ class envertech_pv extends utils.Adapter {
                 await this.initStateObject(`${gatewayId}.mppt_online`, STATES_CFG['_MpptOnline_']);
                 await this.initStateObject(`${gatewayId}.mppt_offline`, STATES_CFG['_MpptOffline_']);
 
-                if (typeof cvtOnline[stationId] === 'undefined') cvtOnline[stationId] = 0;
-                if (typeof cvtOffline[stationId] === 'undefined') cvtOffline[stationId] = 0;
+                if (typeof cvtOnline[stationId] === 'undefined') {
+                    cvtOnline[stationId] = 0;
+                }
+                if (typeof cvtOffline[stationId] === 'undefined') {
+                    cvtOffline[stationId] = 0;
+                }
 
-                if (typeof cvtOnline[gatewayId] === 'undefined') cvtOnline[gatewayId] = 0;
-                if (typeof cvtOffline[gatewayId] === 'undefined') cvtOffline[gatewayId] = 0;
+                if (typeof cvtOnline[gatewayId] === 'undefined') {
+                    cvtOnline[gatewayId] = 0;
+                }
+                if (typeof cvtOffline[gatewayId] === 'undefined') {
+                    cvtOffline[gatewayId] = 0;
+                }
 
                 /* prettier-ignore */
                 await this.setStateAsync(`${gatewayId}.info.last_update`, { val: new Date().toLocaleString(), ack: true, q: 0x00 });
@@ -419,14 +434,17 @@ class envertech_pv extends utils.Adapter {
                     this.log.debug(`[gatewayinfo] processing ${key}`);
 
                     if (!STATES_CFG[key]) {
-                        if (this.config.optLogNew)
+                        if (this.config.optLogNew) {
                             this.log.warn(`[gateway] object ${key} not configured - report to developer.`);
+                        }
                         continue;
                     }
 
                     await this.initStateObject(`${rootId}.${key}`, STATES_CFG[key]);
 
-                    if (typeof STATEs[`${this.name}.${this.instance}.${rootId}.${key}`] === 'undefined') continue; // undesired object
+                    if (typeof STATEs[`${this.name}.${this.instance}.${rootId}.${key}`] === 'undefined') {
+                        continue;
+                    } // undesired object
 
                     let val = row[key];
 
@@ -458,13 +476,16 @@ class envertech_pv extends utils.Adapter {
                         if (match) {
                             val = match.groups.val;
                         } else {
-                            if (this.config.optLogNew)
+                            if (this.config.optLogNew) {
                                 this.log.warn(`[gateway] unexpected data format for ${key} - ${val}`);
-                            else
+                            } else {
                                 this.log.debug(`[gateway] unexpected data format for ${key} - ${val}`);
+                            }
                         }
                     }
-                    if (STATES_CFG[key].type === 'number') val = Number(val);
+                    if (STATES_CFG[key].type === 'number') {
+                        val = Number(val);
+                    }
                     await this.setStateAsync(`${rootId}.${key}`, { val: val, ack: true, q: 0x00 });
                 }
             }
@@ -495,8 +516,8 @@ class envertech_pv extends utils.Adapter {
     /**
      * doQueryStation - Scan station data
      *
-     * @return  nothing
-     *
+     * @param pStationId
+     * @returns  nothing
      */
     async doQueryStation(pStationId) {
         this.log.debug(`doQueryStation (${pStationId})`);
@@ -507,8 +528,9 @@ class envertech_pv extends utils.Adapter {
         if (result.status < 0) {
             // error raised by axios
             if (this.stationInitialized) {
-                if (!result.statustext.match(/Error: connect ETIMEDOUT/))
+                if (!result.statustext.match(/Error: connect ETIMEDOUT/)) {
                     await this.setStateAsync(`${rootId}.info.error`, { val: true, ack: true, q: 0x00 });
+                }
                 await this.setStateAsync(`${rootId}.info.error_text`, { val: result.statustext, ack: true, q: 0x00 });
                 await this.setStateAsync(`${rootId}.info.online`, { val: false, ack: true, q: 0x00 });
             }
@@ -525,8 +547,9 @@ class envertech_pv extends utils.Adapter {
         } else if (result.status >= 100) {
             // http error
             if (this.stationInitialized) {
-                if (!result.statustext.match(/Error: connect ETIMEDOUT/))
+                if (!result.statustext.match(/Error: connect ETIMEDOUT/)) {
                     await this.setStateAsync(`${rootId}.info.error`, { val: true, ack: true, q: 0x00 });
+                }
                 await this.setStateAsync(`${rootId}.info.error_text`, { val: result.statustext, ack: true, q: 0x00 });
                 await this.setStateAsync(`${rootId}.info.online`, { val: false, ack: true, q: 0x00 });
             }
@@ -582,14 +605,19 @@ class envertech_pv extends utils.Adapter {
             this.log.debug(`[stationdatainfo] processing station info ${key}`);
 
             if (!STATES_CFG[key]) {
-                if (this.config.optLogNew)
-                    this.log.warn(`[station] object ${key} : ${result.data[key]} not configured - report to developer.`);
+                if (this.config.optLogNew) {
+                    this.log.warn(
+                        `[station] object ${key} : ${result.data[key]} not configured - report to developer.`,
+                    );
+                }
                 continue;
             }
 
             await this.initStateObject(`${rootId}.${key}`, STATES_CFG[key]);
 
-            if (typeof STATEs[`${this.name}.${this.instance}.${rootId}.${key}`] === 'undefined') continue; // undesired object
+            if (typeof STATEs[`${this.name}.${this.instance}.${rootId}.${key}`] === 'undefined') {
+                continue;
+            } // undesired object
 
             let val = result.data[key];
             if (STATES_CFG[key].cvt && typeof val === 'string') {
@@ -600,7 +628,9 @@ class envertech_pv extends utils.Adapter {
                     this.log.debug(`[station] unexpected data format for ${key} - ${val}`);
                 }
             }
-            if (STATES_CFG[key].type === 'number') val = Number(val);
+            if (STATES_CFG[key].type === 'number') {
+                val = Number(val);
+            }
             await this.setStateAsync(`${rootId}.${key}`, { val: val, ack: true, q: 0x00 });
         }
     }
@@ -611,9 +641,8 @@ class envertech_pv extends utils.Adapter {
      *		creates object if it does not exist
      *		overrides object data otherwise
      *
-     * @param {obj}     pObj    objectstructure
-     * @return
-     *
+     * @param     pObj    objectstructure
+     * @returns
      */
     async initObject(pObj) {
         this.log.debug(`initobject [${pObj._id}]`);
@@ -622,12 +651,12 @@ class envertech_pv extends utils.Adapter {
 
         if (typeof STATEs[fullId] === 'undefined') {
             try {
-                this.log.debug('creating obj "' + pObj._id + '" with type ' + pObj.type);
+                this.log.debug(`creating obj "${pObj._id}" with type ${pObj.type}`);
                 await this.setObjectNotExistsAsync(pObj._id, pObj);
                 await this.extendObjectAsync(pObj._id, pObj);
                 STATEs[fullId] = 'X';
             } catch (e) {
-                this.log.error('error initializing obj "' + pObj._id + '" ' + e.message);
+                this.log.error(`error initializing obj "${pObj._id}" ${e.message}`);
             }
         }
     }
@@ -638,15 +667,16 @@ class envertech_pv extends utils.Adapter {
      *		creates object if it does not exist
      *		overrides object data otherwise
      *
-     * @param    {string}    pId    object id
-     * @param    {obj}       pObj   configuration object
-     * @return
-     *
+     * @param    pId    object id
+     * @param       pObj   configuration object
+     * @returns
      */
     async initStateObject(pId, pObj) {
         this.log.debug(`initStateobject (${pId})`);
 
-        if (!pObj.type) return;
+        if (!pObj.type) {
+            return;
+        }
 
         await this.initObject({
             _id: pId,
@@ -667,8 +697,7 @@ class envertech_pv extends utils.Adapter {
     /**
      * resetStateObjects - reset state existing objects
      *
-     * @return
-     *
+     * @returns
      */
     async resetStateObjects() {
         this.log.debug(`resetStateobjects`);
@@ -685,7 +714,7 @@ class envertech_pv extends utils.Adapter {
  * module export / startup
  */
 
-console.log('DEBUG  : envertech_pv adapter initializing (' + process.argv + ') ...'); //logger not yet initialized
+console.log(`DEBUG  : envertech_pv adapter initializing (${process.argv}) ...`); //logger not yet initialized
 
 /*
 if (process.argv) {
@@ -702,13 +731,13 @@ if (process.argv) {
 }
 */
 
-// @ts-ignore parent is a valid property on module
+// @ts-expect-error parent is a valid property on module
 if (module.parent) {
     // Export the constructor in compact mode
     /**
-     * @param {Partial<ioBroker.AdapterOptions>} [options={}]
+     * @param [options]
      */
-    module.exports = (options) => new envertech_pv(options);
+    module.exports = options => new envertech_pv(options);
 } else {
     // otherwise start the instance directly
     new envertech_pv();
