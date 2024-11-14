@@ -9,14 +9,24 @@
                 "_cloudHdr_1": {
                     "type": "header",
                     "text": "txtCloudHeader_1",
-                    "size": 3
+                    "size": 3,
+                    "xs": 12,
+                    "sm": 12,
+                    "md": 12,
+                    "lg": 12,
+                    "xl": 12
                 },
                 "_cloudInfo": {
                     "type": "staticText",
                     "text": "txtCloudInfo",
                     "style": {
                         "fontSize": 16
-                    }
+                    },
+                    "xs": 12,
+                    "sm": 12,
+                    "md": 12,
+                    "lg": 12,
+                    "xl": 12
                 },
                 "_cloudInfoOffline": {
                     "type": "staticText",
@@ -26,7 +36,12 @@
                     "style": {
                         "fontSize": 16,
                         "color": "red"
-                    }
+                    },
+                    "xs": 12,
+                    "sm": 12,
+                    "md": 12,
+                    "lg": 12,
+                    "xl": 12
                 },
                 "cloudUsername": {
                     "type": "text",
@@ -36,7 +51,12 @@
                     "newLine": true,
                     "default": "",
                     "tooltip": "ttCloudUsername",
-                    "help": "hlpCloudUsername"
+                    "help": "hlpCloudUsername",
+                    "xs": 12,
+                    "sm": 12,
+                    "md": 6,
+                    "lg": 3,
+                    "xl": 3
                 },
                 "cloudPassword": {
                     "type": "password",
@@ -45,7 +65,12 @@
                     "hidden": "!_alive",
                     "default": "",
                     "tooltip": "ttCloudPassword",
-                    "help": "hlpCloudPassword"
+                    "help": "hlpCloudPassword",
+                    "xs": 12,
+                    "sm": 12,
+                    "md": 6,
+                    "lg": 3,
+                    "xl": 3
                 },
                 "_getStationId": {
                     "type": "sendTo",
@@ -58,7 +83,12 @@
                     "disabled": "data.cloudUsername==='' || data.cloudPassword===''",
                     "hidden": "!_alive",
                     "tooltip": "ttGetStationId",
-                    "help": "hlpGetStationId"
+                    "help": "hlpGetStationId",
+                    "xs": 12,
+                    "sm": 12,
+                    "md": 6,
+                    "lg": 3,
+                    "xl": 3
                 },
                 "cloudStationId": {
                     "type": "text",
@@ -67,20 +97,32 @@
                     "hidden": "!_alive",
                     "readOnly": true,
                     "tooltip": "ttCloudStationId",
-                    "help": "hlpCloudStationId"
+                    "help": "hlpCloudStationId",
+                    "xs": 12,
+                    "sm": 12,
+                    "md": 6,
+                    "lg": 3,
+                    "xl": 3
                 },
                 "_cloudHdr_2": {
                     "type": "header",
                     "text": "txtCloudHeader_2",
-                    "size": 3
-                },
-                "stations": {
-                    "type": "table",
+                    "size": 3,
+                    "xs": 12,
                     "sm": 12,
                     "md": 12,
                     "lg": 12,
+                    "xl": 12
+                },
+                "stations": {
+                    "type": "table",
                     "label": "",
                     "showSecondAddAt": 5,
+                    "xs": 12,
+                    "sm": 12,
+                    "md": 12,
+                    "lg": 12,
+                    "xl": 12,
                     "items": [
                         {
                             "type": "checkbox",
@@ -128,7 +170,12 @@
                     "label": "lblOptLogReq",
                     "default": false,
                     "help": "hlpOptLogReq",
-                    "tooltip": "ttOptLogReq"
+                    "tooltip": "ttOptLogReq",
+                    "xs": 12,
+                    "sm": 12,
+                    "md": 12,
+                    "lg": 12,
+                    "xl": 12,
                 },
                 "optLogNew": {
                     "type": "checkbox",
@@ -136,7 +183,12 @@
                     "newLine": true,
                     "default": true,
                     "help": "hlpOptLogNew",
-                    "tooltip": "ttOptLogNew"
+                    "tooltip": "ttOptLogNew",
+                    "xs": 12,
+                    "sm": 12,
+                    "md": 12,
+                    "lg": 12,
+                    "xl": 12
                 }
             }
         },
@@ -150,7 +202,12 @@
                     "newLine": true,
                     "default": "https://www.envertecportal.com",
                     "tooltip": "ttExpertUrl",
-                    "help": "hlpExpertUrl"
+                    "help": "hlpExpertUrl",
+                    "xs": 12,
+                    "sm": 12,
+                    "md": 6,
+                    "lg": 3,
+                    "xl": 3
                 },
                 "expertTimeout": {
                     "type": "number",
@@ -160,7 +217,12 @@
                     "min": 5,
                     "max": 600,
                     "tooltip": "ttExpertTimeout",
-                    "help": "hlpExpertTimeout"
+                    "help": "hlpExpertTimeout",
+                    "xs": 12,
+                    "sm": 12,
+                    "md": 6,
+                    "lg": 3,
+                    "xl": 3
                 },
                 "expertMinDelay": {
                     "type": "number",
@@ -170,7 +232,12 @@
                     "min": 5,
                     "max": 600,
                     "tooltip": "ttExpertMinDelay",
-                    "help": "hlpExpertMinDelay"
+                    "help": "hlpExpertMinDelay",
+                    "xs": 12,
+                    "sm": 12,
+                    "md": 6,
+                    "lg": 3,
+                    "xl": 3
                 }
             }
         }
