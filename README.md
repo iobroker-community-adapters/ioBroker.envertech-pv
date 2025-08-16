@@ -2,28 +2,48 @@
 
 # ioBroker.envertech-pv
 
-[![NPM version](https://img.shields.io/npm/v/iobroker.envertech-pv.svg)](https://www.npmjs.com/package/iobroker.envertech-pv)
+**General Info:**<br>
+[![GitHub license](https://img.shields.io/github/license/iobroker-community-adapters/ioBroker.envertech-pv)](https://github.com/iobroker-community-adapters/ioBroker.envertech-pv/blob/main/LICENSE)
+[![Downloads](https://img.shields.io/npm/dm/iobroker.envertech-pv.svg)](https://www.npmjs.com/package/iobroker.envertech-pv)
+![GitHub repo size](https://img.shields.io/github/repo-size/iobroker-community-adapters/ioBroker.envertech-pv)
+[![Translation status](https://weblate.iobroker.net/widgets/adapters/-/envertech-pv/svg-badge.svg)](https://weblate.iobroker.net/engage/adapters/?utm_source=widget)</br>
+![GitHub commit activity](https://img.shields.io/github/commit-activity/m/iobroker-community-adapters/ioBroker.envertech-pv)
+![GitHub commits since latest release (by date)](https://img.shields.io/github/commits-since/iobroker-community-adapters/ioBroker.envertech-pv/latest)
+![GitHub last commit](https://img.shields.io/github/last-commit/iobroker-community-adapters/ioBroker.envertech-pv)
+![GitHub issues](https://img.shields.io/github/issues/iobroker-community-adapters/ioBroker.envertech-pv)
+</br>
+**Version:** </br>
+[![NPM version](http://img.shields.io/npm/v/iobroker.envertech-pv.svg)](https://www.npmjs.com/package/iobroker.envertech-pv)
 ![Current version in stable repository](https://iobroker.live/badges/envertech-pv-stable.svg)
 ![Number of Installations](https://iobroker.live/badges/envertech-pv-installed.svg)
-![Test and Release](https://github.com/iobroker-community-adapters/ioBroker.envertech-pv/workflows/Test%20and%20Release/badge.svg)
-[![Translation status](https://weblate.iobroker.net/widgets/adapters/-/envertech-pv/svg-badge.svg)](https://weblate.iobroker.net/engage/adapters/?utm_source=widget)
-[![Downloads](https://img.shields.io/npm/dm/iobroker.envertech-pv.svg)](https://www.npmjs.com/package/iobroker.envertech-pv)
+</br>
+**Tests:** </br>
+[![Test and Release](https://github.com/iobroker-community-adapters/ioBroker.envertech-pv/actions/workflows/test-and-release.yml/badge.svg)](https://github.com/iobroker-community-adapters/ioBroker.envertech-pv/actions/workflows/test-and-release.yml)
+[![CodeQL](https://github.com/iobroker-community-adapters/ioBroker.envertech-pv/actions/workflows/github-code-scanning/codeql/badge.svg)](https://github.com/iobroker-community-adapters/ioBroker.envertech-pv/actions/workflows/github-code-scanning/codeql)
+<br>
+**Donation:** </br>
+[![Donate](https://img.shields.io/badge/paypal-donate%20|%20spenden-blue.svg)](https://paypal.me/mcm1957atIoBroker)
+[![](https://img.shields.io/static/v1?label=Sponsor&message=%E2%9D%A4&logo=GitHub&color=%23fe8e86)](https://github.com/sponsors/mcm1957)
 
-[![NPM](https://nodei.co/npm/iobroker.envertech-pv.png?downloads=true)](https://nodei.co/npm/iobroker.envertech-pv/)
-
-<!--
+**************************************************************************************************************
+## Sentry
 **This adapter uses Sentry libraries to automatically report exceptions and code errors to the developers.**
 For more details and for information how to disable the error reporting see [Sentry-Plugin Documentation](https://github.com/ioBroker/plugin-sentry#plugin-sentry)! Sentry reporting is used starting with js-controller 3.0.
--->
 
-## ioBroker.envertech-pv
+**************************************************************************************************************
+
+## envertech-pv Adapter for ioBroker
 
 The ioBroker.envertech-pv adapter empowers you to access and gather data from the [envertech cloud service](www.envertecportal.com) easily. By regularly polling the web service, this adapter ensures that all valuable information is promptly retrieved and stored in easily accessible states.
+
+**************************************************************************************************************
 
 ## Disclaimer
 
 **All product and company names or logos are trademarks™ or registered® trademarks of their respective holders. Use of them does not imply any affiliation with or endorsement by them or any associated subsidiaries! This personal project is maintained in spare time and has no business goal.**
 **Envertech® is a registered trademark of Zhejiang Envertech Corporation Limited**
+
+**************************************************************************************************************
 
 ## Documentation
 
@@ -37,6 +57,14 @@ This adapter would not have been possible without the great work of @adcrafter27
 ## How to report issues and feature requests
 
 Ideally, please use GitHub issues for this, with the best method achieved by setting the adapter to Debug log mode (Instances -> Expert mode -> Column Log level). Then retrieve the logfile from disk via the  'log' ioBroker subdirectory, **not** from Admin, which will cut lines. If you prefer to avoid providing it in a GitHub issue, email me (mcm57@gmx.at). Please reference the relevant **GitHub issue**, provide corresponding **descriptive commentary** and add **log timestamp(s)** where appropriate.
+
+**************************************************************************************************************
+
+**If you like this adapter, please consider a donation:**
+  
+[![paypal](https://www.paypalobjects.com/en_US/DK/i/btn/btn_donateCC_LG.gif)](https://paypal.me/mcm1957atIoBroker)
+
+**************************************************************************************************************
 
 ## Changelog
 
