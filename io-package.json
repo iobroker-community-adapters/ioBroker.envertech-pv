@@ -1,8 +1,21 @@
 {
   "common": {
     "name": "envertech-pv",
-    "version": "1.4.0",
+    "version": "1.5.0",
     "news": {
+      "1.5.0": {
+        "en": "Adapter requires node.js 20, js-controller 6.0.11 and admin 7.6.17 now.\nDependencies have been updated.",
+        "de": "Adapter erfordert jetzt node.js 20, js-controller 6.0.11 und admin 7.6.17.\nAbhängigkeiten wurden aktualisiert.",
+        "ru": "Адаптер требует node.js 20, js-контроллер 6.0.11 и админ 7.6.17.\nЗависимости были обновлены.",
+        "pt": "O adaptador requer node.js 20, js-controller 6.0.11 e admin 7.6.17 agora.\nAs dependências foram atualizadas.",
+        "nl": "Adapter vereist node.js 20, js-controller 6.0.11 en admin 7.6.17 nu.\nAfhankelijkheden zijn bijgewerkt.",
+        "fr": "L'adaptateur nécessite node.js 20, js-controller 6.0.11 et admin 7.6.17.\nLes dépendances ont été actualisées.",
+        "it": "Adattatore richiede node.js 20, js-controller 6.0.11 e admin 7.6.17 ora.\nLe dipendenze sono state aggiornate.",
+        "es": "Adaptador requiere node.js 20, js-controller 6.0.11 y admin 7.6.17 ahora.\nSe han actualizado las dependencias.",
+        "pl": "Adapter wymaga node.js 20, kontroler js- 6.0.11 i admin 7.6.17 teraz.\nZaktualizowano zależność.",
+        "uk": "Адаптер вимагає node.js 20, js-controller 6.0.11 і admin 7.6.17 тепер.\nОновлено залежність.",
+        "zh-cn": "适配器需要节点20,js控制器6.0.11和现在的admin 7.6.17.\n附属关系已经更新."
+      },
       "1.4.0": {
         "en": "Adapter has been changes to meet Responsive Design Rules.\nAdapter requires js-controller 5.0.19 and admin 6.17.14 now.\nDependencies have been updated.",
         "de": "Adapter wurde geändert, um Responsive Design Rules zu erfüllen.\nAdapter benötigt jetzt js-controller 5.0.19 und admin 6.17.14.\nAbhängigkeiten wurden aktualisiert.",
