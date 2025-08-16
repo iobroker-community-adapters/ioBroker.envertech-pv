@@ -38,7 +38,7 @@
     "node": ">= 20"
   },
   "dependencies": {
-    "@iobroker/adapter-core": "^3.2.3",
+    "@iobroker/adapter-core": "^3.3.1",
     "@mcm1957/iobroker.library": "^0.0.3",
     "axios": "^1.7.9"
   },
