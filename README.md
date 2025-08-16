@@ -149,7 +149,7 @@ Ideally, please use GitHub issues for this, with the best method achieved by set
 
 MIT License
 
-Copyright (c) 2023-2024 mcm1957 <mcm57@gmx.at>, adcrafter27 <adcrafter27@gmail.com>
+Copyright (c) 2023-2025 mcm1957 <mcm57@gmx.at>, adcrafter27 <adcrafter27@gmail.com>
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
