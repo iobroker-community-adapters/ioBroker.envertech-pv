@@ -84,7 +84,7 @@
     "ttStationId": "Station-Id to poll",
     "txtCloudHeader_1": "Retrieve station id using username / password",
     "txtCloudHeader_2": "Configuration of stations",
-    "txtCloudInfo": "You can retrieve the the station-id by filling in username and password used to access the Envertech cloud.<br>After pressing the button 'Get Station-Id' the station-id will show up. Copy the station-id into the comfiguration table below.",
+    "txtCloudInfo": "You can retrieve the station-id by filling in username and password used to access the Envertech cloud.<br>After pressing the button 'Get Station-Id' the station-id will show up. Copy the station-id into the configuration table below.",
     "txtCloudInfoOffline": "Note: the adapterinstance must be started to retrieve the instance id using username and password.",
     "txtCloudPanel": "Configure parameters to access Envertec cloud services",
     "txtGetStationId": "Press button to retrieve the station-id for user"
