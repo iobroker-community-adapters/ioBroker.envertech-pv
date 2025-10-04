@@ -23,7 +23,7 @@
     "descLastUpdate": "Zeitpunkt des letzten empfangenen Datensatzes",
     "descLat": "Breitengrad des Anlagenstandorts",
     "descLng": "Längengrad des Anlagenstandorts",
-    "descMpptOffline": "Anzahl der Konverter, die derzeit offline sind",
+    "descMpptOffline": "Anzahl der Wechselrichter, die derzeit offline sind",
     "descMpptOnline": "Anzahl der Wechselrichter, die derzeit online sind",
     "descOnline": "Zustand wird auf wahr gesetzt, wenn die Anlage online ist",
     "descPower": "vom Wechselrichter erzeugte aktuelle Leistung",
