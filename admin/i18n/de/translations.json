@@ -27,7 +27,7 @@
     "descMpptOnline": "Anzahl der Wechselrichter, die derzeit online sind",
     "descOnline": "Zustand wird auf wahr gesetzt, wenn die Anlage online ist",
     "descPower": "vom Wechselrichter erzeugte aktuelle Leistung",
-    "descSiteDateTime": "lokale Zeit des Konverters",
+    "descSiteDateTime": "lokale Zeit des Wechselrichters",
     "descSnId": "eindeutige Identifikationsnummer des Wechselrichters",
     "descStationId": "eindeutige Identifikation der Anlage in der Cloud (Station-ID)",
     "descStationName": "Name der Anlage",
