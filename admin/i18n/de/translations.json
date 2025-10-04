@@ -8,7 +8,7 @@
     "descCreateYear": "Jahr der Registrierung der Anlage",
     "descDayEnergy": "tägliche Energieproduktion",
     "descDcVoltage": "Vom Wechselrichter gemeldete Gleichspannung",
-    "descEnergy": "Energie (kWh), die heute von diesem Umrichter produziert wurde",
+    "descEnergy": "Energie (kWh), die heute von diesem Wechselrichter produziert wurde",
     "descError": "Zustand wird auf wahr gesetzt, wenn ein Fehler aktiv ist",
     "descErrorText": "Beschreibung des aktuellen Fehlers",
     "descEtoday": "Energie (kWh), die heute von allen Gateways produziert wurde",
