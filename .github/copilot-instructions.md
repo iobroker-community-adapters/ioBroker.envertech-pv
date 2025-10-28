@@ -494,6 +494,10 @@ Follow the [AlCalzone release-script](https://github.com/AlCalzone/release-scrip
 ```markdown
 # Changelog
 
+<!--
+  Placeholder for the next version (at the beginning of the line):
+  ## **WORK IN PROGRESS**
+-->
 
 ## **WORK IN PROGRESS**
 
