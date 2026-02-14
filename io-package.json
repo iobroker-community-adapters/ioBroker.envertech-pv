@@ -1,8 +1,21 @@
 {
   "common": {
     "name": "envertech-pv",
-    "version": "1.5.0",
+    "version": "1.5.1",
     "news": {
+      "1.5.1": {
+        "en": "Dependencies have been updated.",
+        "de": "Abhängigkeiten wurden aktualisiert.",
+        "ru": "Зависимости были обновлены.",
+        "pt": "As dependências foram atualizadas.",
+        "nl": "Afhankelijkheden zijn bijgewerkt.",
+        "fr": "Les dépendances ont été actualisées.",
+        "it": "Le dipendenze sono state aggiornate.",
+        "es": "Se han actualizado las dependencias.",
+        "pl": "Zaktualizowano zależność.",
+        "uk": "Оновлено залежність.",
+        "zh-cn": "附属关系已经更新."
+      },
       "1.5.0": {
         "en": "Adapter requires node.js 20, js-controller 6.0.11 and admin 7.6.17 now.\nDependencies have been updated.",
         "de": "Adapter erfordert jetzt node.js 20, js-controller 6.0.11 und admin 7.6.17.\nAbhängigkeiten wurden aktualisiert.",
