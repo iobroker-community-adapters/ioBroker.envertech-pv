@@ -210,7 +210,6 @@
     "loglevel": "info",
     "tier": 2,
     "mode": "daemon",
-    "allowInit": true,
     "type": "energy",
     "connectionType": "cloud",
     "dataSource": "poll",
